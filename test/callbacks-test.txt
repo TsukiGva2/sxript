@@ -1,0 +1,11 @@
+func(someAction,{
+  [z]([x],[y])
+}):
+
+func(calcProduct,{[x]*[y]}):
+func(calcSum,{[x]+[y]}):
+
+print_  someAction(5, 15, calcProduct)  - 75  ,:
+print_  someAction(5, 15, calcSum)      - 20  ,:
+
+print_\n

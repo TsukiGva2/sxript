@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">for(&lt;var,low,high,step&gt;,{content}) = content</font>
+</center>

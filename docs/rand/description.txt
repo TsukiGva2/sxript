@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">rand(maxnumber) = 0 < random double < maxnumber</font>
+</center>

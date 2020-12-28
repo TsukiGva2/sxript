@@ -1,0 +1,7 @@
+let(a,<`cow',`cat',`dog',`duck'>)         ,:
+
+print_replace([a],2,`lion')
+          -  <`cow',`lion',`dog',`duck'>  ,:
+print_replace([a],3,`mouse')
+         -  <`cow',`cat',`mouse',`duck'>  ,:
+print_\n

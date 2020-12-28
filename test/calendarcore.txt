@@ -1,0 +1,43 @@
+include(`../test/timecore.txt'):
+include(`../test/vector.txt'):
+
+func(unformat2,{iff(greater(10,unformat([x])),{unquote(`0'+quote(unformat([x])))},{unformat([x])})}):
+
+func(calendar,{
+  smooth(<sub({
+    let(year,[x]):
+    let(month,[y]):
+    let(dom,fb_hTimeDaysInMonth([month],[year])):
+    let(offset,(6+fb_DateSerial([year],[month],1))%7):
+    let(p,7-[offset]):
+    let(row01,
+      iff([offset]=0,{
+        apply(unformat2,fill(1,[p],[p]))
+      },{
+        stack(
+          apply($({`#'}),fill(0,1,[offset])),
+          apply(unformat2,fill(+1.0,[p],[p])))})):
+
+    let(k,unformat2(+2.0)):
+    5:
+    do:
+      let(q,[p]):
+      let(p,[p]+7):
+      let((row)([k]),apply(unformat2,fill([q]+1,[p],7))):
+      let(k,unformat2([k]+1)):
+    loop:
+    let(k,unformat2(+1.0)):
+    6:
+    do:
+      print_
+      let((row)([k]),
+        apply(
+          $({iff(greater([dom],[x]-1),{[x]},{`--'})}),
+          symbol((row)([k])))
+      ),:
+      let(k,unformat2([k]+1)):
+    loop:
+  })>)
+}):
+
+print_`calendarcore.txt':

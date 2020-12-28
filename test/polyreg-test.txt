@@ -1,0 +1,9 @@
+include(`../test/linalg.txt'):
+
+let(xr,<0,  1,  2,  3,  4,  5,  6,   7,   8,   9,   10  >):
+let(yr,<1,  6,  17, 34, 57, 86, 121, 162, 209, 262, 321 >):
+let(order,3):
+
+print_  mform(let(m,polyreg([xr],[yr],[order])))   ,\n\n:
+print_  column(syslinsolve([m]),[order]+1)             ,:
+print_\n

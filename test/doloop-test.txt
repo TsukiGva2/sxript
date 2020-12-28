@@ -1,0 +1,11 @@
+print_
+
+sub({
+  let(i,+0.0):
+  10:
+  do:
+    print_let(i,[i]+1),:
+  loop
+}):
+
+print_\n

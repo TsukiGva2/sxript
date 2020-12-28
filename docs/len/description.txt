@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">len(quote/vector/number) = number</font>
+</center>

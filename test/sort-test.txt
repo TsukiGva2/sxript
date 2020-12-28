@@ -1,0 +1,18 @@
+include(`../test/sort.txt'):
+
+let(thevec,<
+`cat',
+`dog',
+`mouse',
+`ant',
+`zebra',
+`cow',
+`bull',
+`weasel',
+`lion',
+`tiger'
+>):
+
+print_  sortinsvec([thevec])  ,:
+print_  [thevec]              ,:
+print_\n

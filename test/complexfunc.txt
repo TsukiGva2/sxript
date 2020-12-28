@@ -1,0 +1,23 @@
+include(`../test/complexnum.txt'):
+
+`Derivative of a complex function':
+func(cderiv, {
+  (([x]([y][c+][z])) [c-] ([x]([y][c-][z]))) [c/] (2[c*][z])
+}):
+
+func(citersolve,{
+  [y] [c-] (([x]([y])) [c/] cderiv([x],[y],[z]))
+}):
+
+func(cnewtonsolve, {
+  sub({
+    let(fn,[x]):
+    let(z0,[y]):
+    for(<k,1,[z],1>, {
+      let(z0,citersolve([fn],[z0],<.01,0>))
+    }):
+    print_[z0]
+  })
+}):
+
+print_`complexfunc.txt':

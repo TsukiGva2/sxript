@@ -1,0 +1,12 @@
+func(babbage,{(([x])*(10^6) + 269696)^.5}):
+func(intc,{([x]=int([x]))}):
+
+print_func(doit,{
+  iff(intc(babbage([x])),{
+    babbage([x])
+  },{ 
+    doit([x]+1)
+  })
+})(1):
+
+print_\n

@@ -1,0 +1,45 @@
+func(fact, {( [x]!    )}):
+func(pow,  {( [x]^[y] )}):
+func(pow2,{iff(greater([x],0),{pow([x],[y])},{-pow([x],[y])})}):
+func(mult, {( [x]*[y] )}):
+func(div,  {( [x]/[y] )}):
+func(mod,  {( [x]%[y] )}):
+func(add,  {( [x]+[y] )}):
+func(subtr,{( [x]-[y] )}):
+func(equal,{( [x]=[y] )}):
+
+func(dice,{
+  1+int(rand([x]))
+}):
+
+func(unformat,{
+  unquote(((quote([x])/`+')/`-')-`.0')
+}):
+
+func(inrange,{
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(c,[z]):
+    print_
+    iff(greater([b],[a]),{
+      iff(greater([c],[b]),{1},{0})
+    },{
+      0
+    })
+  })
+}):
+
+func(goreq,{
+  iff((greater([x],[y])) | ([x]=[y]), {1},{0})
+}):
+
+func(greaternum,{
+  ([x])*greater([x],[y]) + ([y])*greater([y],[x]) + ([x])*equal([x],[y])
+}):
+
+func(lessernum,{
+  ([y])*greater([x],[y]) + ([x])*greater([y],[x]) + ([x])*equal([x],[y])
+}):
+
+print_`arithmetic.txt':

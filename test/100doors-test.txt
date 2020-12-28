@@ -1,0 +1,24 @@
+include(`../test/vector.txt'):
+
+func(ruler,{smooth(<sub({let(i,+0.0):[x]:do:print_let(i,[i]+1),:loop})>)}):
+
+print_let(doors,apply($({-1.0}),ruler(100)))  \n\n:
+
+func(comb,{
+  smooth(<sub({
+    let(a,[x]):
+    print_for(<i,1,100,1>,{
+      iff(([i]%[a])=0,{-1,},{1,})  
+    })
+  })>)
+}):
+
+for(<i,1,100,1>,{
+  let(doors,map([doors],$({[x]*[y]}),comb([i])))
+}):
+
+print_for(<i,1,100,1>,{
+  iff(elem([doors],[i])=1,{[i],})
+}):
+
+print_\n

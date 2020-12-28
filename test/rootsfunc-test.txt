@@ -1,0 +1,18 @@
+include(`../test/calculus.txt'):
+include(`../test/statistics.txt'):
+
+func(poly,{
+  [x]^3 - 3*[x]^2 + 2*[x]
+}):
+
+let(low,-2):
+let(high,4):
+let(intvl,.33):
+let(newtondepth,3):
+let(nbins,40):
+
+let(table,smooth(<for(<i,[low],[high],[intvl]>,{newtonsolve(poly,[i],[newtondepth]),})>)):
+
+print_  plot2(poly,[low],[high],[intvl],[nbins],15)  \n:
+print_  histogram([table],[nbins])                     :
+print_\n

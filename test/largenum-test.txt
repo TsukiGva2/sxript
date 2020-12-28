@@ -1,0 +1,9 @@
+include(`../test/largenum.txt'):
+
+print_largefact(5)                                                     - 120  ,\n:
+print_largefact(50) 
+       - 30414093201713378043612608166064768844377641568960512000000000000.0  ,\n:
+print_$({decimals(largepow(largesqrt([x],[y]),2),75)[l-][x]})(2,75)           ,\n:
+print_$({decimals(largepow(largesqrt([x],[y]),2),75)[l-][x]})(8,75)           ,\n:
+print_$({decimals(largepow(largesqrt([x],[y]),2),75)[l-][x]})(10,75)          ,\n:
+print_\n

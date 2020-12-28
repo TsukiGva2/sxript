@@ -1,0 +1,17 @@
+include(`../test/vector.txt'):
+
+let(a,<1,2>):
+let(b,<3,4>):
+let(c,stack([a],[b])):
+let(u,<1,2,3,4>):
+let(v,<5,6,7,8>):
+let(tree,<1,<<2,<<4,<7>>,<5>>>,<3,<6,<8,9>>>>>)  :
+
+print_  dotprod([a],[b])           - 11         ,:
+print_  dotprod([c],[c])           - 30         ,:
+print_  dotprod([u],[v]) - (5+12+21+32)         ,:
+
+print_  crossprod(<1,2,3>,<4,5,6>)      
+                           - <-3,6,-3>          ,:
+print_  flatten([tree]) - 124753689             ,:
+print_\n

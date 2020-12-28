@@ -1,0 +1,38 @@
+include(`../test/object.txt'):
+
+let(icons,
+  <
+    <`angel',`0:-)'>,
+    <`annoyed',`>.<'>,
+    <`clinton',`=:o]'>,
+    <`doublechin',`:-))'>,
+    <`dumb',`<:-|'>,
+    <`elvis',`5:-)'>,
+    <`evil',`>:-)'>,
+    <`fish',`><(((*>'>,
+    <`frown',`:-('>,
+    <`grin',`X-D'>,
+    <`heart',`<3'>,
+    <`highfive',`o/\\o'>,
+    <`homer',`~(_8^(1)'>,
+    <`johnlennon',`//0-0\\\\{\}'>,
+    <`kiss',`:-*'>,
+    <`reagan',`7:^]'>,
+    <`pokerface',`:-|'>,
+    <`rose',`@}->--'>,
+    <`santa',`*<|:-)'>,
+    <`silent',`:-X'>,
+    <`skeptic',`:-|'>,
+    <`smile',`:-)'>,
+    <`stare',`O_O'>,
+    <`sunglasses',`8-)'>,
+    <`surprise',`O_o'>,
+    <`tongue',`:-P'>,
+    <`vomit',`:-###..'>,
+    <`wink',`;-)'>,
+  >
+):
+
+loadobj(`icons'):
+print_[icons.johnlennon],:
+print_\n

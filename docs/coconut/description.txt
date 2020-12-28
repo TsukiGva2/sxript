@@ -1,0 +1,1 @@
+Build a three sided pyramid and a four sided pyramid by stacking coconuts. Keep building them higher and higher. At some point, you will find you have used nearly the same number of coconuts for each pyramid. When the difference in the number of coconuts is 1, how big are the pyramids, i.e., how many coconuts used in each?

@@ -1,0 +1,11 @@
+print_   5!       - 120  ,:
+print_   2 ^ 3   - 8     ,:
+print_   2 * 3   - 6     ,:
+print_  10 / 2   - 5     ,:
+print_  10 % 3   - 1     ,:
+print_   2 + 3   - 5     ,:
+print_   4 - 2   - 2     ,:
+print_   3 = 3   - 1     ,:
+print_   1 & 0   - 1     ,:
+print_   0 | 1   - 1     ,:
+print_\n

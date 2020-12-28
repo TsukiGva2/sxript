@@ -1,0 +1,9 @@
+print_  let(a,5)     ,\n:
+print_  a            ,\n:
+print_  [a]          ,\n:
+print_  symbol(a)    ,\n:
+print_  {a}          ,\n:
+print_  {{a}}        ,\n:
+print_  {{{a}}}      ,\n:
+print_  {{{{a}}}}    ,\n:
+print_  {{{{{a}}}}}  ,\n:

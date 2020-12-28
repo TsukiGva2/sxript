@@ -1,0 +1,36 @@
+` Given three points <x,y>, this function directly solves:                   ':
+`     (x - h)^2 + (y - k)^2 = r^2                                            ':
+` The answer is reported as a vector <h,k,r>.                                ':
+`                                                                            ':
+print_
+func(circs,{
+  sub({
+    :let(x1,elem([x],1))
+    :let(x2,elem([y],1))
+    :let(x3,elem([z],1))
+    :let(y1,elem([x],2))
+    :let(y2,elem([y],2))
+    :let(y3,elem([z],2))
+    :let(alpha,(([x2])^2)-(([x1])^2)+(([y2])^2)-(([y1])^2))
+    :let(delta,(([x3])^2)-(([x1])^2)+(([y3])^2)-(([y1])^2))
+    :let(beta,   -2*([x2])+2*([x1]))
+    :let(gamma,   2*([y1])-2*([y2]))
+    :let(epsilon,-2*([x3])+2*([x1]))
+    :let(rho,     2*([y1])-2*([y3]))
+    :`Some division-by-zero prevention...'
+    :let(beta,   iff(greater(.001,([beta])^2),   {[beta]+.001},   {[beta]}))
+    :let(gamma,  iff(greater(.001,([gamma])^2),  {[gamma]+.001},  {[gamma]}))
+    :let(epsilon,iff(greater(.001,([epsilon])^2),{[epsilon]+.001},{[epsilon]}))
+    :let(rho,    iff(greater(.001,([rho])^2),    {[rho]+.001},    {[rho]}))
+    :let(k,([alpha]/[beta]-[delta]/[epsilon])
+          /([rho]/[epsilon]-[gamma]/[beta]))
+    :let(h,([alpha]/[gamma]-[delta]/[rho])
+          /([epsilon]/[rho]-[beta]/[gamma]))
+    :let(rad,(([x1]-[h])^2+([y1]-[k])^2)^.5)
+    :let(result,<[h],[k],[rad]>)
+    :print_[result]
+  })
+})(<4,1>,<-3,7>,<5,-3>) -
+<-6.045454545454544,-3.6363636363636367,+11.063770821622635> ,:
+
+print_\n

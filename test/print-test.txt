@@ -1,0 +1,11 @@
+print_
+
+quote(
+  sub({
+    print_  H      :
+    print_  ell    :
+    print_  o      :
+  })
+)     + ` There.'  :
+
+print_\n

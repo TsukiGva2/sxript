@@ -1,0 +1,16 @@
+include(`../test/hashfunc.txt'):
+
+func(hash,{hashgen([x],101)}):
+
+func(hassign,{
+  let( h(hash([x])),[y] )
+}):
+
+func(hrecall,{
+  symbol(h(hash([x])))
+}):
+
+print_  hash(`billy')                   ,:
+print_  hassign(`apple',`tastes good')  ,:
+print_  hrecall(`apple')                ,:
+print_\n

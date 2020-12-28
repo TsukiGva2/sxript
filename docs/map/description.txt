@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">map(vector1,reference([x],[y]),vector2) = vector3</font>
+</center>

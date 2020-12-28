@@ -1,0 +1,6 @@
+let(a,<1,2,3,4,5>)      ,:
+let(b,<5,4,3,2,1>)      ,:
+
+print_elem([a],3)  - 3  ,:
+print_elem([b],4)  - 2  ,:
+print_\n

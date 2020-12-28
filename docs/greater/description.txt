@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">greater(double1, double2) = binary</font>
+</center>

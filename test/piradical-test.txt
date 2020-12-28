@@ -1,0 +1,15 @@
+include(`../test/largenum.txt'):
+
+let(factor,80):
+let(a,largesqrt(2,[factor])):
+let(n,16):
+do:
+  let(a,largesqrt(largeadd(2,[a]),[factor])):
+loop:
+
+let(a,largesub(2,[a])):
+let(a,largesqrt([a],[factor])):
+let(b,largepow(2,[n]+2)):
+print_let(c,largemul([b],[a])):
+
+print_\n

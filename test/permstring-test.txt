@@ -1,0 +1,5 @@
+include(`../test/permstring.txt'):
+
+print_permstring(`abcd')  \n:
+
+

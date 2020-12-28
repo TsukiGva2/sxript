@@ -1,0 +1,6 @@
+include(`../test/calculus.txt'):
+
+print_newtonsolve($({   [x]^2-8   }), 3 , 10 ),:
+
+print_\n
+

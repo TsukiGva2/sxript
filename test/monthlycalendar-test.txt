@@ -1,0 +1,8 @@
+include(`../test/calendarcore.txt')  :
+include(`../test/linalg.txt')        :
+
+print_  `  Su M  T  W  Th F  Sa'  ,\n:
+print_  mform(calendar(2019,8))     ,:
+
+print_\n
+

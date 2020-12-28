@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">(sin/cos/tan/atan)(number) = number</font>
+</center>

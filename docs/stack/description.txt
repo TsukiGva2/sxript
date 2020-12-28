@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">stack(vector1,vector2) = vector12</font>
+</center>

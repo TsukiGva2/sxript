@@ -1,0 +1,25 @@
+include(`../test/vector.txt'):
+
+func(histogram,{
+  sub({
+    let(table,[x]):
+    let(nbins,[y]):
+    let(r,range([table])):
+    let(delta,elem([r],2)-elem([r],1)):
+    let(bins,fill(elem([r],1)-[delta]/10,elem([r],2)+[delta]/10,[nbins])):
+    let(counts,apply($({0}),fill(1,len([bins]),[nbins]))):
+    func(increment,{let([x],replace(symbol([x]),[y],elem(symbol([x]),[y])+1))}):
+    for(<i,1,len([table]),1>,{block({print_():
+      let(a,elem([table],[i])):
+      for(<j,1,len([bins])-1,1>,{
+        iff((goreq([a],elem([bins],[j])))&(greater(elem([bins],[j]+1),[a])),{
+          increment(counts,[j])
+        })
+      })
+    })}):
+    let(graph,map([bins],$({<[x],[y]>}),[counts])):
+    print_hist([graph],1)
+  })
+}):
+
+print_`statistics.txt':

@@ -1,0 +1,14 @@
+let(a,5+5)                       :
+let(b,`Moo '+ `Cow')             :
+let(c,<cos(3),sin(3)>)           :
+let(d,{4+4})                     :
+print_  [a]+[a]    - 20         ,:
+print_  [b]        - `Moo Cow'  ,:
+print_  [c]                     ,:
+print_  [d]                     ,:
+print_\n                         :
+print_  alet(a)                 ,:
+print_  alet(b)                 ,:
+print_  alet(c)                 ,:
+print_  alet(d)                 ,:
+print_\n

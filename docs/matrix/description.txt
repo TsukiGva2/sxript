@@ -1,0 +1,1 @@
+Sxript regards a <i>matrix</i> as a vector whose components are themselves vectors.

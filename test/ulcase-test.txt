@@ -1,0 +1,4 @@
+let(a,`Moo '+ `Cow')                :
+print_  ucase([a])    - `MOO COW'  ,:
+print_  lcase([a])    - `moo cow'  ,:
+print_\n

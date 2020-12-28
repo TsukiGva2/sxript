@@ -1,0 +1,17 @@
+func(and,{([x]&[y])}):
+func(or,{([x]|[y])}):
+func(not,{iff([x]=1,{0},{1})}):
+func(nand,{not(and([x],[y]))}):
+func(nor,{not(or([x],[y]))}):
+
+func(xor,{
+  not(
+    and(
+      not([x] & not([x] & [y]))
+      ,
+      not([y] & not([x] & [y]))
+    )
+  )
+}):
+
+print_`bitwise.txt':

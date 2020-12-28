@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">replace(vector1,index,content) = vector2</font>
+</center>

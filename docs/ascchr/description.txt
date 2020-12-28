@@ -1,0 +1,5 @@
+<center>
+<font face="Courier New">asc(character) = integer</font>
+<br/>
+<font face="Courier New">chr(integer) = character</font>
+</center>

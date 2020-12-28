@@ -1,0 +1,31 @@
+include(`../test/permstring.txt'):
+
+func(abs,({([x]*[x])^.5})):
+
+let(moo,permstring(`bcfms')):
+
+print_
+for(<i,1,len([moo]),1> ,{
+  sub({
+    let(a,elem([moo],[i])):
+    let(b,1):
+    iff(left([a],1)=`c',{let(b,0)}):
+    iff(right([a],1)=`b',{let(b,0)}):
+    iff(left([a],1)=`f',{let(b,0)}):
+    iff(right([a],1)=`f',{let(b,0)}):
+    let(gb,instr([a],`b',1)):
+    let(gc,instr([a],`c',1)):
+    let(gf,instr([a],`f',1)):
+    let(gm,instr([a],`m',1)):
+    let(gs,instr([a],`s',1)):
+    iff(greater([gm],[gc]),{},{let(b,0)}):
+    iff(greater(abs([gs]-[gf]),1),{},{let(b,0)}):
+    iff(greater(abs([gf]-[gc]),1),{},{let(b,0)}):
+    print_iff([b]=1,{[a]},{}):
+  })
+}) ,:
+
+print_\n
+
+
+

@@ -1,0 +1,124 @@
+func(unformat,{
+  unquote(((quote([x])/`+')/`-')-`.0')
+}):
+
+func(cell,{
+  symbol(
+    (([x])(unformat([y]+0)))
+  )
+}):
+
+func(prow,{
+  sub({
+    let(a,unformat([x]+0)):
+    let(b,instr(`ABCDEFGH',[y])):
+    let(c,instr(`ABCDEFGH',[z])):
+    print_for(<j,[b],[c],1>,{
+      symbol(unquote(mid(`ABCDEFGH',{j},1)+quote({a}))),
+    })
+  })
+}):
+
+func(pcol,{
+  sub({
+    let(a,[x]):
+    let(b,[y]+0):
+    let(c,[z]+0):
+    let(d,[t]):
+    print_for(<i,[b],[c],1>,{
+      symbol(unquote(quote({a})+quote(unformat({i})))),
+    })
+  })
+}):
+
+func(aprow,{
+  apply(unoccult,
+  smooth(<sub({
+    let(a,unformat([x]+0)):
+    let(b,instr(`ABCDEFGH',[y])):
+    let(c,instr(`ABCDEFGH',[z])):
+    let(d,[t]):
+    print_for(<j,[b],[c],1>,{
+      {let(mid(`ABCDEFGH',{j},1)+quote({a})+`orig',{d})},
+    })
+  })>)
+  )
+}):
+
+func(apcol,{
+  apply(unoccult,
+  smooth(<sub({
+    let(a,[x]):
+    let(b,[y]+0):
+    let(c,[z]+0):
+    let(d,[t]):
+    print_for(<i,[b],[c],1>,{
+      {let(quote({a})+quote(unformat({i}))+`orig',{d})},
+    })
+  })>)
+  )
+}):
+
+func(hexpand,{
+  occult(unoccult(sub({
+    let(a,[x]):
+    let(b,unquote([y])):
+    let(c,unformat([z]+0)):
+    let(k,1):
+    len([a]):
+    do:
+      print_
+      {let(quote({b})+quote({c})+`orig',elem({a},{k}))}:
+      let(k,[k]+1):
+      let(b,unquote(mid(`ABCDEFGH',1+instr(`ABCDEFGH',[b]),1))):
+    loop:
+  })))
+}):
+
+func(hcontract,{
+  apply(symbol,
+  smooth(<sub({
+    let(a,[x]):
+    let(b,instr(`ABCDEFGH',[y])):
+    let(c,instr(`ABCDEFGH',[z])):
+    print_for(<i,[b],[c],1>,{
+      (mid(`ABCDEFGH',[i],1))([a]),
+    })
+  })>)
+  )
+}):
+
+func(vexpand,{
+  occult(unoccult(sub({
+    let(a,[x]):
+    let(b,unquote([y])):
+    let(c,unformat([z]+0)):
+    let(k,1):
+    len([a]):
+    do:
+      print_
+      {let(quote({b})+quote({c})+`orig',elem({a},{k}))}:
+      let(k,[k]+1):
+      let(c,unformat([c]+1)):
+    loop:
+  })))
+}):
+
+func(vcontract,{
+  apply(symbol,
+  smooth(<sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(c,[z]):
+    print_for(<i,[b],[c],1>,{
+      [a](unformat([i])),
+    })
+  })>)
+  )
+}):
+
+func(htotal,{sub({print_reduce($({[x]+[y]}),smooth(<prow([x],[y],[z])>))})}):
+
+func(vtotal,{sub({print_reduce($({[x]+[y]}),smooth(<pcol([x],[y],[z])>))})}):
+
+print_`spreadsheet.txt':

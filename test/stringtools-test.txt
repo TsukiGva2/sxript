@@ -1,0 +1,18 @@
+include(`../test/stringtools.txt'):
+
+print_strvec(`apples')               ,:
+print_asciivec(strvec(`apples'))     ,:
+print_greaterstr(`aaa',`bbb')        ,:
+print_greaterstr(`bbb',`aaa')        ,:
+print_greaterstr(`aaa',`aaa')        ,:
+
+print_\n:
+
+let(message,`72 97 118 101 32 97 32 119 111 110 100 101 114 102 117 108 32 100 97 121 32 97 110 100 32 107 101 101 112 32 119 97 116 99 104 105 110 103 32 116 104 101 32 115 107 105 101 115 46'):
+
+let(message,<strepl([message],` ',`,')>)       :
+let(message,smooth(apply(unquote,[message])))  :
+let(message,apply(chr,[message]))              :
+print_reduce($({[x][y]}),[message])           ,:
+
+print_\n

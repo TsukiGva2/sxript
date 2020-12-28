@@ -1,0 +1,36 @@
+include(`../test/epoch.txt'):
+
+func(qf,{quote(unformat(0+[x]))}):
+
+func(guessdatetime,{
+  sub({
+    let(a,[x]):
+    let(b,timetoseconds(trimtime([a]))):
+    let(thedate,[a]-[b]):
+    let(thetime,secondstotime([b])):
+    let(year,0+int(1970+[thedate]/(60*60*24*365.25))):
+    let(guessepoch,epoch(`1-1-'+quote([year]),[thetime],[y])):
+    let(month,0+int(([a]-[guessepoch])/(60*60*24*(365.25/12)))):
+    let(guessepoch,epoch(quote([month])+`-1-'+quote([year]),[thetime],[y])):
+    let(day,0+int(([a]-[guessepoch])/(60*60*24))):
+    fb_hNormalizeDate():
+    print_<qf([month])+`-'+qf([day])+`-'+qf([year]),[thetime]>
+  })
+}):
+
+func(appxdatetime,{
+  sub({
+    let(a,[x]),:
+    let(datetimeguess,guessdatetime([a],[y])):
+    let(dateguess,elem([datetimeguess],1)):
+    let(timeguess,elem([datetimeguess],2)):
+    let(b,epoch([dateguess],[timeguess],[y])):
+    let(delta,[a]-[b]):
+    let(b,[b]+2*[delta]):
+    print_guessdatetime([b],[y]):
+  })
+}):
+
+func(testappx,{appxdatetime(epoch([x],[y],[z]),[z])}):
+
+print_`epochrev.txt':

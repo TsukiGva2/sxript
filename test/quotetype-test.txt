@@ -1,0 +1,5 @@
+print_  (`Green' + ` ' + `Dragon' - `on' = `Green Drag')   - 1  ,:
+print_  (`abcde' + `xyz' - `xyz' = `abcde')                - 1  ,:
+print_  (`moo' * `cat' = `mcatocatocat')                   - 1  ,:
+print_  (`moocow' / `oo' = `mcow')                         - 1  ,:
+print_\n

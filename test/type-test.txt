@@ -1,0 +1,15 @@
+print_  type(+123.456)       ,:
+print_  type(`cowface')      ,:
+print_  type(<<1,2>,<3,4>>)  ,:
+print_  type({([x]+[y])})    ,:
+print_  type(+)              ,:
+print_  type(*)              ,:
+
+print_  quote(+123.456)      ,:
+print_  vector(+123.456)     ,:
+print_  occult(+123.456)     ,:
+
+print_  unquote(`Moo Cow')   ,:
+print_  unvector(<123>)      ,:
+print_  unoccult({1+2+3})    ,:
+print_  \n

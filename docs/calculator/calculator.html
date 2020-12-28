@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="device-width, initial-scale=1">
+
+<title>Sxript Calculator</title>
+
+<script type="text/javascript" src="../jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../../src/sxript.js"></script>
+<script type="text/javascript" src="../../src/qbf.js"></script>
+<script>
+$(document).ready(function() {
+  $("#textin").click(function() {
+  //alert("text field clicked");
+  });
+});
+
+$(document).ready(function() {
+  $("#textin").keyup(function (e) {
+  if (e.keyCode == 13) {
+    $("#evalbutton").click();
+  }
+  });
+});
+</script>
+
+</head>
+
+<body bgcolor="#222222">
+
+<center>
+<table style="width:100%" border="0">
+  <tbody>
+  <tr>
+    <td align="center">
+      <font color="White" size="6" face="Courier New"><b>Sxript<br/>Calculator</b></font>
+    </td>
+  </tr>
+  <tr>
+  <td>
+    <center>
+    <form id="mainform">
+<textarea id="textold" rows="1" cols="24" style="font-size:20px; font-weight:bold; font-family:Courier New; color:Black; background-color: #CCCCCC" readonly="readonly">
+</textarea>
+    <br/>
+<textarea id="textin"  rows="1" cols="24" style="font-size:20px; font-weight:bold; font-family:Courier New; color:Black; background-color:#FFFFFF">
+</textarea>
+    </form>
+    </center>
+  </td>
+  </tr>
+  <tr>
+  <td>
+    <center>
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="1" value="1" onclick="mainform.textin.value += '1'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="2" value="2" onclick="mainform.textin.value += '2'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="3" value="3" onclick="mainform.textin.value += '3'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Wheat" id="+" value="+" onclick="mainform.textin.value += '+'">
+    <br/>
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="4" value="4" onclick="mainform.textin.value += '4'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="5" value="5" onclick="mainform.textin.value += '5'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="6" value="6" onclick="mainform.textin.value += '6'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Wheat" id="-" value="-" onclick="mainform.textin.value += '-'">
+    <br/>
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="7" value="7" onclick="mainform.textin.value += '7'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="8" value="8" onclick="mainform.textin.value += '8'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="9" value="9" onclick="mainform.textin.value += '9'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Wheat" id="*" value="*" onclick="mainform.textin.value += '*'">
+    <br/>
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="(" value="(" onclick="mainform.textin.value += '('">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="0" value="0" onclick="mainform.textin.value += '0'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id=")" value=")" onclick="mainform.textin.value += ')'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Wheat" id="/" value="/" onclick="mainform.textin.value += '/'">
+    <br/>
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:LightCoral" id="clear" value="CLR" onclick="mainform.textin.value = ''">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:LightCoral" id="backsp" value="del<" onclick="mainform.textin.value = mainform.textin.value.substr(0,mainform.textin.value.length-1)">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Tan" id="." value="." onclick="mainform.textin.value += '.'">
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:Wheat" id="^" value="^" onclick="mainform.textin.value += '^'">
+    <br/>
+    <!input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:LightBlue" id="matax" value="MAtx" onclick="mainform.textin.value += 'matax('">
+    <!input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:70px; height:45px; background-color:LightBlue" id="cttax" value="CTtx" onclick="mainform.textin.value += 'cttax('">
+    <br/>
+    <input type="button" style="font-size:20px; font-family:Courier New; font-weight:bold;  color:Black; width:295px; height:45px; background-color:LimeGreen" id="evalbutton" value="=" onclick="mainform.textold.value=mainform.textin.value+' = '; mainform.textin.value=sxriptEval(mainform.textin.value)">
+    <br/>
+    </center>
+  </td>
+  </tr>
+  </tbody>
+</table>
+</center>
+
+<br/>
+
+<center>
+<a href="../../index.html" target="_parent"><img src="../../img/sxlogoinv.png" alt=""/></a>
+</center>
+
+<br/>
+
+<script>
+mainform.textin.focus();
+sxriptEval("func(matax,{(.0625*[x])})");
+sxriptEval("func(cttax,{(.0635*[x])})");
+</script>
+
+</body>
+</html>

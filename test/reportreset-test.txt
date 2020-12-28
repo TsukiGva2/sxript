@@ -1,0 +1,7 @@
+print_  let(a,6)                ,:
+print_  func(yell,{[x]+`!!!'})  ,:
+print_  report()                ,:
+print_  report(yell)            ,:
+print_  reset()                 ,:
+print_  report()                ,:
+print_\n

@@ -1,0 +1,22 @@
+func(perm,{
+  sub({
+  let(a,[x]):
+  let(b,[y]):
+  print_iff(len([b])=0, { [a], }, {
+    sub({
+    let(i,1):
+    len([b]):
+    do:
+      let(newpre, [a] + mid([b],[i],1)  ):
+      let(newsuf, left([b],[i]-1) + right([b],len([b])-[i])  ):
+      print_perm([newpre],[newsuf]):
+      let(i,[i]+1):
+    loop }) }) }) }):
+
+func(permstring,{
+  smooth(<
+    perm(`',[x])
+  >)
+}):
+
+print_`permstring.txt':

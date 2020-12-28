@@ -1,0 +1,28 @@
+let(nums,<rand(10),rand(10),rand(10),rand(10)>):
+let(nums,apply(int,[nums])):
+let(qnums,apply(quote,[nums])):
+let(tot1,reduce($({[x]+[y]}),[nums])):
+
+let(q,`Your numbers are ' + quote([nums]) + `. Place operators and parens (keep the quotes) to make 24, i.e.: \`'):
+
+let(r,elem([qnums],1) + `+' + elem([qnums],2) + `+' + elem([qnums],3) + `+' + elem([qnums],4) + `\''):
+
+input(ans,[q]+[r]):
+
+print_`Your equation is: ' + [ans]  \n:
+
+let(ansr,((((((((
+[ans]/`*')/`/')/`+')/`-')/`(')/`)')*`+')+`0')):
+let(tot2,unquote([ansr])):
+if_[tot1]=[tot2] @ proceed:
+
+print_`Invalid numbers or expression.':
+goto_done:
+
+anchor_proceed:
+let(res,unquote([ans])):
+print_`Your result is: ' + quote([res])  \n:
+print_iff([res]=24,{`Congrats!'},{`Try again...'}):
+
+anchor_done:
+print_\n

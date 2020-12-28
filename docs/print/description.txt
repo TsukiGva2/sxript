@@ -1,0 +1,6 @@
+Similar to the "return" statement in C-family languages, the <font face="Courier New">print</font> statement is the means through which subprograms and codeblocks hand output to the parent. A <font face="Courier New">print</font> statement does not terminate or exit the subprogram, and multiple print statements (but never zero) per subprogram are allowed. To return void, use <font face="Courier New">print_()</font>.
+
+<br/>
+<br/>
+
+When the <font face="Courier New">print</font> statement occurs in the `main' program, output is handed to the terminal (or equivalent).

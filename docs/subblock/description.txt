@@ -1,0 +1,10 @@
+A <i>sub(program)</i> is a sequence of expressions, each separated by the colon ( <font face="Courier New">:</font> ) symbol, to be evaluated in linear order. The sequence is wrapped in curled braces ( <font face="Courier New">{ }</font> ) as occulted code. The <font face="Courier New">sub</font> prefix triggers subprogram evaluation, as in <font face="Courier New">sub({exp1:exp2:exp3:...})</font>.
+<br/>
+<br/>
+Subprograms have private scope: variables created <i>before</i> the <font face="Courier New">sub</font> call are still "visible" inside the subprogram, whereas variables created <i>inside</i> the subprogram vanish as the subprogram finishes.
+<br/>
+<br/>
+The output of a subprogram is specified by whichever expressions are prefixed by the <font face="Courier New">print_</font> statement. This special keyword is analogous to "return" in C-family languages. There must be at least one <font face="Courier New">print_</font> statement in a subprogram.
+<br/>
+<br/>
+A <i>(code)block</i> is a subprogram with public scope: variables created or altered <i>inside</i> a codeblock are maintained after exit.

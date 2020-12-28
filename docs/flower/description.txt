@@ -1,0 +1,7 @@
+<i>Turtle graphics</i> are a method for tracing out line segments. The "pencil point" (a.k.a. "turtle") has a designated position (as a cursor would), where lines are produced by instructing the pointer to either (i) move forward, or (ii) change direction. In this example, we instruct the turtle to move forward, turn left, move forward, turn left, and so on until he completes a circuit. Turn left an extra time, and trace out a similar curcuit. Repeat these instructions for several iterations to produce the shape below. <br/><br/><center><img src="flower.png"></center><br/><center><textarea class="console" cols="80" rows="7">
+gnuplot> set terminal png size 480,360
+gnuplot> set output "flower.png"
+gnuplot> set size ratio 1
+gnuplot> set object rectangle from screen 0,0 to screen 1,1 behind fillcolor rgb 'black' fillstyle solid noborder
+gnuplot> plot 'flower-out.txt' with linespoints ls 1
+</textarea></center>

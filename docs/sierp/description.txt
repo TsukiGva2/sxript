@@ -1,0 +1,7 @@
+<center><img src="sierp.png"></center><br/><center><textarea class="console" cols="80" rows="7">
+gnuplot> set terminal png size 480,360
+gnuplot> set output "sierp.png"
+gnuplot> set size ratio 1
+gnuplot> set object rectangle from screen 0,0 to screen 1,1 behind fillcolor rgb 'black' fillstyle solid noborder
+gnuplot> plot "sierp-out.txt" with dots lc rgb "green"
+</textarea></center>

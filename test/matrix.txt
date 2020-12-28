@@ -1,0 +1,28 @@
+`Return a single element [y],[z] from 2D matrix [x]':
+func(melem,{
+  elem(elem([x],[y]),[z])
+}):
+
+`Replace element [y],[z] in matrix [x] with [t]':
+func(repelem,{
+  replace([x],[y],replace(elem([x],[y]),[z],[t]))
+}):
+
+`Transpose a matrix':
+func(trans,{
+  smooth(<
+  sub({
+    let(a,[x]):
+    print_for(<i,1,len(elem([a],1)),1>, {
+      column([a],[i]),
+    })
+  })
+  >)
+}):
+
+`Replace column [y] of matrix [x] with vector [z]':
+func(repcol,{
+  trans(replace(trans([x]),[y],[z]))
+}):
+
+print_`matrix.txt':

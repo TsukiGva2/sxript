@@ -1,0 +1,27 @@
+func(genmult,{
+  sub({
+    let(v1,[x]):
+    let(op,[y]):
+    let(v2,[z]):
+    let(rule,[t]):
+    iff(type([v1])=`number',{let(v1,<[v1],0>)}):
+    iff(type([v2])=`number',{let(v2,<[v2],0>)}):
+    let(result,
+      <
+      ((elem([v1],1)) [op] (elem([v2],1))) * (elem([rule],1)),
+      ((elem([v1],1)) [op] (elem([v2],2))) * (elem([rule],2)),
+      ((elem([v1],2)) [op] (elem([v2],1))) * (elem([rule],3)),
+      ((elem([v1],2)) [op] (elem([v2],2))) * (elem([rule],4))
+      >
+    ):
+    let(result,reduce($({([x]+[y])}),[result])):
+    print_[result]
+  })
+}):
+
+func(foil, {genmult([x],*,[y],<<1,0>,<1,0>,<1,0>, <1,0>>)}):
+func(dprod,{genmult([x],*,[y],<<1,0>,<0,0>,<0,0>, <1,0>>)}):
+func(cmult,{genmult([x],*,[y],<<1,0>,<0,1>,<0,1>,<-1,0>>)}):
+func(cadd, {genmult([x],+,[y],<<1,0>,<0,0>,<0,0>, <0,1>>)}):
+
+print_`genmult.txt':

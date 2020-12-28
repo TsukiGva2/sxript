@@ -1,0 +1,1 @@
+The <font face="Courier New">do... loop</font> structure is a way to execute code in repetition.  The number of iterations is the number immediately preceding the <font face="Courier New">do</font> statement. Early termination can be achieved with <font face="Courier New">goto</font> or <font face="Courier New">if_@</font>.

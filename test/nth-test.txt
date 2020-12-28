@@ -1,0 +1,21 @@
+include(`../test/vector.txt'):
+
+func(nth,{
+  sub({
+    let(a,[x]):
+    let(b,right([a],2)):
+    let(result,`th'):
+    iff(right([b],1)=1,{let(result,`st')}):
+    iff(right([b],1)=2,{let(result,`nd')}):
+    iff(right([b],1)=3,{let(result,`rd')}):
+    iff([b]-11=0,{let(result,`th')}):
+    iff([b]-12=0,{let(result,`th')}):
+    iff([b]-13=0,{let(result,`th')}):
+    print_[x]\'[result]
+  })
+}):
+
+print_  apply(nth,apply(unformat,                    fill(1,25,25)))   ,\n\n:
+print_  apply(nth,apply(unformat,apply($({[x]+250}) ,fill(1,15,15))))  ,\n\n:
+print_  apply(nth,apply(unformat,apply($({[x]+1000}),fill(1,15,15))))      ,:
+print_\n

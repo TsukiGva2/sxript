@@ -1,0 +1,20 @@
+func(turtle,{
+  < elem([x],1) + ([z])*cos([y]*3.1415927/180) ,
+    elem([x],2) + ([z])*sin([y]*3.1415927/180)
+  >
+}):
+
+let(pos,<0,0>):
+let(ang,0):
+print_reduce($({[x]\t[y]}),[pos]) \n:
+
+12:
+do:
+  360/30:
+  do:
+    let(pos,turtle([pos],[ang],1)):
+    let(ang,[ang]+30):
+    print_reduce($({[x]\t[y]}),[pos]) \n:
+  loop:
+  let(ang,[ang]+30):
+loop

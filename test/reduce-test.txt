@@ -1,0 +1,7 @@
+func(addtwo,{[x]+[y]}):
+func(multtwo,{[x]*[y]}):
+
+print_reduce(addtwo, <1,2,3,4,5>)        - 15   ,:
+print_reduce(multtwo, <1,2,3,4,5>)       - 120  ,:
+print_reduce($({[x]-[y]}), <1,2,3,4,5>)  - -13  ,:
+print_\n

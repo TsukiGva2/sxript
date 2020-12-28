@@ -1,0 +1,6 @@
+let(pi,4*atan(1))                                        :
+print_  <cos(0),cos([pi])>    -  <1,-1>                 ,:
+print_  <sin(0),sin([pi])>    -  <0,0>                  ,:
+print_  <tan(0),tan([pi])>    -  <0,0>                  ,:
+print_  <atan(0),atan([pi])>  -  <0,1.262627255678911>  ,:
+print_  \n

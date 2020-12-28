@@ -1,0 +1,58 @@
+`Define a two-argument function to be curried down to one argument':
+func(divide,{([x]/[y])}):
+
+`Method 0 of 3: Classical approach uses hard-coded function.':
+
+func(overtwo,{divide([x],2)}):
+print_overtwo(2) - 1 ,:
+
+`Method 1 of 3: Block containing lambda.':
+
+block(
+  $({
+    sub({
+      let(a,[x]):
+      let(b,[y]):
+      print_{
+        print_func({a}, { divide([x],{b}) })
+      }
+    })
+  })(overthree,3)
+):
+print_overthree(6) - 2 ,:
+
+`Method 2 of 3: Function containing block.':
+
+func(gen,{
+  block(
+    sub({
+      let(a,[x]):
+      let(b,[y]):
+      print_{
+        print_func({a}, { divide([x],{b}) })
+      }
+    })
+  )
+}):
+
+gen(overfour,4):
+print_overfour(12) - 3 ,:
+print_(gen(overfive,5))(20) - 4 ,:
+
+`Method 3 of 3: Lambda containing block.':
+
+print_
+$({
+  block(
+    sub({
+      let(a,[x]):
+      let(b,[y]):
+      print_{
+        print_func({a}, { divide([x],{b}) })
+      }
+    })
+  )
+})(oversix,6)(30) - 5 ,:
+
+print_\n
+

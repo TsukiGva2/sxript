@@ -1,0 +1,1 @@
+It turns out that the first hundred (or so) Fibonacci Numbers can be produced by inverting the integer 999999999999999999999998999999999999999999999999 (bonus points for noticing that one of the digits is not a 9). <br/><br/><center><img src="fibsho.png"></center><br/><center>

@@ -1,0 +1,147 @@
+`Helper function for creating nodes.':
+`Each node has a name and contains N child nodes.':
+func(create,{
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(c,[z]):
+    print_{let({a},<{b},{c}>)}
+  })
+}):
+
+func(new,{$(create([x],[y],[z]))()}):
+
+`Sample data: (node, parent, <children>)'  :
+new(`one',    `',       <`two',`three'>)   :
+new(`two',    `one',    <`four',`five'>)   :
+new(`three',  `one',    <`six'>)           :
+new(`four',   `two',    <`seven'>)         :
+new(`five',   `two',    <`'>)              :
+new(`six',    `three',  <`eight',`nine'>)  :
+new(`seven',  `four',   <`'>)              :
+new(`eight',  `six',    <`'>)              :
+new(`nine',   `six',    <`'>)              :
+
+`-----':
+
+func(preorder,{
+  sub({
+    let(a,[x]):
+    if_(len([a])=0)@done:
+    print_[a],:
+    let(i,1):
+    let(b,elem(symbol(unquote([a])),2)):
+    len([b]):
+    do:
+      let(r,elem([b],[i])):
+      print_preorder([r]):
+      let(i,[i]+1):
+    loop:
+    anchor_done:
+  })
+}):
+
+`-----':
+
+func(inorderbin,{
+  sub({
+    let(a,[x]):
+    if_(len([a])=0)@done:
+    let(b,elem(symbol(unquote([a])),2)):
+    print_iff(greater(len([b]),0),{block({
+      print_inorderbin(elem([b],1)):
+      print_[a],:
+    })}):
+    print_iff(greater(len([b]),1),{
+      inorderbin(elem([b],2))
+    }):
+    anchor_done:
+  })
+}):
+
+`-----':
+
+func(postorder,{
+  sub({
+    let(a,[x]):
+    if_(len([a])=0)@done:
+    let(i,1):
+    let(b,elem(symbol(unquote([a])),2)):
+    len([b]):
+    do:
+      let(r,elem([b],[i])):
+      print_postorder([r]):
+      let(i,[i]+1):
+    loop:
+    print_[a],:
+    anchor_done:
+  })
+}):
+
+`-----':
+
+func(hheight,{
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(c,[z]):
+    if_[a]=[b]@prt:
+    let(d,elem(symbol(unquote([b])),1)):
+    let(c,[c]+1):
+    print_hheight([a],[d],[c]):
+    goto_ext:
+    anchor_prt:
+    print_[c]:
+    anchor_ext:
+  })
+}):
+
+func(theight,{
+  hheight([x],[y],0)
+}):
+
+func(htable,{
+  sub({
+    let(a,[x]):
+    let(b,smooth(<preorder([a])>)):
+    print_apply($({<[x],theight({a},[x])>}),[b])
+  })
+}):
+
+include(`../test/sort.txt'):
+
+func(sortinsvec2,{
+  sub({
+    let(a,[x]):
+    let(i,2):
+    len([a])-1:
+    do:
+      print_for(<j,[i],2,-1>,{
+        block({
+          let(m,elem(elem([a],[j]-1),2)):
+          let(n,elem(elem([a],[j]),2)):
+          if_ greater([n],[m])=1 @ skip:
+          if_ [m]=[n] @ skip:
+          let(a,elemswap([a],[j],[j]-1)):
+          anchor_skip:
+          print_()
+        })
+      }):
+      let(i,[i]+1):
+    loop:
+    print_[a]:
+  })
+}):
+
+func(levelorder,{
+  sub({
+    print_unvector(apply($({elem([x],1)}),sortinsvec2(htable([x]))))
+  })
+}):
+
+`-----':
+
+print_`Preorder: ' + preorder(`one')        \n:
+print_`Inorder(bin): ' + inorderbin(`one')  \n:
+print_`Postorder: ' + postorder(`one')      \n:
+print_`Level-order: ' + levelorder(`one')   \n:

@@ -1,0 +1,76 @@
+include(`../test/object.txt'):
+
+`Create several objects.'                         :
+let(lifeform,
+  <
+    <`alive',`yes'>,
+    <`soul',`maybe'>
+  >
+):
+
+let(human,
+  <
+    <`planet',Earth>,
+    <`arms',2>,
+    <`legs',2>,
+    <`soul',`yes'>,
+    <`prototype',lifeform>
+  >
+):
+
+let(someperson,
+  <
+    <`name',`Billy Barnes'>,
+    <`year',1984>,
+    <`location',`USA'>,
+    <`talent',{[x]+[y]}>,
+    <`value',3+4>,
+    <`prototype',human>
+  >
+):
+
+`Test memory indexing.'                           :
+print_memind([someperson],`name')       - 1      ,:
+print_memind([someperson],`location')   - 3      ,:
+
+`Demonstrate prototype inheritance.'              :
+print_  mem([human],`arms')             - 2      ,:
+print_  mem([someperson],`alive')       - `yes'  ,:
+print_  mem([someperson],`soul')        - `yes'  ,:
+
+`Demonstrate flattening.'                         :
+print_  mem(flat([someperson]),`soul')   - `yes'  :
+
+`Demonstrate self-referencing object factory.'    :
+func(makeperson,{
+  let([x],<
+    <`first',[y]>,
+    <`last',[z]>,
+    <`fullname',{
+      mem(symbol([x]),`first') + ` ' + 
+      mem(symbol([x]),`last')
+    }>
+  >)
+})(sprezzo,`Tom',`Furtek'):
+
+print_  $(mem([sprezzo],`fullname'))()           
+                                 - `Tom Furtek'  ,:
+
+`Demonstrate editing.'                            :
+func(objedit,{
+  block({
+    print_let([x],
+      replace(
+        symbol([x]),
+        memind(symbol([x]),[y]),
+        <[y],[z]>
+      )
+    )
+  })
+})(sprezzo,`first',`Muffin'):
+
+
+print_  $(mem([sprezzo],`fullname'))()
+                             - `Muffin Furtek'  ,:
+
+print_\n

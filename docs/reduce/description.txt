@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">reduce(reference([x],[y]),vector) = data</font>
+</center>

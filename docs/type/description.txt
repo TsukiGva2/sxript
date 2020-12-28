@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">type(data) = `type'</font>
+</center>

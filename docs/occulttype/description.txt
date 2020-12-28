@@ -1,0 +1,1 @@
+An <i>occulted(ed)</i> structure is anything contained in curly braces ( <font face="Courier New">{ }</font> ). Occulted strucures are generally not evaluated until directly called by a function, such as <font face="Courier New">sub</font>, <font face="Courier New">block</font>, <font face="Courier New">iff</font>, etc.

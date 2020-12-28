@@ -1,0 +1,39 @@
+include(`../test/arithmetic.txt'):
+
+let(xx,0):
+let(yy,0):
+
+print_scatter(smooth(<sub({
+350:
+do:
+  let(ii,dice(100)),:
+  if_greater(1,[ii])    @ a:
+  if_inrange(1,[ii],8)  @ b:
+  if_inrange(8,[ii],15) @ c:
+  if_greater([ii],15)   @ d:
+    
+  anchor_a:
+  let(xx,  0                       ):
+  let(yy,  .16*[yy]                ):
+  goto_doneloop:
+    
+  anchor_b:
+  let(xx,  .2*[xx]-.26*[yy]        ):
+  let(yy,  .23*[xx]+.22*[yy]+1.6   ):
+  goto_doneloop:
+    
+  anchor_c:
+  let(xx,  -.15*[xx]+.28*[yy]      ):
+  let(yy,  .26*[xx]+.24*[yy]+.44   ):
+  goto_doneloop:
+    
+  anchor_d:
+  let(xx,  .85*[xx]+.04*[yy]       ):
+  let(yy,  -.04*[xx]+.85*[yy]+1.6  ):
+  goto_doneloop:
+    
+  anchor_doneloop:
+  print_<[xx],[yy]>,:
+loop})>),60,60,1)
+
+

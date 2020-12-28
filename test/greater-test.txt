@@ -1,0 +1,5 @@
+print_  greater(2,5) - 0  ,:
+print_  greater(5,2) - 1  ,:
+print_  greater(5,5) - 0  ,:
+print_  greater(0,0) - 0  ,:
+print_\n

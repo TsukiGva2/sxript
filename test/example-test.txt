@@ -1,0 +1,20 @@
+`...All programs are actually subprograms...':
+include(`../test/arithmetic.txt'):
+print_`Welcome!\n':
+let(rollone,dice(6)):
+print_`Single roll: ' + quote([rollone]) + `\n':
+func(rolltwo,{<dice([x]),dice([x])>}):
+print_`Your double dice roll is: ' 
+  + quote(rolltwo(6)) + `\n\n':
+func(rollmany,{
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    do:
+    print_dice([a]),:
+    loop:
+  })
+}):
+print_rollmany(6,10)
+
+:print_\n

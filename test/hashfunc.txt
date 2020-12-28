@@ -1,0 +1,15 @@
+include(`../test/arithmetic.txt'):
+
+func(hashgen,{
+  sub({
+    let(thekey,[x]) :
+    let(thesum,0) :
+    for(<i,1,len([thekey]),1>,{
+      let(thesum,[thesum]+([i]*asc(mid([thekey],[i],1)))^2)
+    }) :
+    let(thesum,[thesum] % [y]) :
+    print_unformat([thesum])
+  })
+}):
+
+print_`hash.txt':

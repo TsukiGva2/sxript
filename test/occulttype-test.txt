@@ -1,0 +1,8 @@
+let(a,
+  {let(b,1+0):print_let(c,2+[b])}
+)                                  ,:
+print_  sub([a])               - 3 ,:
+print_  [b]                        ,:
+print_  block([a])             - 3 ,:
+print_  [b]                    - 1 ,:
+print_\n

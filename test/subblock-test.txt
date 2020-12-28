@@ -1,0 +1,26 @@
+let(a,+1.0)                      :
+let(b,+2.0)                      :
+let(c,+3.0)                      :
+
+print_
+sub({
+  let(a,11):
+  let(b,89):
+  print_let(c,[a]+[b]):
+})                       - 100  ,:
+
+print_
+<[a],[b],[c]>     
+            - <+1.0,+2.0,+3.0>  ,:
+
+print_
+block({
+  let(a,3):
+  let(b,4):
+  print_let(c,[a]+[b]):
+})                         - 7  ,:
+
+print_
+<[a],[b],[c]>        - <3,4,7>  ,:
+
+print_\n

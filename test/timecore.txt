@@ -1,0 +1,103 @@
+`Functions starting with "fb_" are translations from FreeBASIC.':
+
+func(fb_hNormalizeDate,{
+  block({
+    print_iff(greater(1,[month]),{block({print_():
+      let(submonths, -[month] + 1):
+      let(subyears, int(([submonths] + 11) / 12)):
+      let(year, [year] - [subyears]):
+      let(month,[subyears] * 12 - [submonths] + 1):
+    })},{block({print_():
+      let(month, [month] - 1):
+      let(singleyear, [year] + int([month] / 12)):
+      let(year, [singleyear]):
+      let(month, [month] % 12):
+      let(month, [month] + 1):
+    })}):
+    print_
+    iff(greater(1,[day]),{block({print_():
+      let(subdays,-[day]+1):
+      anchor_start:
+        if_greater(0,[subdays]-1)@done:
+        let(month, [month] - 1):
+        iff([month]=0,{block({print_():let(month,12):let(year,[year]-1)})}):
+        let(dom,fb_hTimeDaysInMonth([month],[year])):
+        iff(greater([subdays],[dom]),{
+          let(subdays,[subdays]-[dom])
+        },{block({print_():
+          let(day,[dom]-[subdays]+1):
+          let(subdays,0)})
+        }):
+      goto_start:
+      anchor_done:
+    })},{block({print_():
+      let(dom, fb_hTimeDaysInMonth([month], [year])):
+      anchor_start:
+        if_greater([dom]+1,[day])@done:
+        let(day, [day] - [dom]):
+        let(month, [month] + 1):
+        iff([month]=13,{block({print_():let(month,1):let(year,[year]+1)})}):
+        let(dom, fb_hTimeDaysInMonth([month], [year])):
+      goto_start:
+      anchor_done:
+    })}):
+  })
+}):
+
+func(fb_DateSerial,{
+  sub({
+    let(year,[x]):
+    let(month,[y]):
+    let(day,[z]):
+    let(result,2):
+    let(curyear,1900):
+    let(curmonth,1):
+    let(curday,1):
+
+    print_fb_hNormalizeDate():
+
+    block({print_():anchor_start:
+      let(factor,2*(-.5+greater([year],[curyear]))):
+      let(curyear,[curyear]+[factor]*1):
+      let(result,[result]+[factor]*fb_hTimeDaysInYear([curyear])):
+      if_[curyear]=[year]@done:
+      goto_start:
+      anchor_done}):
+    block({print_():anchor_start:
+      if_[curmonth]=[month]@done:
+      let(result,[result]+fb_hTimeDaysInMonth([curmonth],[year])):
+      let(curmonth,[curmonth]+1):
+      goto_start:
+      anchor_done}):
+    print_ [result] + ([day] - [curday])
+  })
+}):
+
+func(fb_hTimeDaysInMonth,{
+  sub({
+    let(month,[x]):
+    let(year,[y]):
+    let(days,<31,28,31,30,31,30,31,31,30,31,30,31>):
+    print_elem([days],[month]) + iff([month]=2,{fb_hTimeLeap([year])},{0})
+  })
+}):
+
+func(fb_hTimeLeap,{
+  sub({
+    let(year,[x]):
+    let(ret,0):
+    if_let(ret,iff([year]%400=0,{1},{0}))@done:
+    if_let(ret,iff([year]%100=0,{0}))=0@done:
+    if_let(ret,iff([year]%4=0,{1},{0}))=0@done:
+    anchor_done:
+    print_[ret]:
+  })
+}):
+
+func(fb_hTimeDaysInYear,{
+  sub({
+    print_(365 + fb_hTimeLeap([x]))
+  })
+}):
+
+print_`timecore.txt',:

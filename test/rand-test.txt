@@ -1,0 +1,5 @@
+print_  rand(1)    ,:
+print_  rand(5)    ,:
+print_  rand(10)   ,:
+print_  rand(100)  ,:
+print_\n

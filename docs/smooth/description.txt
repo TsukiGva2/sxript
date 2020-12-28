@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">smooth(sparse vector) = tight vector</font>
+</center>

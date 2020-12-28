@@ -1,0 +1,20 @@
+print_  let(greeting,`Hello')                                               \n:
+print_  func(swedish,{[x]*`f' - `f'})                                       \n:
+print_  swedish([greeting])                                                 \n:
+print_  let(personname,`Satoshi')                                           \n:
+print_  swedish([personname])                                               \n:
+print_  let(sentence,[greeting] + ` ' + [personname])                       \n:
+print_  swedish([sentence])                                                 \n:
+print_  func(yell,{[x]+`!'})                                                \n:
+print_  func(enthusiastically,{[x]([x]([x]([y])))})                         \n:
+print_  func(very,{enthusiastically([x],())})                               \n:
+print_  yell([greeting])                                                    \n:
+print_  enthusiastically(yell,[greeting])                                   \n:
+print_  yell(swedish([greeting]))                                           \n:
+print_  enthusiastically(yell,enthusiastically(swedish,[greeting]))         \n:
+print_  (enthusiastically(swedish,[sentence])) (enthusiastically(very,yell))  :
+print_\n\n:
+print_len((`keybone')(enthusiastically(very,yell))) - 7 - (3^3) ,\n:
+print_len((`keybone')(enthusiastically(very,(enthusiastically(very,yell))))) - 7 - (3^6) ,\n:
+print_len((`keybone')($({(enthusiastically(very,(enthusiastically(very,(enthusiastically(very,[x]))))))}))(yell)) - 7 - (3^9) ,\n:
+print_\n

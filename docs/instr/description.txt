@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">instr(quote1,quote2) = number</font>
+</center>

@@ -1,0 +1,15 @@
+<center>
+<a href="https://rosettacode.org/wiki/Dinesman%27s_multiple-dwelling_problem">https://rosettacode.org/wiki/Dinesman%27s_multiple-dwelling_problem</a>
+</center>
+<br/>
+Baker, Cooper, Fletcher, Miller, and Smith live on different floors of an apartment house that contains only five floors.
+<br/>
+<ul>
+<li>Baker does not live on the top floor.</li>
+<li>Cooper does not live on the bottom floor. </li>
+<li>Fletcher does not live on either the top or the bottom floor.</li>
+<li>Miller lives on a higher floor than does Cooper.</li>
+<li>Smith does not live on a floor adjacent to Fletcher's. </li>
+<li>Fletcher does not live on a floor adjacent to Cooper's.</li>
+</ul>
+Where does everyone live?

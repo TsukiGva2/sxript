@@ -1,0 +1,9 @@
+print_
+sub({
+  let(a,10):
+  if_ [a]=10 @ jump:
+  let(a,555):
+  anchor_jump:
+  print_[a]
+})                   - 10  ,:
+print_\n

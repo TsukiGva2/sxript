@@ -1,0 +1,6 @@
+<center>
+<font face="Courier New">ucase(quote) = QUOTE</font>
+<br/>
+<br/>
+<font face="Courier New">lcase(QUOTE) = quote</font>
+</center>

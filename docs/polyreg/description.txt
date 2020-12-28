@@ -1,0 +1,3 @@
+<center>
+<a href="http://www.rosettacode.org/wiki/Polynomial_regression">http://www.rosettacode.org/wiki/Polynomial_regression</a>
+</center>

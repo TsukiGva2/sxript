@@ -1,0 +1,7 @@
+include(`../test/calculus.txt'):
+
+print_  integral($({[x]^2}),-2,2,.01)  - +5.333400000000012  ,:
+print_  newtonsolve($({[x]^2-8}),3,10) - (8^.5)              ,:
+print_  lhopital(sin,$([x]),0)         - 0.9999998333333416  ,:
+print_\n
+

@@ -1,0 +1,18 @@
+func(add,{([x]+[y])})       ,:
+
+func(subtract, {
+  ([x]-[y])
+})                          ,:
+
+func(multadd, {
+  sub({
+    let(a,[x]*[y]):
+    let(b,add([x],[y])):
+    print_[a]+[b]
+  })
+})                          ,:
+
+print_  add(3,4)       - 7  ,:
+print_  subtract(5,2)  - 3  ,:
+print_  multadd(4,6)  - 34  ,:
+print_\n

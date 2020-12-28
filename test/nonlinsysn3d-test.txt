@@ -1,0 +1,67 @@
+`Nonlinear System Solver 2.0'
+
+: include(`../test/calculus.txt')
+: include(`../test/linalg.txt')
+
+: `Define system of equations here (3 for now but easily generalized)'
+: func(eq1,{  -5*[x] + 2*[y] + 2*[z] - 7   })
+: func(eq2,{  8*[x] - 2*[y] + 1*[z] - 6   })
+: func(eq3,{  3*[x] + 7*[y] + 0*[z] + 2   })
+
+: `State the initial guess.'
+: let(x0,2)
+: let(y0,-1)
+: let(z0,-5)
+
+: `Curry two-argument equations down to one argument.'
+: func(eq1x,{eq1([x],{y0},{z0})})
+: func(eq1y,{eq1({x0},[x],{z0})})
+: func(eq1z,{eq1({x0},{y0},[x])})
+: func(eq2x,{eq2([x],{y0},{z0})})
+: func(eq2y,{eq2({x0},[x],{z0})})
+: func(eq2z,{eq2({x0},{y0},[x])})
+: func(eq3x,{eq3([x],{y0},{z0})})
+: func(eq3y,{eq3({x0},[x],{z0})})
+: func(eq3z,{eq3({x0},{y0},[x])})
+
+: `Set number of iterations.'
+: 5 
+: do
+
+  : `Evaluate Jacobian matrix components.'
+  : let(a1,deriv(eq1x,[x0],.01)) : `J_11'
+  : let(b1,deriv(eq1y,[y0],.01)) : `J_12'
+  : let(c1,deriv(eq1z,[z0],.01)) : `J_13'
+  : let(a2,deriv(eq2x,[x0],.01)) : `J_21'
+  : let(b2,deriv(eq2y,[y0],.01)) : `J_22'
+  : let(c2,deriv(eq2z,[z0],.01)) : `J_23'
+  : let(a3,deriv(eq3x,[x0],.01)) : `J_31'
+  : let(b3,deriv(eq3y,[y0],.01)) : `J_32'
+  : let(c3,deriv(eq3z,[z0],.01)) : `J_33'
+
+  : `Set up an augmented matrix to solve as a linear system.'
+  : let(r, syslinsolve(
+  <
+  <[a1], [b1], [c1], -1*(eq1([x0],[y0],[z0])) + [a1]*[x0] + [b1]*[y0] + [c1]*[z0]> ,
+  <[a2], [b2], [c2], -1*(eq2([x0],[y0],[z0])) + [a2]*[x0] + [b2]*[y0] + [c2]*[z0]> ,
+  <[a3], [b3], [c3], -1*(eq3([x0],[y0],[z0])) + [a3]*[x0] + [b3]*[y0] + [c3]*[z0]> 
+  >
+  ))
+
+  : let(x0,elem(elem([r],1),4))
+  : let(y0,elem(elem([r],2),4))
+  : let(z0,elem(elem([r],3),4))
+
+: loop
+
+: print_<[x0],[y0],[z0]> - <+0.13939393939393988,
+                           -0.34545454545454385,
+                           +4.1939393939393925> ,
+
+: print_<eq1([x0],[y0],[z0]) ,
+         eq2([x0],[y0],[z0]) ,
+         eq3([x0],[y0],[z0])> - <-1.7763568394002505e-15,
+                                -8.881784197001252e-16,
+                                +1.27675647831893e-14>
+:
+print_\n

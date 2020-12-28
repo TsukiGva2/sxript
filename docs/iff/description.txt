@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">iff(condition = 1, {true path} [,{false path}]) = (* path)</font>
+</center>

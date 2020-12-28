@@ -1,0 +1,32 @@
+Two points can always be connected by a line. Three points can be connected by a circle. Solve for the position and radius of a circle given three points <x,y> in the plane.
+
+<br/>
+<br/>
+
+<center>
+<table border="1">
+    <tbody>
+    <tr>
+    <td>
+    <center>
+    <table border="0">
+        <tbody>
+        <tr> 
+        <td>
+	<center>
+        <font face="Courier New"><b>Proof</b></font>
+        <br/>
+        <a href="http://www.wolframalpha.com/input/?i=circle+through+%3C4,1%3E,%3C-3,7%3E,%3C5,-3%3E">Wolfram Alpha</a>
+        <br/>
+        <a href="wolfcircle.png">Screenshot</a>
+	</center>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+    </center>
+    </td>
+    </tr>
+    </tbody>
+</table>
+</center>

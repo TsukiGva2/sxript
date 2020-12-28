@@ -1,0 +1,37 @@
+include(`../test/mathconstants.txt'):
+
+`Trigonometry':
+func(hypot,{((([x]^2)+([y]^2))^.5)}):
+func(sec,{1/cos([x])}):
+func(csc,{1/sin([x])}):
+func(cot,{1/tan([x])}):
+func(asin,{
+  sub({
+    let(a,[x]):
+    print_
+    iff(greater([a],0),{
+      iff([a]=1,{2*atan(1)},{atan(([a])/(1-([a]^2))^.5)})
+    },{
+      iff([a]=-1,{-2*atan(1)},{-1*atan(-1*([a])/(1-([a]^2))^.5)})
+    })
+  })
+}):
+func(acos,{[pi]/2 - asin([x])}):
+
+func(sinc,{
+  iff(([x]=0), {
+    1+0
+  },{
+    (sin([x])) / ([x])
+  })
+}):
+
+`Exponential(s)':
+func(exp,{([ee]^([x]))}):
+
+`Hyperbolic trigonometry':
+func(cosh,{.5*(exp([x]) + exp(-[x]))}):
+func(sinh,{(([ee]^[x]) - ([ee]^-[x]))/2}):
+func(tanh,{(sinh([x]))/(cosh([x]))}):
+
+print_`analytic.txt',:

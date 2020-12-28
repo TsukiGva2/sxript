@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">apply(reference([x]),vector) = vector</font>
+</center>

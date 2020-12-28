@@ -1,0 +1,77 @@
+func(memind,{
+  sub({
+    let(key,[y]):
+    let(i,0):
+    len(let(obj,[x])):
+    do:
+      if_ [key]=elem(elem([obj],let(i,[i]+1)),1) @ inobj:
+    loop:
+    ler(r,-1):
+    anchor_inobj:
+    let(r,[i]):
+    print_[r]
+  })
+}):
+
+func(mem,{
+  sub({
+    let(key,[y]):
+    let(i,0):
+    len(let(obj,[x])):
+    do:
+      if_ [key]=elem(elem([obj],let(i,[i]+1)),1) @ inobj:
+    loop:
+    iff( [key]=`prototype' ,{
+      let(r,`null')
+    },{
+      iff( let(a,mem([obj],`prototype'))=`null' ,{
+        let(r,`null')
+      },{
+        let(r,mem(symbol([a]),[key]))
+      })
+    }):
+    goto_inparent:
+    anchor_inobj:
+    let(r,elem(elem([obj],[i]),2)):
+    anchor_inparent:
+    print_[r]
+  })
+}):
+
+func(flat,{
+  smooth(<
+    sub({
+      let(i,1):
+      len(let(a,[x])):
+      do:
+        let(b,elem(elem([a],[i]),1)):
+        let(c,elem(elem([a],[i]),2)):
+        print_iff( [b]=`prototype' ,{
+          unvector(flat(symbol([c]))),
+        },{
+          <[b],[c]>,
+        }):
+        let(i,[i]+1):
+      loop
+    })
+  >)
+}):
+
+func(preloadobj,{
+  smooth(<sub({
+    let(n,unquote([x])):
+    let(a,[[n]]):
+    let(i,0):
+    len([a])-1:
+    do:
+      let(b,elem([a],let(i,[i]+1))):
+      let(c,unquote(elem([b],1))):
+      let(d,elem([b],2)):
+      print_{let({n}.{c},{d})},:
+    loop
+  })>)
+}):
+
+func(loadobj,{apply(unoccult,preloadobj([x]))}):
+
+print_`object.txt':

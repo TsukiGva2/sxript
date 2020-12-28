@@ -1,0 +1,6 @@
+include(`../test/calendarcore.txt'):
+
+print_  calendar(2017,4)  :,
+
+print_\n
+

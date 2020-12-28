@@ -1,0 +1,11 @@
+include(`../test/epochrev.txt'):
+
+print_testappx(`7-21-1984',`20:55:30',0)          ,:
+print_testappx(`12-31-1984',`20:55:30',0)         ,:
+
+print_let(case1,epoch(`4-13-2014',`11:13:30',0))  ,:
+print_let(case2,epoch(`2-10-1987',`12:12:12',0))  ,:
+print_appxdatetime([case1],0)                     ,:
+print_appxdatetime([case2],0)                     ,:
+
+print_\n:

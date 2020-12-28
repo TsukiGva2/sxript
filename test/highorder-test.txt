@@ -1,0 +1,52 @@
+func(dostuff,{
+  block(
+    sub({
+
+      `Store arguments sent to high-order function.':
+      let(name,[x]):
+      let(act,[y]):
+      let(instruct,[z]):
+
+      `Store state variables.':
+      let(a,len([name])):
+      let(yell,{[x]+`!!!'}):
+
+      `Prepare surviving output.':
+      print_({
+        func({act},{
+          sub({
+            let(m,{a}+1):
+            let(f,{instruct}):
+            let(p,$([f])):
+            print_[m]+([p])([x])
+          })
+        })
+      }):
+
+      `Prepare surviving output.':
+      print_({
+        func({name}speak,{
+          sub({
+            print_$({yell})(quote({act}))
+          })
+        })
+      }):
+
+      `Prepare surviving output.':
+      print_({
+        let({name},
+          `My name is ' + quote({name}) + `, and my talent is to ' + quote({act}) + `. Somewhere in that function I calculate ' + quote({instruct}) + `. Type: \`' + quote(quote((({name}speak)) \(\))) + `\' to hear me roar.'
+        )
+      })
+
+    })
+  )
+}) ,:
+
+dostuff(cow,moo,{cos([x]+3)}) ,:
+dostuff(kitty,meow,{([x]^2)}) ,:
+
+print_[cow]                       ,\n:
+print_moo(5)   - (3+1+cos(5+3)) ,\n\n:
+print_[kitty]                     ,\n:
+print_meow(5)  - (5+1+(5^2))      ,\n:

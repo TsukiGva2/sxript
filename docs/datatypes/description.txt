@@ -1,0 +1,29 @@
+<font face="Arial" color="#003399" size="4"><b>Number</b></font>
+<br/>
+A Number is a numeric literal. Acceptable numerical characters are the numerals 0 through 9, along with decimal points, sign information ( <font face="Courier New"><b>+</b></font> <font face="Courier New"><b>-</b></font> ), and special characters denoting scientific notation. These are type <font face="Courier New">DOUBLE</font> in BASIC &amp; C++ implementations, and type <font face="Courier New">FLOAT</font> in JavaScript. Sxript also has an `in-house' large-number format designed to accomodate arbitrary-precision calculations.
+<br/>
+<br/>
+<font face="Arial" color="#003399" size="4"><b>Quote</b></font>
+<br/>
+Quotes, also known as Strings, hold alphanumeric text whose meaning is completely ignored by the interpreter. String literals are always enclosed on the left by the "backtick" key ( ` ) (on the "tilde" key without pressing SHIFT). Strings are closed on the right by the single quote ( ' ). 
+<br/>
+<br/>
+<font face="Arial" color="#003399" size="4"><b>Vector</b></font>
+<br/>
+A Vector is a structure that holds one or more elements in linear sequence, enclosed by angle brackets ( <font face="Courier New">&lt; &gt;</font> ), with neighboring elements separated by a comma ( <font face="Courier New">,</font> ). Vector elements need not have uniform type: elements may mix between numbers, quotes, vectors, and so on.
+<br/>
+<br/>
+<font face="Arial" color="#003399" size="4"><b>Occult</b></font>
+<br/>
+Occulted structures hold one or more expressions in linear sequence. These are enclosed by squiggle brackets ( <font face="Courier New">{ }</font> ), with neighboring expressions separated by a colon ( <font face="Courier New">:</font> ). Occulted structures provide a way to pass expressions through the interpreter <i>without</i> eagerly evaluating them.
+<br/>
+<br/>
+<font face="Arial" color="#003399" size="4"><b>Symbol</b></font>
+<br/>
+A Symbol is a variable name enclosed in square brackets ( <font face="Courier New">[ ]</font> ). Symbols are `eagerly
+' replaced by the data literal represented by the symbol on a single pass through the interpreter.
+<br/>
+<br/>
+<font face="Arial" color="#003399" size="4"><b>Word</b></font>
+<br/>
+A Word is a generic term for any cluster of characters, including function names, operators, and special characters, that do not qualify as a pure number, quote, vector, or occult object.

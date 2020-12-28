@@ -1,0 +1,102 @@
+include(`../test/stringtools.txt'):
+include(`../test/timecore.txt'):
+include(`../test/vector.txt'):
+
+`Extract time string from epoch.':
+func(trimtime,{
+  sub({
+    let(a,[x]):
+    let(sec,unformat(0+[a]%60)):
+    let(a,([a]-[sec])/60):
+    let(min,unformat(0+[a]%60)):
+    let(a,([a]-[min])/60):
+    let(hr,unformat(0+[a]%24)):
+    let(a,([a]-[hr])/24):
+    print_quote([hr])+`:'+quote([min])+`:'+quote([sec])
+  })
+}):
+
+`Converts date string separated by dashes into a vector.':
+func(datetovector,{
+  <unquote(strepl([x],`-',`,'))>
+}):
+
+`Converts time string separated by colons into a vector.':
+func(timetovector,{
+  <unquote(strepl([x],`:',`,'))>
+}):
+
+`Returns number of days between two date strings.':
+func(deltadate,{
+  sub({
+    let(a,datetovector([x])):
+    let(b,datetovector([y])):
+    print_
+    fb_DateSerial(elem([a],3),elem([a],1),elem([a],2)) - fb_DateSerial(elem([b],3),elem([b],1),elem([b],2))
+  })
+}):
+
+`Converts time string to number of seconds.':
+func(timetoseconds,{
+  sub({
+    let(a,timetovector([x])):
+    print_3600*elem([a],1) + 60*elem([a],2) + elem([a],3)
+  })
+}):
+
+`Converts number of seconds to time string.':
+func(secondstotime,{
+  sub({
+    let(a,[x]):
+    let(sec,[a]%60):
+    let(a,[a]-[sec]):
+    let(a,[a]/60):
+    let(min,[a]%60):
+    let(a,[a]-[min]):
+    let(a,[a]/60):
+    let(hr,[a]):
+    print_quote(unformat([hr]))+`:'+quote(unformat([min]))+`:'+quote(unformat([sec]))
+  })
+}):
+
+`Returns number of seconds between two time strings.':
+func(deltatime,{
+  timetoseconds([x])-timetoseconds([y])
+}):
+
+`Returns number of seconds between two date & time strings.':
+func(spanseconds,{
+  24*3600*deltadate([x],[z]) + deltatime([y],[t])
+}):
+
+`Returns number of seconds between two date/time strings and 1-1-1970. Acounts for time zone.':
+func(epoch,{
+  spanseconds([x],[y],`1-1-1970',`00:00:00') - [z]*3600
+}):
+
+`Curry epoch() down to a function to time zone.':
+func(epochnow,{
+  epoch(date(),time(),[x])
+}):
+
+`Alternative epoch function provided by CodeHunter.':
+func(daynumber,{
+  sub({
+    let(a,[x]):
+    let(vec,<unquote(strepl([a],`-',`,'))>):
+    let(mo,elem([vec],1)):let(da,elem([vec],2)):let(yr,elem([vec],3)):
+    iff(greater([mo],2),{let(mo,[mo]+1)},{block({print_():let(yr,[yr]-1):let(mo,[mo]+13)})}):
+    let(r,[yr]*365 + int([yr]/4) - int([yr]/100) + int([yr]/400) + int([mo]*306001/10000) + [da]):
+    print_[r]
+  })
+}):
+func(epochnow2,{
+  sub({
+    let(vec,<unquote(strepl(time(),`:',`,'))>):
+    let(ho,elem([vec],1)):let(mi,elem([vec],2)):let(se,elem([vec],3)):
+    let(r,86400*(daynumber(date())-daynumber(`01-01-1970'))+3600*[ho]+60*[mi]+[se]-3600*[x]):
+    print_[r]
+  })
+}):
+
+print_`epoch.txt':

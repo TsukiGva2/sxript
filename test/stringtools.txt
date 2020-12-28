@@ -1,0 +1,54 @@
+include(`../test/arithmetic.txt'):
+
+func(strvec,{
+  smooth(<for(<i,1,len([x]),1>,{mid([x],[i],1),})>)
+}):
+
+func(strrev,{
+  for(<k,len([x]),1,-1>,{mid([x],[k],1)})
+}):
+
+func(asciivec,{
+  apply(asc,[x])
+}):
+
+func(greaterstr,{
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(flag,0):
+    if_[a]=[b]@done:
+    let(flag,-1):
+    let(i,1):
+    lessernum(len([a]),len([b])):
+    do:
+      let(d,asc(mid([a],[i],1))-asc(mid([b],[i],1))):
+      iff( [d]=0 ,{
+        let(i,[i]+1)
+      },{
+        iff(greater([d],0),{let(flag,0)},{let(flag,1)})
+      }):
+      if_greater([flag],-1)@done:
+    loop:
+    anchor_done:
+    print_[flag]
+  })
+}):
+
+func(strepl,{
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(c,[z]):
+    let(i,0):
+    let(r,`'):
+    len([a]):
+    do:
+      let(d,mid([a],let(i,[i]+1),1)):
+      let(r,[r]+iff([d]=[b],{[c]},{[d]})):
+    loop:
+    print_[r]
+  })
+}):
+
+print_`stringtools.txt':

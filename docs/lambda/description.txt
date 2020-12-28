@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">lambda({expression}) = reference</font>
+</center>

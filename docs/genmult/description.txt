@@ -1,0 +1,1 @@
+It turns out that the <i>foil</i> operation from algebra, the two-dimensional <i>dot</i> and <i>cross</i> products from vector algebra, along with complex number operations - can boil out from a more general formula for multiplication, developed here. If we don't strictly insist on multiplication as the central operation, the same code produces complex number addition as well.

@@ -1,0 +1,9 @@
+print_
+sub({
+  print_`A':
+  goto_skipit:
+  print_+`B':
+  anchor_skipit:
+  print_+`C':
+})                - `AC'  ,:
+print_\n

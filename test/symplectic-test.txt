@@ -1,0 +1,26 @@
+func(deriv, {
+  (([x]([y]+[z])) - ([x]([y]-[z]))) / (2*[z])
+}):
+
+let(k,1):
+let(m,1):
+
+
+func(kinetic1d,{([x]^2)/(2*[m])}):
+func(pothook1d,{(.5*[k]*[x]*[x])}):
+
+func(dke1ddp,{deriv(kinetic1d,[x],.001)}):
+func(dpe1ddq,{deriv(pothook1d,[x],.001)}):
+
+let(dt,.075):
+
+let(q,20):
+let(p,0.00001):
+print_[q]\ \ \ [p]\n:
+
+100:
+do:
+  let(q,[q] + dke1ddp([p]*[dt])):
+  let(p,[p] - dpe1ddq([q]*[dt])):
+  print_[q]\ \ \ [p]\n:
+loop:

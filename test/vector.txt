@@ -1,0 +1,87 @@
+include(`../test/arithmetic.txt'):
+
+func(first,{elem([x],1)}):
+
+func(last,{elem([x],len([x]))}):
+
+func(range,{
+  sub({
+    let(a,[x]):
+    let(xmin,99999):
+    let(xmax,-99999):
+    for(<i,1,len([a]),1>,{block({print_():
+      let(b,elem([a],[i])):
+      iff(greater([xmin],[b]),{let(xmin,[b])}):
+      iff(greater([b],[xmax]),{let(xmax,[b])}):
+    })}):
+    print_<[xmin],[xmax]>
+  })
+}):
+
+func(fill,{
+  smooth(<sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(c,[z]):
+    let(i,[a]+0):
+    let(interval,([b]-[a])/([c]-1)):
+    [c]:
+    do:
+      print_[i],:
+      let(i,[i]+[interval]),:
+    loop
+  })>)
+}):
+
+func(forward,{
+  stack(<last([x])>,left([x],len([x])-1))
+}):
+
+func(back,{
+  stack(right([x],len([x])-1),first([x]))
+}):
+
+func(elemswap,{
+  replace(replace([x],[z],elem([x],[y])),[y],elem([x],[z]))
+}):
+
+func(flatten,{
+  sub({
+    let(a,[x]):
+    let(i,1):
+    len([a]):
+    do:
+      let(b,elem([a],[i])):
+      print_iff(len([b])=1,{unvector([b])},{flatten([b])}):
+      let(i,[i]+1):
+    loop:
+  })
+}):
+
+func(psum,{
+  sub({
+    let(a,[x]):let(b,[y]):let(i,1):let(t,0):
+    len([a]):
+    do:
+      let(t,[t]+(elem([a],[i])^[b])):
+      let(i,[i]+1):
+    loop:print_[t]
+  })
+}):
+
+func(dotprod,{reduce(add,[x]*[y])}):
+
+func(crossprod,{
+  sub({
+    let(r1,[x]):
+    let(r2,[y]):
+    print_
+    <
+         (elem([r1],2)*elem([r2],3)-elem([r1],3)*elem([r2],2)),
+      -1*(elem([r1],1)*elem([r2],3)-elem([r1],3)*elem([r2],1)),
+         (elem([r1],1)*elem([r2],2)-elem([r1],2)*elem([r2],1))
+    >
+  })
+}):
+
+print_`vector.txt':

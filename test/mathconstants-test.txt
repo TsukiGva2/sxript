@@ -1,0 +1,6 @@
+include(`../test/mathconstants.txt'):
+
+print_[phi]   ,\n:
+print_[pi]    ,\n:
+print_[ee]    ,\n:
+

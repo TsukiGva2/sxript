@@ -1,0 +1,34 @@
+include(`../test/arithmetic.txt'):
+
+func(memorize,{
+  block(
+    sub({
+      let(datachunk,[y]):
+      let(prename,[x]):
+      let(i,0):
+      let(numitems,len([datachunk])):
+      do:
+        let(i,unformat([i]+1)):
+        print_({
+          let(({prename})({i}),
+            elem({datachunk},({i}))
+          ):
+        }):
+      loop
+    })
+  )
+}):
+
+func(list,{
+  smooth(<sub({
+    let(i,1):
+    [x]:
+    do:
+      let(a,([y])(unformat([i]+0))):
+      print_[[a]],:
+      let(i,[i]+1):
+    loop
+  })>)
+}):
+
+print_`listmem.txt':

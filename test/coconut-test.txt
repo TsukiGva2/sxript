@@ -1,0 +1,35 @@
+print_`This is a translation of tsh73\'s solution to the problem,
+originally posted at: http://justbasic.conforums.com/index.cgi?board=code&action=display&num=1518104885' \n:
+
+func(copy,{for(<i,1,[y],1>,{[x]})}):
+func(fill,{copy(\ ,9-len([x]))[x]}):
+
+let(iSq,1):
+let(nSq,1):
+let(iTri,1):
+let(nTri,1):
+
+print_  \n`Triangle pyramid           Square pyramid  \n':
+print_  (apply(fill,<`i',`n',`i',`n'>)):
+
+let(i,0):
+100:
+do:
+  let(i,[i]+1):
+  iff( greater([nSq],[nTri]), {block({print_():
+    let(iTri,[iTri] + 1):
+    let(nTri,[nTri] + [iTri] * ([iTri] + 1) / 2)})
+  },{block({print_():
+    let(iSq,[iSq] + 1):
+    let(nSq,[nSq] + [iSq] ^ 2)})
+  }):
+
+  print_
+  iff( ([nTri] - [nSq])^2 = 1 ,{
+    \n (apply(fill,<[iTri],[nTri],[iSq],[nSq]>))
+  }):
+loop:
+
+print_  \n`-------------- last checked -------------'  \n:
+print_  (apply(fill,<[iTri],[nTri],[iSq],[nSq]>))        :
+print_\n

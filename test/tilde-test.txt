@@ -1,0 +1,5 @@
+func(minus,{[x]-[y]})      :
+print_(7 ~minus~ 5)  - 2  ,:
+let(m-,~minus~)            :
+print_(5 [m-] 7)     + 2  ,:
+print_\n

@@ -1,0 +1,82 @@
+func(largefact,{
+  iff([x],{1},{largemul([x],largefact(largesub([x],1)))})
+}):
+
+func(largeabs,{
+  unquote(iff(left(let(a,quote([x])),1)=`-',{`+'+right([a],len([a])-1)},{[a]}))
+}):
+
+func(largepow,{
+  sub({
+    let(r,1):
+    let(i,[y]):
+    do:
+      let(r,largemul([r],[x])):
+    loop:
+    print_[r]
+  })
+}):
+
+func(decimals,{
+  sub({
+    let(a,[x]):
+    let(b,[y]+1):
+    let(d,instr([a],.)):
+    print_iff(greater([d],0), {
+      sub({
+        print_left([a],[d]-1):
+        print_mid([a],[d],[b])
+      })
+    },{
+      [a]
+    })
+  })
+}):
+
+func(smag,{
+  sub({
+    let(a,quote([x])):
+    let(b,right([a],len([a])-instr([a],`.'))):    
+    let(n,0):
+    len([b]):
+    do:
+      if_ mid([b],[n]+1,1)=`0' @ cont:
+      goto_done:
+      anchor_cont:
+      let(n,[n]+1):
+    loop:
+    anchor_done:
+    print_[n]
+  })
+}):
+
+func(zeros,{iff(greater([x],0),{for(<i,1,[x],1>,{0})},{()})}):
+
+func(largesqrt,{
+  sub({
+    let(quest,[x]):
+    let(guess,
+      iff(greater([quest],1),{([quest])^.5},{unquote(`+0.' + quote(zeros([quest])) + `5')})
+    ):
+    let(accuracy,[y]):
+    let(oldguess,-1):
+    10+int([accuracy]^.5):
+    do:
+      if_(quote([guess])=quote([oldguess])) @ doneloop:
+      let(oldguess,[guess]):
+      let(guess, 
+        [guess] [l-] ((([guess][l*][guess]) [l-] [quest]) [l/] (2[l*][guess]))
+       ):
+      let(guess, decimals([guess],[accuracy])) ;n:
+    loop:
+    anchor_doneloop:
+    print_[guess]
+  })
+}):
+
+let(l*,~largemul~):
+let(l/,~largediv~):
+let(l+,~largeadd~):
+let(l-,~largesub~):
+
+print_`largenum.txt':

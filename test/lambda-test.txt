@@ -1,0 +1,13 @@
+print_  lambda({`Hello Lambda!'})()         ,:
+
+print_  lambda({([x]+[y])})(3,4)       - 7  ,:
+
+print_  lambda({
+          sub({
+            let(a,[x]):
+            let(b,[y]):
+            print_[a]+[b]
+          })
+        })(3,4)                         - 7  ,:
+
+print_\n

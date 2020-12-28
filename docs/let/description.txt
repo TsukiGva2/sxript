@@ -1,0 +1,6 @@
+<center>
+<font face="Courier New">let(reference, content) = (content)</font>
+<br/>
+<br/>
+<font face="Courier New">alet(reference) = address</font>
+</center>

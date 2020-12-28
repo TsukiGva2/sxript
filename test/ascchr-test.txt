@@ -1,0 +1,16 @@
+let(a,`a')                      :
+let(b,`b')                      :
+let(c,`c')                      :
+let(space,` ')                  :
+
+print_  asc([a])        - 97   ,:
+print_  asc([b])        - 98   ,:
+print_  asc([c])        - 99   ,:
+print_  asc([space])    - 32   ,:
+
+print_  quote(chr(97))  - `a'  ,:
+print_  quote(chr(98))  - `b'  ,:
+print_  quote(chr(99))  - `c'  ,:
+print_  quote(chr(32))         ,:
+
+print_\n

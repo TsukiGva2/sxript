@@ -1,0 +1,74 @@
+include(`../test/hashfunc.txt'):
+
+func(unformat,{
+  unquote(((quote([x])/`+')/`-')-`.0')
+}):
+
+func(hash,{hashgen([x],11)}):
+
+func(store,{
+  block(
+    sub({
+      let(thenode,[x]):
+      let(thename,elem([thenode],1)):
+      let(thecontent,elem([thenode],2)):
+      let(hname,hash([thename])):
+      let(vname,(ha)([hname])):
+      let(oldcontent,symbol([vname])):
+      print_
+      iff(type([oldcontent])=`symbol', {
+        {print_let({vname},<{thenode}>)}
+      }, {
+        {print_let({vname},stack({oldcontent},<{thenode}>))}
+      })
+    })
+  )
+}):
+
+store(<`alice',  rand(5)>),:
+store(<`bob',    rand(5)>),:
+store(<`carrie', rand(5)>),:
+store(<`darth',  rand(5)>),:
+store(<`edgar',  rand(5)>),:
+store(<`fred',   rand(5)>),:
+store(<`gringo', rand(5)>),:
+store(<`henry',  rand(5)>),:
+store(<`izzy',   rand(5)>),:
+store(<`jerk',   rand(5)>),:
+store(<`kipper', rand(5)>),:
+store(<`larry',  rand(5)>),:
+store(<`mo',     rand(5)>),:
+
+print_for(<i,0,11,1>,{
+  symbol(ha(unformat([i]))),\n\n
+}):,
+
+func(recall,{
+  sub({
+    let(thename,[x]):
+    let(thedata,symbol((ha)(hash([thename])))):
+    let(j,len([thedata])):
+    iff([j]=1, {
+      let(thereturn,elem([thedata],1))
+    }, {
+      for(<i,1,[j],1>, {
+        block({
+          let(tmpdata,elem({thedata},[i])):
+          let(tmpname,elem([tmpdata],(1))):
+          iff([tmpname]={thename}, {
+            let(thereturn,[tmpdata])
+          }):
+          print_()
+        })
+      })
+    }):
+    print_[thereturn]
+  })
+}):
+
+print_recall(`alice'),\n:
+print_recall(`bob'),\n:
+print_recall(`carrie'),\n:
+print_recall(`gringo'),\n:
+print_recall(`henry'),\n:
+print_recall(`larry'),\n:

@@ -1,0 +1,45 @@
+Notes:
+  (1)  The term "evaluate*" denotes recursion/looping i.e., output is used as next input.
+  (2)  The (--> ^) symbol denotes (Return = LeftFragment + MidFragment + RightFragment) and return to top.
+
+' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''                                                                |
+                                                                                                                        |
+FUNCTION EvalStep$ (TheStringIn AS STRING)                                                                              |
+                                                                                                                        |
+    ' Replace variable references with literal representations:                                                         |  Let:   a=5 and b=6
+    '   Variables in square brackets ( [] ) are replaced outside of all occulted ( {} ) brackets.                       |  Then:  [a]+{b}  ->  5+{b}
+    '   Variables in curvy brackets ( {} ) are replaced down to the fourth (4th) level of occulted ( {} ) brackets.     |         5+{b}    ->  5+6
+                                                                                                                        |
+    ' Scan for most-embedded structure and break the input string into fragments:                                       |  Assume input string: 3+[g]-cos(4+[p])-9
+    '   LeftFragment = Everything to the left of the inner-most parenthesized structure or ScannedName (can be empty).  |    LeftFragment:   3+[g]-
+    '   ScannedName = Word to the left of the most-embedded set of parentheses (if found).                              |    ScannedName:    cos
+    '   MidFragment = (i) Most-embedded structure contained in parens ( ), OR                                           |    MidFragment:    (4+[p])
+    '                 (ii) If no parens detected, the whole input string.                                               |    RightFragment:  -9
+    '   RightFragment = Everything to the right of the inner-most parenthesized structure (can be empty).               |
+    '   Note: LeftFragment and RightFragment remain static. All changes occur in ScannedName and MidFragment.           |
+                                                                                                                        |
+    ' If input expression contains no zero-level (unocculted) parens:                                                   |  Examples (assorted operations):
+                                                                                                                        |    1+2                  ->  +3.0
+        ' Pass through NumberCrunch (regardless of input type).                                                         |    4 -3 + 2*15 + 1.5    ->  +32.5
+        '   If NumberCrunch changes input string, loop until a stable result is reached. (--> ^)                        |    <1,2>+<4,5>-<1,1>    ->  <+4.0,+6.0>
+        '   If input was already stable (emerges unchanged), pass control downward.                                     |    `hel'+`lo wo'+`rld'  ->  hello world
+                                                                                                                        |    <1+3,4-7,2+1>        ->  <+4.0,-3.0,+3.0>
+        ' If handed a vector, evaluate* each component. (--> ^)                                                         |    3*<5,2+2>            ->  <+15.0,+12.0>
+                                                                                                                        |    
+    ' If input expression contains zero-level parens but no scanned function name:                                      |  Example (singular vs list):
+                                                                                                                        |
+        ' If argument is singular, strip the outer parens and evaluate* content. (--> ^)                                |    (5+5)                ->  +10.0
+                                                                                                                        |
+        ' If argument is a parenthesized list, evaluate* each component and retain parens. (--> ^)                      |    (1+1,2+2,3+3)        ->  (+2.0,+4.0,+6.0)
+                                                                                                                        |
+    ' If input expression contains parens and a name was scanned:                                                       |  Assume user-defined function:
+                                                                                                                        |    func(foo,{(cos([x])+5)})
+        ' If ScannedName is a user-defined function:                                                                    |
+        '   Replace the function call with the literal function content.                                                |    foo(4)  ->  cos(4)+5
+        '   Replace variables [x], [y], etc. with arguments sent to the function. (--> ^)                               |
+                                                                                                                        |
+        ' If ScannedName is a primitive, pass through FunctionCrunch. (--> ^)                                           |    cos(4)  ->  -0.6536436208636119
+                                                                                                                        |
+END FUNCTION                                                                                                            |
+
+' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''

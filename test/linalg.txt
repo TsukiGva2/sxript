@@ -1,0 +1,179 @@
+include(`../test/vector.txt'):
+include(`../test/matrix.txt'):
+
+`Deteriminant of a 2x2 matrix':
+func(det22,{
+  sub({
+    let(r1, elem([x],1)                 ):
+    let(r2, elem([x],2)                 ):
+    let(ax, elem([r1],1) * elem([r2],2) ):
+    let(by, elem([r1],2) * elem([r2],1) ):
+    print_[ax]-[by]
+  })
+}):
+
+`Inverse of a 2x2 matrix':
+func(inv22,{
+  sub({
+    let(a,   melem([x],1,1) ):
+    let(b,   melem([x],1,2) ):
+    let(c,   melem([x],2,1) ):
+    let(d,   melem([x],2,2) ):
+    print_(1/det22([x])) * <<[d],-[b]>,<-[c],[a]>>
+  })
+}):
+
+`Apply a matrix to a vector':
+func(axb,{
+  smooth(<
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    print_for(<i,1,len([a]),1>, {
+      dotprod(elem([a],[i]),[b]),
+    })
+  })
+  >)
+}):
+
+`Matrix multiplication':
+func(axc,{
+  trans(
+  smooth(<
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(i,1):
+    let(n,len([a])):
+    do:
+      let(c,column([b],[i])):
+      print_axb([a],[c]),:
+      let(i,[i]+1):
+    loop
+  })
+  >)
+  )
+}):
+
+`Upper triangle form of an N*(N+1) matrix':
+func(mutri,{
+  sub({
+    let(e,[x]):
+    let(m,len([e])):
+    let(n,len(elem([e],1))):
+    let(mcnt,1):
+    for(<j,1,[n]-2,1>, {
+      block({print_():
+        iff(greater([m],[mcnt]), {
+          for(<i,[mcnt]+1,[m],1>, {
+            block({print_():
+              let(a,melem([e],[i],[j])):
+              let(b,melem([e],[j],[j])):
+              let(fac,-1*[a]/[b]):
+              for(<k,1,[n],1>,{
+                let(e,
+                  repelem([e],[i],[k],
+                    melem([e],[i],[k]) + [fac]*melem([e],[mcnt],[k])
+                  )
+                )
+              })
+            })
+          })
+        }):
+        let(mcnt,[mcnt]+1)
+      })
+    }):
+    print_[e]
+  })
+}):
+
+`Lower triangle form of an N*(N+1) matrix':
+func(mltri,{
+  sub({
+    let(e,[x]):
+    let(m,len([e])):
+    let(n,len(elem([e],1))):
+    let(mcnt,[m]-1):
+    for(<j,[n]-2,0,-1>, {
+      block({print_()
+        iff(greater([mcnt],0), {
+          for(<i,[mcnt]-1,0,-1>, {
+            block({print_()
+              let(a,melem([e],[i]+1,[j]+1)):
+              let(b,melem([e],[j]+1,[j]+1)):
+              let(fac,-1*[a]/[b]):
+              for(<k,0,[n]-1,1>,{
+                let(e,
+                  repelem([e],[i]+1,[k]+1,
+                    melem([e],[i]+1,[k]+1) + [fac]*melem([e],[mcnt]+1,[k]+1)
+                  )
+                )
+              })
+            })
+          })
+        }):
+        let(mcnt,[mcnt]-1)
+      })
+    }):
+    print_[e]
+  })
+}):
+
+`Diagonal form of an N*(N+1) matrix':
+func(mdiag,{mltri(mutri([x]))}):
+
+`Normalized diagonal form of an N*(N+1) matrix':
+func(normdiag,{
+  sub({
+    let(a,[x]):
+    let(b,len([a])+1):
+    for(<i,1,len([a]),1>,{
+      block({
+        let(p,melem([a],[i],[i])):
+        let(q,melem([a],[i],[b])):
+        let(a,repelem([a],[i],[i],[p]/[p])):
+        let(a,repelem([a],[i],[b],[q]/[p])):
+        print_()
+      })
+    }):
+    print_[a]
+  })
+}):
+
+`Solve system of equations':
+func(syslinsolve,{normdiag(mdiag([x]))}):
+
+`Polynomial regression':
+func(polyreg,{
+  sub({
+    let(x0,[x]):
+    let(y0,[y]):
+    let(order,[z]):
+    print_smooth(<sub({
+      let(j,0):
+      [order]:
+      do:
+        let(r[j],<sub({
+        let(i,0):
+        [order]:
+          do:
+            print_psum([x0],[i]+[j]),:
+            let(i,unformat([i]+1)):
+          loop
+        })>):
+        let(r[j],smooth(stack(symbol(r[j]),dotprod(apply($({[x]^[j]}),[x0]),[y0])))):
+        print_symbol(r[j]),:
+        let(j,unformat([j]+1)):
+      loop
+    })>)
+  })
+}):
+
+`Slightly formatted matrix print':
+func(mform,{
+  sub({
+    print_apply($({[x]\n}),[x])
+  })
+}):
+
+print_`linalg.txt':

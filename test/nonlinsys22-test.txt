@@ -1,0 +1,46 @@
+`Nonlinear System Solver - 2D using Inverse'
+
+: include(`../test/calculus.txt')
+: include(`../test/linalg.txt')
+
+: `Define system of equations here (must be 2)'
+: func(eq1,{2*[x]*[x]+3*[y]-1})
+: func(eq2,{4*[x]-7*[y]-3})
+
+: `State the initial guess.'
+: let(x0,-1)
+: let(y0,-1)
+
+: `Curry two-argument equations down to one argument.'
+: func(eq1x,{eq1([x],{y0})})
+: func(eq1y,{eq1({x0},[x])})
+: func(eq2x,{eq2([x],{y0})})
+: func(eq2y,{eq2({x0},[x])})
+
+: `Define the Jacobian matrix.'
+: func(j,{
+<
+<deriv(eq1x,[x0],.01),deriv(eq1y,[y0],.01)>,
+<deriv(eq2x,[x0],.01),deriv(eq2y,[y0],.01)>
+>
+})
+
+: `Compute the inverse of the Jacobian.'
+: func(jinv,{inv22(j())})
+
+: `Establish a loop to refine the guess.'
+: 5
+: do
+  : let(z,<[x0],[y0]>)
+  : let(z,[z] + (-1 * axb(jinv(),<eq1([x0],[y0]),eq2([x0],[y0])>)))
+  : let(x0,elem([z],1))
+  : let(y0,elem([z],2))
+: loop
+
+: print_  <[x0],[y0]> 
+          - <-1.580322535471223,-1.3316128774121274> ,
+
+: print_  <eq1([x0],[y0]),eq2([x0],[y0])> 
+          - <+7.105427357601002e-15,+8.881784197001252e-16>
+:
+print_\n

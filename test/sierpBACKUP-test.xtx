@@ -1,0 +1,23 @@
+include(`../test/arithmetic.txt'):
+
+let(xx1,0):
+let(yy1,0):
+let(xx2,2.4/(3^.5)):
+let(yy2,0):
+let(xx3,1.2/(3^.5)):
+let(yy3,1.2):
+let(xx,0):
+let(yy,0):
+
+150:
+do:
+
+  let(ii,dice(3)):
+
+  iff([ii]=1,{block({let(xx,.5*([xx]+[xx1])):let(yy,.5*([yy]+[yy1])):print_()})},{}):
+  iff([ii]=2,{block({let(xx,.5*([xx]+[xx2])):let(yy,.5*([yy]+[yy2])):print_()})},{}):
+  iff([ii]=3,{block({let(xx,.5*([xx]+[xx3])):let(yy,.5*([yy]+[yy3])):print_()})},{}):
+
+  print_[xx]\ \ \ [yy]\n:
+
+loop

@@ -1,0 +1,8 @@
+let(a,`Moo '+ `Cow')     :
+let(b,<cos(3),sin(3)>)   :
+let(c,12345)             :
+
+print_  len([a])  - 7   ,:
+print_  len([b])  - 2   ,:
+print_  len([c])  - 5   ,:
+print_\n

@@ -1,0 +1,7 @@
+let(a,`Moo '+ `Cow')                     :
+let(b,<cos(3),sin(3),33,44,55,66>)       :
+
+print_  left([a],5)   - `Moo C'         ,:
+print_  mid([b],2,3)  - <sin(3),33,44>  ,:
+print_  right([a],4)  - `Cow'           ,:
+print_\n

@@ -1,0 +1,20 @@
+include(`../test/largenum.txt'):
+
+let(precision,80):
+let(i,1):
+let(testsum,0):
+30:
+do:
+  let(result,largesqrt([i],[precision]+5)):
+  let(testsum,
+    largeadd(
+      [testsum],
+      largeabs(decimals(largepow([result],2),[precision]+5)[l-][i])
+  )):
+  print_<[i],decimals([result],[precision])>:
+  let(i,[i]+1):
+  print_\n:
+loop:
+print_[testsum]:
+
+print_\n

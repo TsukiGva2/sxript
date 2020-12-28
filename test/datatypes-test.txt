@@ -1,0 +1,11 @@
+print_ `This is a quote.'                                                ,\n:
+print_ `Numbers such as ' + quote(-3 - 0.1415) + ` can embed in quotes.' ,\n:
+print_ <`Vectors', <`are', `fun'>, and, `use'+`ful', <structures>, `.'>  ,\n:
+
+iff(`occulted code'=`occulted code',
+  {let(result,`True path.')}
+  ,
+  {let(result,`False path.')}
+):
+
+print_ [result] ,\n:

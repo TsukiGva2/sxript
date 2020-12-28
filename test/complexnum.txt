@@ -1,0 +1,71 @@
+include(`../test/genmult.txt'):
+include(`../test/mathconstants.txt'):
+
+let(I,<0,1>):
+
+let(c+,~cadd~):
+let(c*,~cmult~):
+let(c-,~(func(csub,{[x] [c+] (-1[c*][y])}))~):
+
+func(conj,{< elem([x],1), -1*elem([x],2)> }):
+func(mag,{((elem([x],1))^2 + (elem([x],2))^2)^.5}):
+func(cdiv,{( (1/((mag([y]))^2)) * ([x] [c*] conj([y]))) }):
+let(c/,~cdiv~):
+
+func(absr,{( ([x]*[x])^.5 )}):
+
+func(angleget,{
+  sub({
+    let(a,elem([x],1)):
+    let(b,elem([x],2)):
+    let(res,.00001):
+    let(output,null):
+    iff((greater([res],absr([a]))) & (greater([b],[res])),{let( output, [pi]/2  )}):
+    iff((greater([res],absr([a]))) & (greater([res],[b])),{let( output, -[pi]/2 )}):
+    iff((greater([res],absr([b]))) & (greater([a],[res])),{let( output, 0       )}):
+    iff((greater([res],absr([b]))) & (greater([res],[a])),{let( output, +[pi]   )}):
+    print_iff([output]=null,{atan([b]/[a])},{[output]})
+  })
+}):
+
+func(carttopolar,{<mag([x]),angleget([x])>}):
+
+func(polartocart,{elem([x],1) * <cos(elem([x],2)), sin(elem([x],2))>}):
+
+func(cpow,{
+  sub({
+    let(a,carttopolar([x])):
+    let(mag,elem([a],1)):
+    let(ang,elem([a],2)):
+    let(thepow,[y]):
+    let(mag,[mag]^[thepow]):
+    let(ang,[ang]*[thepow]):
+    print_polartocart(<[mag],[ang]>) 
+  })
+}):
+
+func(cpow2,{
+  sub({
+    let(a,carttopolar([x])):
+    let(b,carttopolar([y])):
+    let(maga,elem([a],1)):
+    let(anga,elem([a],2)):
+    let(magb,elem([b],1)):
+    let(angb,elem([b],2)):
+  
+    let(num,[maga]^([magb]*cos([angb]))):
+    let(den,[ee]^([anga]*[magb]*sin([angb]))):
+    let(at1,[magb]*sin([angb])*ln([maga])):
+    let(at2,[magb]*[anga]*cos([angb])):
+    let(newmag,[num]/[den]):
+    let(newang,[at1]+[at2]):
+
+    print_polartocart(<[newmag],[newang]>)
+  })
+}):
+
+let(c^,~cpow~):
+
+let(c2^,~cpow2~):
+
+print_`complexnum.txt':

@@ -1,0 +1,1 @@
+The "<font face="Courier New">if_@</font>" structure is a conditional <font face="Courier New">goto</font> statement. If the quantity between <font face="Courier New">_</font> and <font face="Courier New">@</font> evaluates to <font face="Courier New">+1.0</font>, control is passed to the anchor referenced after <font face="Courier New">@</font>.

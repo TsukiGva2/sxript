@@ -1,0 +1,68 @@
+include(`../test/matrix.txt'):
+
+let(foo,<
+  <0,0,0,0,0,0,0,0,0,0,0>,
+  <0,0,0,0,0,0,0,0,0,0,0>,
+  <0,0,0,0,0,0,0,0,0,0,0>,
+  <0,0,0,0,0,0,0,0,0,0,0>,
+  <0,0,1,1,1,0,0,0,0,0,0>,
+  <0,0,0,1,1,1,0,0,0,0,0>,
+  <0,0,0,1,0,0,0,0,0,0,0>,
+  <0,0,0,0,1,0,0,0,0,0,0>,
+  <0,0,0,0,0,0,0,0,0,0,0>,
+  <0,0,0,0,0,0,0,0,0,0,0>,
+  <0,0,0,0,0,0,0,0,0,0,0>
+>):
+
+print_
+func(mform,{
+  sub({
+  let(a,[x]):
+  let(b,apply($({apply($({sub({print_iff([x]=0,{\ },{`X'})})}),[x])}),[a])):
+  print_apply($({[x]\n}),[b])
+  })
+})([foo])\n:
+
+let(mwidth,len([foo])):
+let(mheight,len(elem([foo],1))):
+let(bar,[foo]):
+
+3:
+do:
+  let(yi,1):
+  let(xi,1):
+  [mheight]-2:
+  do:
+    let(yi,[yi]+1):
+    let(xi,1):
+    [mwidth]-2:
+    do:
+      let(xi,[xi]+1):
+      let(n7,melem([foo],[yi]-1,[xi]-1)):
+      let(n8,melem([foo],[yi]-1,[xi]  )):
+      let(n9,melem([foo],[yi]-1,[xi]+1)):
+      let(n4,melem([foo],[yi],  [xi]-1)):
+      let(n6,melem([foo],[yi],  [xi]+1)):
+      let(n1,melem([foo],[yi]+1,[xi]-1)):
+      let(n2,melem([foo],[yi]+1,[xi]  )):
+      let(n3,melem([foo],[yi]+1,[xi]+1)):
+      let(neighbors,[n7]+[n8]+[n9]+[n4]+[n6]+[n1]+[n2]+[n3]):
+      let(bar,repelem([bar],[yi],[xi],0)):
+      if_[neighbors]=3 @ aa:
+      if_[neighbors]=2 @ bb:
+      goto_doneloop:
+      anchor_aa:
+      let(bar,repelem([bar],[yi],[xi],1)):
+      goto_doneloop:
+      anchor_bb:
+      if_melem([foo],[yi],[xi])=1 @ cc:
+      goto_doneloop:
+      anchor_cc:
+      let(bar,repelem([bar],[yi],[xi],1)):
+      goto_doneloop:
+      anchor_doneloop:
+    loop:
+  loop:
+  let(foo,[bar]):
+  print_mform([foo])\n:
+loop

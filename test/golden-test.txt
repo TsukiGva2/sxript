@@ -1,0 +1,36 @@
+include(`../test/largenum.txt'):
+include(`../test/mathconstants.txt'):
+
+let(a,1.4):
+7:
+do:
+  let(a,
+    [a] [l-]
+      (
+      (([a] [l-] (1[l/][a])) [l-] 1)
+      [l/]
+      (1 [l+] (1 [l/] ([a][l*][a])))
+      )
+  ):
+  let(a,left([a],256)):
+loop:
+
+print_let(a,left([a],128))  - [phi]  ,:
+
+func(largefib2,{
+  sub({
+    let(a,0):
+    let(b,1):
+    let(c,largeadd([a],[b])):
+    largesub([x],2):
+    do:
+      let(a,[b]):
+      let(b,[c]):
+      let(c,largeadd([a],[b])):
+    loop:
+    print_[c]
+  })
+}):
+
+print_  left(largediv(largefib2(311),largefib2(310)),128)  - [phi]  ,:
+print_  \n:

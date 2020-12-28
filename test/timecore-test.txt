@@ -1,0 +1,19 @@
+include(`../test/timecore.txt'):
+
+print_  fb_DateSerial(1900, 1, 1)             -  2      ,:
+print_  fb_DateSerial(1900, 1, 2)             -  3      ,:
+print_  fb_DateSerial(1900, 1, 31)            -  32     ,:
+print_  fb_DateSerial(1900, 1, 32)            -  33     ,:
+print_  fb_DateSerial(1900, 2, 01)            -  33     ,:
+print_  fb_DateSerial(2016, 3, 15)            -  42445  ,:
+print_  fb_DateSerial(2017, 3, 31)            -  42825  ,:
+print_  fb_DateSerial(1915, 3, 35)            -  5573   ,:
+print_  fb_DateSerial(1915, -3, 35)           -  5392   ,:
+print_  fb_DateSerial(2020, -13, 35)          -  43439  ,:
+print_  fb_DateSerial(2018, 1, 35)            -  43135  ,:
+print_  fb_DateSerial(2018, 1, -35)           -  43065  ,:
+print_  fb_DateSerial(1915, -3, -35)          -  5322   ,:
+print_  fb_DateSerial(2018, 1, 32)            -  43132  ,:
+print_  fb_DateSerial(2018, 2, 1)             -  43132  ,:
+
+print_\n

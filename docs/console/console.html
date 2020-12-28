@@ -1,0 +1,272 @@
+<html>
+
+<head>
+
+<meta name="viewport" content="device-width, initial-scale=1">
+
+<title>Sxript Console</title>
+
+<script type="text/javascript" src="../jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../../src/sxript.js"></script>
+<script type="text/javascript" src="../../src/qbf.js"></script>
+<script>
+
+$(document).ready(function() {
+  $("#evalbutton").click(function() {
+    var theinput;
+    var thecleaninput;
+    var theprocessedinput;
+    theinput = $("#textin").val();
+    thecleaninput = theinput.replace(/^\s+|\s+$/g, "");
+    theprocessedinput = thecleaninput;
+    if (document.getElementById("codeblock").checked) {
+      theprocessedinput = "block({" + theprocessedinput + "})";
+      if (document.getElementById("showinput").checked) {
+        document.mainform.areatext.value += "\n: " + theprocessedinput + "\n:";
+      }
+    }
+    if (document.getElementById("subprogram").checked) {
+      theprocessedinput = "sub({" + theprocessedinput + "})";
+      if (document.getElementById("showinput").checked) {
+        document.mainform.areatext.value += "\n: " + theprocessedinput + "\n:";
+      }
+    }
+    if (document.getElementById("oneline").checked) {
+      if (document.getElementById("showinput").checked) {
+        document.mainform.areatext.value += "\n: " + theprocessedinput;
+      }
+    }
+    document.mainform.areatext.value += "\n" + ": " + sxriptEval(theprocessedinput) + "\n";
+    document.mainform.areatext.scrollTop = document.mainform.areatext.scrollHeight;
+    document.getElementById("textin").value = thecleaninput;
+  });
+});
+
+$(document).ready(function() {
+  $("#evalbutton2").click(function() {
+    var theinput;
+    var thecleaninput;
+    var theprocessedinput;
+    theinput = $("#textin2").val();
+    thecleaninput = theinput.replace(/^\s+|\s+$/g, "");
+    theprocessedinput = thecleaninput;
+    document.mainform.areatext.value += "\n: " + theprocessedinput + "\n";
+    document.mainform.areatext.value += ": " + sxriptEval(theprocessedinput) + "\n";
+    document.mainform.areatext.scrollTop = document.mainform.areatext.scrollHeight;
+    document.getElementById("textin2").value = thecleaninput;
+  });
+});
+
+$(document).ready(function() {
+  $("#textin").keyup(function (e) {
+    if ((e.keyCode == 13)) {
+      if (document.getElementById("oneline").checked) {
+        $("#evalbutton").click();
+        document.getElementById("textin").select();
+      }
+    }
+  });
+});
+
+$(document).ready(function() {
+  $("#textin2").keyup(function (e) {
+    if ((e.keyCode == 13)) {
+      $("#evalbutton2").click();
+      document.getElementById("textin2").select();
+    }
+  });
+});
+
+</script>
+
+<link href="../styles.css" rel="stylesheet" type="text/css" />
+
+<style type='text/css'>
+form {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+</style>
+
+</head>
+ 
+<body bgcolor="#222222">
+
+<a name="Top"/a>
+
+<center>
+<table width="100%" border="0">
+    <tbody>
+    <tr>
+    <td>
+    <font face="Arial" color="White" size="4"><b>Navigation</b></font>
+    </td>
+    </tr>
+    </tbody>
+</table>
+</center>
+
+<center>
+<table width="97%" border="0">
+    <tbody>
+    <tr>
+    <td>
+    <a href="../../#Top" style="text-decoration:none"><b><font face="Courier New"; color="Grey"> [Top] </font></b></a>
+    <a href="#Top" style="text-decoration:none"><b><font face="Courier New"; color="White"> [Console] </font></b></a>
+    <a href="../../#Guide" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Guide] </font></a>
+    <a href="../../#Applications" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Applications] </font></a>
+    <a href="../../#Index" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Index] </font></a>
+    <a href="javascript:history.back()" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Back] </font></a>
+    </td>
+    <td align="right">
+    <a href="../../../../index.html" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Home] </font></a>
+    </td>
+    </tr>
+    </tbody>
+</table>
+</center>
+
+<center>
+<table width="100%" border="0">
+    <tbody>
+    <tr>
+    <td>
+    <hr/>
+    </td>
+    </tr>
+    </tbody>
+</table>
+</center>
+
+<center>
+<table width="1024">
+  <tbody>
+  <tr>
+    <td align="right" width="40%"><font color="White" size="7" face="Courier New"><b>Sxript</b></font>
+    </td>
+    <td align="center" width="20%"><a href="../../index.html" target="_parent"><img src="../../img/sxlogoinv.png" alt=""/></a>
+    </td>
+    <td align="left" width="40%"><font color="White" size="7" face="Courier New"><b>Console</b></font>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</center>
+
+<center><table width="1024"><tbody><tr><td><hr/></td></tr></tbody></table></center>
+
+<center>
+<table border="0" width="1024">
+  <tbody>
+  <tr valign="top">
+    <td width="50%">
+      <center>
+<textarea id="textin" class="console" rows="27" cols="60">
+</textarea>
+      </center>
+    </td>
+    <td>
+      <center> 
+<form name="mainform">
+<textarea id="areatext" class="console" readonly rows="27" cols="60">
+</textarea>
+</form>
+      </center>
+    </td>
+  </tr>
+
+  <tr valign="top">
+    <td width="50%">
+
+      <center>   
+      <table border="0" width="100%">
+        <tbody>
+        <tr>
+          <td align="left" width="33%">
+            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="oneline"/><label for="oneline">Single Line</label>]</font>
+          </td>
+          <td align="center" width="33%">
+            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="subprogram"/><label for="subprogram">Sub</label>]</font>
+          </td>
+          <td align="right" width="33%">
+            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="codeblock"/><label for="codeblock">Block</label>]</font>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table border="0" width="100%">
+        <tbody>
+        <tr valign="center">
+          <td align="left" width="33%">
+            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="printmodes" id="hideinput"/><label for="hideinput">Hide Input</label>]</font>
+          </td>
+          <td align="center" width="33%">
+            <button id="evalbutton" class="stylebutton" onclick="evalbutton.focus()"><b>Evaluate</b></button>
+          </td>
+          <td align="right" width="33%">
+            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="printmodes" id="showinput"/><label for="showinput">Show Input</label>]</font>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      </center>
+
+    </td>
+    <td>
+
+      <center>
+      <table border="0" width="100%">
+        <tbody>
+        <tr>
+          <td align="right">
+<textarea id="textin2" class="console" rows="2" cols="60">
+</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td align="right">
+            <button id="evalbutton2" class="stylebutton2" onclick=""><b>Immediate</b></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      </center>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</center>
+
+<center><table width="1024"><tbody><tr><td><hr/></td></tr></tbody></table></center>
+
+<br/>
+
+<script>
+document.getElementById("oneline").checked = false;
+document.getElementById("subprogram").checked = true;
+document.getElementById("codeblock").checked = false;
+
+document.getElementById("showinput").checked = true;
+document.getElementById("hideinput").checked = false;
+
+var text_input = document.getElementById("textin2");
+text_input.focus();
+
+(function () {
+  "use strict";
+  var z;
+  document.mainform.areatext.value = "";
+  for (z = 1; z <= SxriptLogoSize; z += 1) {
+   document.mainform.areatext.value += SxriptLogoText[z] + "\n";
+  }
+  document.mainform.areatext.value += "*** Welcome to Sxript ***" + "\n";
+  document.mainform.areatext.value += "   (JavaScript Build)" + "\n";
+  document.mainform.areatext.value += "\n";
+}());
+</script>
+
+</body>
+</html>

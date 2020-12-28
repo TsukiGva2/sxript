@@ -1,0 +1,5 @@
+print_  iff(1, {1})                        - 1        ,:
+print_  iff(0, {1})                                   ,:
+print_  iff(`a'=`a', {`true'})             - `true'   ,:
+print_  iff(`a'=`b', {`true'}, {`false'})  - `false'  ,:
+print_\n

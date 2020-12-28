@@ -1,0 +1,36 @@
+print_
+func(compstr,{
+  sub({
+    let(a,[x]):
+    let(b,[y]):
+    let(ret,`_null'):
+    let(c,len([a])):
+    let(shorter,[a]):
+    iff(greater(len([a]),len([b])),{block({let(c,len([b])):let(shorter,[b])})}):
+    let(i,0):
+    [c]:
+    do:
+      let(i,[i]+1):
+      let(d,asc(mid([a],[i],1))):
+      let(e,asc(mid([b],[i],1))):
+      iff(greater([d],[e]),{let(ret,[b])}):
+      iff(greater([e],[d]),{let(ret,[a])}):
+      if_(([ret]=`_null')=`false') @ doneloop:
+    loop:
+    iff([ret]=`_null',{let(ret,[shorter])}):
+    anchor_doneloop:
+    print_[ret]
+  })
+})(`acow',`adog')
+
+
+
+
+
+
+
+
+
+
+
+

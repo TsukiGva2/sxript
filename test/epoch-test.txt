@@ -1,0 +1,18 @@
+include(`../test/epoch.txt'):
+
+print_  date()                                                    ,:
+print_  time()                                                    ,:
+print_  datetovector(date())                                      ,:
+print_  timetovector(time())                                      ,:
+print_  deltadate(`12-27-2017',`12-27-1983')   -  12419           ,:
+print_  deltatime(`01:01:01',`00:00:00')       -  3661            ,:
+print_  deltatime(`00:00:00',`01:01:01')       +  3661            ,:
+print_  spanseconds(`1-1-1980',`01:01:01',`1-1-1970',`00:00:00') 
+          -  +315622861.0                                         ,:
+print_  epoch(date(),time(),-4)                                   ,:
+print_  epochnow(-4)                                              ,:
+
+`Alternative epoch function provided by CodeHunter.'               :
+print_  epochnow2(-4)                                             ,:
+
+print_\n:

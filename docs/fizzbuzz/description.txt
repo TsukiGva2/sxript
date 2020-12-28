@@ -1,0 +1,1 @@
+Write a program that scans the integers from 1 to 100. Print "Fizz" for multiples of three, and print "Buzz" for multiples of five. For multiples of both, print "FizzBuzz".

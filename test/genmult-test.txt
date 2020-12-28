@@ -1,0 +1,13 @@
+include(`../test/genmult.txt'):
+
+print_  foil(<1,2>,<3,4>)                   - <21,0>  ,:
+print_  foil(3,<3,4>)                       - <21,0>  ,:
+print_  foil(<3,4>,4)                       - <28,0>  ,:
+print_  dprod(<1,2>,<3,4>)                  - <11,0>  ,:
+print_  dprod(<3,4>,<1,2>)                  - <11,0>  ,:
+print_  cmult(<0,1>,<0,1>)                  - <-1,0>  ,:
+print_  cmult(<1,2>,<3,4>)                 - <-5,10>  ,:
+print_  ((5~cmult~<4,5>)~cmult~<0,1>)     - <-25,20>  ,:
+print_  cadd(<1,2>,<3,4>)                    - <4,6>  ,:
+print_  cadd(<3,4>,<1,2>)                    - <4,6>  ,:
+print_\n

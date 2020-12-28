@@ -1,0 +1,10 @@
+print_  exe(`../test/mathconstants.txt')      ,:
+print_  [pi]                                  ,:
+print_  [ee]                                  ,:
+
+print_  include(`../test/mathconstants.txt')  ,:
+print_  [pi]                                  ,:
+print_  [ee]                                  ,:
+print_  \n
+
+

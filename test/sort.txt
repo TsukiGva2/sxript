@@ -1,0 +1,24 @@
+include(`../test/stringtools.txt'):
+include(`../test/vector.txt'):
+
+func(sortinsvec,{
+  sub({
+    let(a,[x]):
+    let(i,2):
+    len([a])-1:
+    do:
+      print_for(<j,[i],2,-1>,{
+        block({
+          if_ greaterstr(elem([a],[j]-1),elem([a],[j]))=1 @ skip:
+          let(a,elemswap([a],[j],[j]-1)):
+          anchor_skip:
+          print_()
+        })
+      }):
+      let(i,[i]+1):
+    loop:
+    print_[a]:
+  })
+}):
+
+print_`sort.txt':

@@ -1,0 +1,6 @@
+include(`../test/statistics.txt'):
+
+let(data,apply(rand,apply($({10}),fill(1,2,25)))):
+print_histogram([data],25):
+
+print_\n

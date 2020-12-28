@@ -1,0 +1,6 @@
+<center>
+<font face="Courier New">asc(character) = number</font>
+<br/>
+<br/>
+<font face="Courier New">chr(number) = character</font>
+</center>

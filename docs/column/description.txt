@@ -1,0 +1,3 @@
+<center>
+<font face="Courier New">column(matrix, index) = vector</font>
+</center>

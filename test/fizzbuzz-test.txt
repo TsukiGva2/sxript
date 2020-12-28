@@ -1,0 +1,11 @@
+func(not,{iff([x]=0,{1},{0})}):
+
+let(i,1):
+100:
+do:
+  let(a,`')                                   :
+  iff([i]%3=0,{let(a,[a]+`Fizz')},{})         :
+  iff([i]%5=0,{let(a,[a]+`Buzz')},{})         :
+  print_iff(not([a]=`'),{<[i],[a]>,`\n'},{})  :
+  let(i,[i]+1)                                :
+loop

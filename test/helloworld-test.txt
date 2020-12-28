@@ -1,0 +1,5 @@
+print_ `Hello World'           ,:
+print_ Hello World             ,:
+print_ Hello\ World            ,:
+print_ `Hello' + ` ' + `World' ,:
+print_\n
