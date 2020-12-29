@@ -1,4 +1,5 @@
 bin/*
+!bin/.keep
 make/BAS-COMB
 make/BAS-COMB.exe
 make/BAS-TO-X
