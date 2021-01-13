@@ -11,7 +11,7 @@
 '            Added switch to show or hide details on all plots.
 ' 2018-12-11 Upgraded x-axis labeling in existing plotascii function.
 ' 2018-12-10 Added scatter plot function.
-' 2020-01-13 Improved plotascii function to be safer in c++ implementation.
+' 2021-01-13 Improved plotascii function to be safer in c++ implementation.
 '            To do: Test and apply similar to scatter plot.
 
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
