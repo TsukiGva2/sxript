@@ -957,6 +957,8 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
 //            Added switch to show or hide details on all plots.
 // 2018-12-11 Upgraded x-axis labeling in existing plotascii function.
 // 2018-12-10 Added scatter plot function.
+// 2020-01-13 Improved plotascii function to be safer in c++ implementation.
+//             To do: Test and apply similar to scatter plot.
 
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
@@ -1720,6 +1722,7 @@ std::string plotASCII (std::string TheFuncIn, double LowLimitIn, double HighLimi
         DetailSwitch = DetailSwitchIn;
         double j;
         int k;
+        double kd;
         int n;
         int NumPoints;
         std::string tmp;
@@ -1825,12 +1828,18 @@ std::string plotASCII (std::string TheFuncIn, double LowLimitIn, double HighLimi
             TheReturn = TheReturn + "\n";
         }
         for (k = 1; k <= WindowHeight; k += 1) {
+            kd = k;
+
+            // JavaScript: STARTSKIP
+            kd = double(k);
+            // JavaScript: ENDSKIP
+
             tmp = "";
             for (n = 1; n <= WindowWidth; n += 1) {
                 TheReturn = TheReturn + AsciiPlane[n][k];
             }
             if (DetailSwitch == 1) {
-                TheReturn = TheReturn + sTR(ymax - ((k - 1) / WindowHeight) * (ymax - ymin) * (WindowHeight / (WindowHeight - 1)));
+                TheReturn = TheReturn + sTR(ymax - ((kd - 1) / WindowHeight) * (ymax - ymin) * (WindowHeight / (WindowHeight - 1)));
             }
             if (k < WindowHeight) {
                 TheReturn = TheReturn + "\n";
@@ -1844,11 +1853,13 @@ std::string plotASCII (std::string TheFuncIn, double LowLimitIn, double HighLimi
                 for (j = WindowWidth; j >= 1; j += (-1)) {
                     c = sTR(xmax - ((j - 1) / WindowWidth) * (xmax - xmin) * (WindowWidth / (WindowWidth - 1)));
                     c = internalEval("1 * " + c);
-                    d = mID(c, k, 1);
-                    if (d == "") {
-                        d = "0";
+                    if (k <= lEN(c)) {
+                        d = mID(c, k, 1);
+                        if (d == "") {
+                            d = "0";
+                        }
+                        tmp = tmp + d;
                     }
-                    tmp = tmp + d;
                 }
                 tmp = tmp + "\n";
             }

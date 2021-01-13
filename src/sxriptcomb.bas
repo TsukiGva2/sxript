@@ -236,6 +236,8 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 '            Added switch to show or hide details on all plots.
 ' 2018-12-11 Upgraded x-axis labeling in existing plotascii function.
 ' 2018-12-10 Added scatter plot function.
+' 2020-01-13 Improved plotascii function to be safer in c++ implementation.
+'             To do: Test and apply similar to scatter plot.
 
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
@@ -999,6 +1001,7 @@ FUNCTION PlotASCII$ (TheFuncIn AS STRING, LowLimitIn AS DOUBLE, HighLimitIn AS D
     DetailSwitch = DetailSwitchIn
     DIM j AS DOUBLE
     DIM k AS INTEGER
+    DIM kd AS DOUBLE
     DIM n AS INTEGER
     DIM NumPoints AS INTEGER
     DIM tmp AS STRING
@@ -1109,12 +1112,18 @@ FUNCTION PlotASCII$ (TheFuncIn AS STRING, LowLimitIn AS DOUBLE, HighLimitIn AS D
         TheReturn = TheReturn + CHR$(10)
     END IF
     FOR k = 1 TO WindowHeight
+        kd = k
+
+        ' JavaScript: STARTSKIP
+        '\\kd = double(k);
+        ' JavaScript: ENDSKIP
+
         tmp = ""
         FOR n = 1 TO WindowWidth
             TheReturn = TheReturn + AsciiPlane(n, k)
         NEXT
         IF (DetailSwitch = 1) THEN
-            TheReturn = TheReturn + STR$(ymax - ((k - 1) / WindowHeight) * (ymax - ymin) * (WindowHeight / (WindowHeight - 1)))
+            TheReturn = TheReturn + STR$(ymax - ((kd - 1) / WindowHeight) * (ymax - ymin) * (WindowHeight / (WindowHeight - 1)))
         END IF
         IF (k < WindowHeight) THEN
             TheReturn = TheReturn + CHR$(10)
@@ -1128,11 +1137,13 @@ FUNCTION PlotASCII$ (TheFuncIn AS STRING, LowLimitIn AS DOUBLE, HighLimitIn AS D
             FOR j = WindowWidth TO 1 STEP -1
                 c = STR$(xmax - ((j - 1) / WindowWidth) * (xmax - xmin) * (WindowWidth / (WindowWidth - 1)))
                 c = InternalEval$("1 * " + c)
-                d = MID$(c, k, 1)
-                IF (d = "") THEN
-                    d = "0"
+                IF (k <= LEN(c)) THEN
+                    d = MID$(c, k, 1)
+                    IF (d = "") THEN
+                        d = "0"
+                    END IF
+                    tmp = tmp + d
                 END IF
-                tmp = tmp + d
             NEXT
             tmp = tmp + CHR$(10)
         NEXT

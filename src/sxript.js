@@ -210,6 +210,8 @@ ScopeLevel = 1;
 //            Added switch to show or hide details on all plots.
 // 2018-12-11 Upgraded x-axis labeling in existing plotascii function.
 // 2018-12-10 Added scatter plot function.
+// 2020-01-13 Improved plotascii function to be safer in c++ implementation.
+//             To do: Test and apply similar to scatter plot.
 
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
@@ -990,6 +992,7 @@ function plotASCII(TheFuncIn, LowLimitIn, HighLimitIn, StepSizeIn, WindowWidthIn
         DetailSwitch = DetailSwitchIn;
         var j;
         var k;
+        var kd;
         var n;
         var NumPoints;
         var tmp;
@@ -1100,12 +1103,15 @@ function plotASCII(TheFuncIn, LowLimitIn, HighLimitIn, StepSizeIn, WindowWidthIn
             TheReturn = TheReturn + "\n";
         }
         for (k = 1; k <= WindowHeight; k += 1) {
+            kd = k;
+
+
             tmp = "";
             for (n = 1; n <= WindowWidth; n += 1) {
                 TheReturn = TheReturn + AsciiPlane[n][k];
             }
             if (DetailSwitch === 1) {
-                TheReturn = TheReturn + sTR(ymax - ((k - 1) / WindowHeight) * (ymax - ymin) * (WindowHeight / (WindowHeight - 1)));
+                TheReturn = TheReturn + sTR(ymax - ((kd - 1) / WindowHeight) * (ymax - ymin) * (WindowHeight / (WindowHeight - 1)));
             }
             if (k < WindowHeight) {
                 TheReturn = TheReturn + "\n";
@@ -1119,11 +1125,13 @@ function plotASCII(TheFuncIn, LowLimitIn, HighLimitIn, StepSizeIn, WindowWidthIn
                 for (j = WindowWidth; j >= 1; j += (-1)) {
                     c = sTR(xmax - ((j - 1) / WindowWidth) * (xmax - xmin) * (WindowWidth / (WindowWidth - 1)));
                     c = internalEval("1 * " + c);
-                    d = mID(c, k, 1);
-                    if (d === "") {
-                        d = "0";
+                    if (k <= lEN(c)) {
+                        d = mID(c, k, 1);
+                        if (d === "") {
+                            d = "0";
+                        }
+                        tmp = tmp + d;
                     }
-                    tmp = tmp + d;
                 }
                 tmp = tmp + "\n";
             }
