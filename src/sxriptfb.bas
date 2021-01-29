@@ -4,7 +4,7 @@
 #Include "sxmath.bm"
 #Include "sxript.bm"
 
-ON ERROR GOTO ErrHand
+'''ON ERROR GOTO ErrHand
 
 DIM GeneralInput AS STRING
 DIM GeneralOutput AS STRING
@@ -40,6 +40,6 @@ DO
     PRINT ":"; GeneralOutput: PRINT
 LOOP
 
-ErrHand:
-RESUME NEXT
+'''ErrHand:
+'''RESUME NEXT
 

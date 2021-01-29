@@ -665,7 +665,7 @@ FUNCTION InternalInv$ (DenomIn AS STRING, NumDigitsIn AS INTEGER)
     Temp = ""
 
     IF (RemoveSign$(Denom) = "0.0") THEN
-        Temp = "ERROR: Division by zero detected in InternalInv."
+        Temp = "{ERROR: Division by zero detected in InternalInv.}"
     END IF
 
     IF (Temp = "") THEN
@@ -764,10 +764,10 @@ FUNCTION InternalDiv$ (NumerIn AS STRING, DenomIn AS STRING, NumDigitsIn AS INTE
     Denom = DenomIn
     NumDigits = NumDigitsIn
     Factor = InternalInv$(Denom, NumDigits)
-    IF (LEFT$(Factor, 5) <> "ERROR") THEN
+    IF (LEFT$(Factor, 6) <> "{ERROR") THEN
         Temp = InternalMul$(Numer, Factor)
     ELSE
-        Temp = "ERROR: Division by zero passed to InternalDiv."
+        Temp = "{ERROR: Division by zero passed to InternalDiv.}"
     END IF
     InternalDiv$ = Temp
 END FUNCTION
@@ -831,12 +831,12 @@ FUNCTION BigNumDiv$ (NumerIn AS STRING, DenomIn AS STRING, NumDigitsIn AS INTEGE
     NumDigits = NumDigitsIn
     Factor = InternalInv$(Denom, NumDigits)
     Temp = ""
-    IF (LEFT$(Factor, 5) <> "ERROR") THEN
+    IF (LEFT$(Factor, 6) <> "{ERROR") THEN
         IF (Temp = "") THEN
             Temp = InternalMul$(Numer, Factor)
         END IF
     ELSE
-        Temp = "ERROR: Division by zero passed to BigNumDiv."
+        Temp = "{ERROR: Division by zero passed to BigNumDiv.}"
     END IF
     BigNumDiv$ = Temp
 END FUNCTION

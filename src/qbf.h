@@ -45,7 +45,7 @@ int iNT(double TheNum) {
 
 // ABS
 int aBS (double TheNum) {
-    return TheNum;
+    return abs(TheNum);
 }
 
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
@@ -86,7 +86,20 @@ std::string mID (std::string TheString, int StartPos, int Width) {
 
 // SQR
 double sQR (double TheNum) {
-    return TheNum;
+    return sqrt(TheNum);
+}
+
+// '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
+
+// SGN
+double sGN (double TheNum) {
+    double Temp;
+    if (TheNum == 0) {
+        Temp = 0;
+    } else {
+        Temp = TheNum / aBS(TheNum);
+    }
+    return Temp;
 }
 
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''

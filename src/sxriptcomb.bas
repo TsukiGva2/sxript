@@ -236,8 +236,11 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 '            Added switch to show or hide details on all plots.
 ' 2018-12-11 Upgraded x-axis labeling in existing plotascii function.
 ' 2018-12-10 Added scatter plot function.
-' 2020-01-13 Improved plotascii function to be safer in c++ implementation.
-'             To do: Test and apply similar to scatter plot.
+' 2021-01-13 Improved plotascii function to be safer in c++ implementation.
+'            To do: Test and apply similar to scatter plot.
+' 2021-01-27 Added support for abs().
+'            Added support for sgn().
+'            Added support for sqrt().
 
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
@@ -1826,12 +1829,43 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         END IF
     END IF
 
+    IF (ScannedName = "abs") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
+            t = VAL(ArgArray(1))
+            t = ABS(t)
+            MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        END IF
+    END IF
+
     IF (ScannedName = "int") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
             t = VAL(ArgArray(1))
             t = INT(t)
             MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        END IF
+    END IF
+
+    IF (ScannedName = "sgn") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
+            t = VAL(ArgArray(1))
+            t = SGN(t)
+            MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        END IF
+    END IF
+
+    IF (ScannedName = "sqrt") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
+            t = VAL(ArgArray(1))
+            IF (t >= 0) THEN
+                t = SQR(t)
+                MidFragment = LTRIM$(RTRIM$(STR$(t)))
+            ELSE
+                MidFragment = "{ERROR: Negative argument sent to sqrt().}"
+            END IF
         END IF
     END IF
 
@@ -2545,7 +2579,6 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
     DIM RightFragment AS STRING
     DIM TheOperator AS STRING
     DIM k AS INTEGER
-    'DIM j AS INTEGER
     DIM m AS INTEGER
     DIM n AS INTEGER
     DIM t1 AS DOUBLE
@@ -2555,6 +2588,7 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
     DIM c1 AS STRING
     DIM c2 AS STRING
     DIM c3 AS STRING
+    DIM Divergence AS INTEGER
     TheString = TheStringIn
     TheReturn = ""
     TypeLeft = ""
@@ -2569,6 +2603,7 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
     c1 = ""
     c2 = ""
     c3 = ""
+    Divergence = 0
 
     TheString = ManageOperators$(TheString)
     c3 = TheString
@@ -2742,7 +2777,11 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                     END IF
 
                     IF (TheOperator = "/") THEN
-                        t3 = t1 / t2
+                        IF (t2 = 0) THEN
+                            Divergence = 1
+                        ELSE
+                            t3 = t1 / t2
+                        END IF
                     END IF
 
                     IF (TheOperator = "%") THEN
@@ -2786,21 +2825,27 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                         END IF
                     END IF
 
-                    ' Inserts a "+" sign in front of positive results.
-                    IF (t3 >= 0) THEN
-                        MidFragment = "+" + LTRIM$(RTRIM$(STR$(t3)))
+                    IF (Divergence = 0) THEN
+
+                        ' Inserts a "+" sign in front of positive results.
+                        IF (t3 >= 0) THEN
+                            MidFragment = "+" + LTRIM$(RTRIM$(STR$(t3)))
+                        ELSE
+                            MidFragment = LTRIM$(RTRIM$(STR$(t3)))
+                        END IF
+
+                        ' Inserts ".0" for numbers not containing decimals.
+                        IF (INSTR(MidFragment, ".") < 1) THEN
+                            MidFragment = MidFragment + ".0"
+                        END IF
+
+                        ' More strict format for small decimals.
+                        MidFragment = ReplaceWord$(MidFragment, "+.", "+0.", -1)
+                        MidFragment = ReplaceWord$(MidFragment, "-.", "-0.", -1)
+
                     ELSE
-                        MidFragment = LTRIM$(RTRIM$(STR$(t3)))
+                        MidFragment = "{ERROR: Division by zero.}"
                     END IF
-
-                    ' Inserts ".0" for numbers not containing decimals.
-                    IF (INSTR(MidFragment, ".") < 1) THEN
-                        MidFragment = MidFragment + ".0"
-                    END IF
-
-                    ' More strict format for small decimals.
-                    MidFragment = ReplaceWord$(MidFragment, "+.", "+0.", -1)
-                    MidFragment = ReplaceWord$(MidFragment, "-.", "-0.", -1)
 
                     TheReturn = LeftFragment + MidFragment + RightFragment
 
@@ -3918,7 +3963,7 @@ FUNCTION InternalInv$ (DenomIn AS STRING, NumDigitsIn AS INTEGER)
     Temp = ""
 
     IF (RemoveSign$(Denom) = "0.0") THEN
-        Temp = "ERROR: Division by zero detected in InternalInv."
+        Temp = "{ERROR: Division by zero detected in InternalInv.}"
     END IF
 
     IF (Temp = "") THEN
@@ -4017,10 +4062,10 @@ FUNCTION InternalDiv$ (NumerIn AS STRING, DenomIn AS STRING, NumDigitsIn AS INTE
     Denom = DenomIn
     NumDigits = NumDigitsIn
     Factor = InternalInv$(Denom, NumDigits)
-    IF (LEFT$(Factor, 5) <> "ERROR") THEN
+    IF (LEFT$(Factor, 6) <> "{ERROR") THEN
         Temp = InternalMul$(Numer, Factor)
     ELSE
-        Temp = "ERROR: Division by zero passed to InternalDiv."
+        Temp = "{ERROR: Division by zero passed to InternalDiv.}"
     END IF
     InternalDiv$ = Temp
 END FUNCTION
@@ -4084,12 +4129,12 @@ FUNCTION BigNumDiv$ (NumerIn AS STRING, DenomIn AS STRING, NumDigitsIn AS INTEGE
     NumDigits = NumDigitsIn
     Factor = InternalInv$(Denom, NumDigits)
     Temp = ""
-    IF (LEFT$(Factor, 5) <> "ERROR") THEN
+    IF (LEFT$(Factor, 6) <> "{ERROR") THEN
         IF (Temp = "") THEN
             Temp = InternalMul$(Numer, Factor)
         END IF
     ELSE
-        Temp = "ERROR: Division by zero passed to BigNumDiv."
+        Temp = "{ERROR: Division by zero passed to BigNumDiv.}"
     END IF
     BigNumDiv$ = Temp
 END FUNCTION

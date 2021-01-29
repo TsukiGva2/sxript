@@ -765,7 +765,7 @@ std::string internalInv (std::string DenomIn, int NumDigitsIn) {
         Temp = "";
 
         if (removeSign(Denom) == "0.0") {
-            Temp = "ERROR: Division by zero detected in InternalInv.";
+            Temp = "{ERROR: Division by zero detected in InternalInv.}";
         }
 
         if (Temp == "") {
@@ -864,10 +864,10 @@ std::string internalDiv (std::string NumerIn, std::string DenomIn, int NumDigits
         Denom = DenomIn;
         NumDigits = NumDigitsIn;
         Factor = internalInv(Denom, NumDigits);
-        if (lEFT(Factor, 5) != "ERROR") {
+        if (lEFT(Factor, 6) != "{ERROR") {
             Temp = internalMul(Numer, Factor);
         } else {
-            Temp = "ERROR: Division by zero passed to InternalDiv.";
+            Temp = "{ERROR: Division by zero passed to InternalDiv.}";
         }
         return Temp;
 }
@@ -931,12 +931,12 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
         NumDigits = NumDigitsIn;
         Factor = internalInv(Denom, NumDigits);
         Temp = "";
-        if (lEFT(Factor, 5) != "ERROR") {
+        if (lEFT(Factor, 6) != "{ERROR") {
             if (Temp == "") {
                 Temp = internalMul(Numer, Factor);
             }
         } else {
-            Temp = "ERROR: Division by zero passed to BigNumDiv.";
+            Temp = "{ERROR: Division by zero passed to BigNumDiv.}";
         }
         return Temp;
 }
@@ -957,8 +957,11 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
 //            Added switch to show or hide details on all plots.
 // 2018-12-11 Upgraded x-axis labeling in existing plotascii function.
 // 2018-12-10 Added scatter plot function.
-// 2020-01-13 Improved plotascii function to be safer in c++ implementation.
-//             To do: Test and apply similar to scatter plot.
+// 2021-01-13 Improved plotascii function to be safer in c++ implementation.
+//            To do: Test and apply similar to scatter plot.
+// 2021-01-27 Added support for abs().
+//            Added support for sgn().
+//            Added support for sqrt().
 
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
@@ -2494,12 +2497,43 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             }
         }
 
+        if (ScannedName == "abs") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
+                t = vAL(ArgArray[1]);
+                t = aBS(t);
+                MidFragment = lTRIM(rTRIM(sTR(t)));
+            }
+        }
+
         if (ScannedName == "int") {
             ScannedName = "";
             if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
                 t = vAL(ArgArray[1]);
                 t = iNT(t);
                 MidFragment = lTRIM(rTRIM(sTR(t)));
+            }
+        }
+
+        if (ScannedName == "sgn") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
+                t = vAL(ArgArray[1]);
+                t = sGN(t);
+                MidFragment = lTRIM(rTRIM(sTR(t)));
+            }
+        }
+
+        if (ScannedName == "sqrt") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
+                t = vAL(ArgArray[1]);
+                if (t >= 0) {
+                    t = sQR(t);
+                    MidFragment = lTRIM(rTRIM(sTR(t)));
+                } else {
+                    MidFragment = "{ERROR: Negative argument sent to sqrt().}";
+                }
             }
         }
 
@@ -3190,7 +3224,6 @@ std::string numberCrunch (std::string TheStringIn) {
         std::string RightFragment;
         std::string TheOperator;
         int k;
-        //DIM j AS INTEGER
         int m;
         int n;
         double t1;
@@ -3200,6 +3233,7 @@ std::string numberCrunch (std::string TheStringIn) {
         std::string c1;
         std::string c2;
         std::string c3;
+        int Divergence;
         TheString = TheStringIn;
         TheReturn = "";
         TypeLeft = "";
@@ -3214,6 +3248,7 @@ std::string numberCrunch (std::string TheStringIn) {
         c1 = "";
         c2 = "";
         c3 = "";
+        Divergence = 0;
 
         TheString = manageOperators(TheString);
         c3 = TheString;
@@ -3380,7 +3415,11 @@ std::string numberCrunch (std::string TheStringIn) {
                         }
 
                         if (TheOperator == "/") {
-                            t3 = t1 / t2;
+                            if (t2 == 0) {
+                                Divergence = 1;
+                            } else {
+                                t3 = t1 / t2;
+                            }
                         }
 
                         if (TheOperator == "%") {
@@ -3421,21 +3460,27 @@ std::string numberCrunch (std::string TheStringIn) {
                             }
                         }
 
-                        // Inserts a "+" sign in front of positive results.
-                        if (t3 >= 0) {
-                            MidFragment = "+" + lTRIM(rTRIM(sTR(t3)));
+                        if (Divergence == 0) {
+
+                            // Inserts a "+" sign in front of positive results.
+                            if (t3 >= 0) {
+                                MidFragment = "+" + lTRIM(rTRIM(sTR(t3)));
+                            } else {
+                                MidFragment = lTRIM(rTRIM(sTR(t3)));
+                            }
+
+                            // Inserts ".0" for numbers not containing decimals.
+                            if (iNSTR(MidFragment, ".") < 1) {
+                                MidFragment = MidFragment + ".0";
+                            }
+
+                            // More strict format for small decimals.
+                            MidFragment = replaceWord(MidFragment, "+.", "+0.", -1);
+                            MidFragment = replaceWord(MidFragment, "-.", "-0.", -1);
+
                         } else {
-                            MidFragment = lTRIM(rTRIM(sTR(t3)));
+                            MidFragment = "{ERROR: Division by zero.}";
                         }
-
-                        // Inserts ".0" for numbers not containing decimals.
-                        if (iNSTR(MidFragment, ".") < 1) {
-                            MidFragment = MidFragment + ".0";
-                        }
-
-                        // More strict format for small decimals.
-                        MidFragment = replaceWord(MidFragment, "+.", "+0.", -1);
-                        MidFragment = replaceWord(MidFragment, "-.", "-0.", -1);
 
                         TheReturn = LeftFragment + MidFragment + RightFragment;
 

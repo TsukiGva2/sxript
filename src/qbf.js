@@ -80,6 +80,14 @@ function sQR(TheNum) {
 
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
+// SGN
+function sGN(TheNum) {
+    "use strict";
+    return Math.sign(TheNum);
+}
+
+// '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
+
 // LCASE
 function lCASE(TheString) {
     "use strict";
