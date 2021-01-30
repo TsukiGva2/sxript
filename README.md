@@ -22,7 +22,7 @@ Linux Users: To handle problems with line endings, run the following line from t
 
 ### Numerical Operators
 
-Arithmetic operations are defined as one-character symbols ``` ! ^ * / % + - ``` that embed between on two base-ten numbers (or rarely, one number) to produce a result of double precision. Operators are regarded in strict descending order - no two operators are of equal precedence. The body result of a numerical operation is always prefixed with a sign ```+```, or ```-```, and suffixed with a decimal remainder, even if ```.0```. Expressions containing multiple operators are evaluated recursively.
+Numerical expressions are defined as one-character operators ``` ! ^ * / % + - ``` as embedded between on two base-ten numbers (or rarely, one number) to produce a numerical result of double precision. Operators are treated in strict descending order as listed - no two operators are of equal precedence. The body result of a numerical operation is always prefixed with a sign ```+```, or ```-```, and suffixed with a decimal remainder, even if ```.0```. Expressions containing multiple operators are evaluated recursively.
 
 ### Operator Reduction
 
