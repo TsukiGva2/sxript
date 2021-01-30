@@ -16,7 +16,7 @@
 ' 2021-01-27 Added support for abs().
 '            Added support for sgn().
 '            Added support for sqrt().
-
+' 2021-01-30 Fixed handling of chr(32).
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -1803,7 +1803,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     IF (ScannedName = "chr") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
-            c = LTRIM$(RTRIM$(CHR$(VAL(ArgArray(1)))))
+            c = CHR$(VAL(ArgArray(1)))
             IF (c = " ") THEN
                 c = EscapeChar + c
             END IF

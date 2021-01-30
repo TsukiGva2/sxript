@@ -2028,7 +2028,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     IF (ScannedName = "chr") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
-            c = LTRIM$(RTRIM$(CHR$(VAL(ArgArray(1)))))
+            c = CHR$(VAL(ArgArray(1)))
             IF (c = " ") THEN
                 c = EscapeChar + c
             END IF

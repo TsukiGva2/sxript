@@ -2682,7 +2682,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         if (ScannedName == "chr") {
             ScannedName = "";
             if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
-                c = lTRIM(rTRIM(cHR(vAL(ArgArray[1]))));
+                c = cHR(vAL(ArgArray[1]));
                 if (c == " ") {
                     c = EscapeChar + c;
                 }
