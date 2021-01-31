@@ -18,11 +18,11 @@ Linux Users: To handle problems with line endings, run the following line from t
 
 ``` find . -name '*.sh' -exec sed -i "s/\r//g" {} \; ```
 
-## Guide
+## Guide: Operators
 
 ### Numerical Operators
 
-Numerical expressions are defined as one-character operators ``` ! ^ * / % + - ``` as embedded between on two base-ten numbers (or rarely, one number) to produce a numerical result of double precision. Operators are treated in strict descending order as listed - no two operators are of equal precedence. The body result of a numerical operation is always prefixed with a sign ```+```, or ```-```, and suffixed with a decimal remainder, even if ```.0```. Expressions containing multiple operators are evaluated recursively.
+Numerical expressions are defined as one-character operators ``` ! ^ * / % + - ``` embedded between on two base-ten numbers (or rarely, one number) to produce a numerical result of double precision. Operators are treated in strict descending order as listed: no two operators are of equal precedence. The result of a numerical operation is always prefixed with a sign ```+```, or ```-```, and suffixed with a decimal remainder, even if ```.0```. Expressions containing multiple operators are evaluated recursively.
 
 ### Operator Reduction
 
@@ -38,12 +38,21 @@ We adopt the convention where the negative sign prefers to bind to numbers (like
 
 > Predict the result of ```0-3^2```.
 
-> Solution: By operator precedence, the power operator ( ```^``` ) is regarded first, which triggers a "search" for numbers surrounding the operator. On the right, we have ```2```, whereas on the left, the operator captures ```-3```. This means ```-3*-3``` is treated as a stand-alone problem, solved by ```+9.0```. The original expression, then, becomes ```0+9.0```, simplifying to ```+9.0```.
+> Solution: By operator precedence, the power operator ( ```^``` ) is regarded first, which triggers a "search" for numbers surrounding the operator. On the right, we have ```2```, whereas on the left, the operator captures ```-3```. This means ```-3*-3``` is treated as a stand-alone problem, solved by ```+9.0```. The original expression becomes ```0+9.0```, simplifying to ```+9.0```.
 
 #### Example:
 
 > Predict the result of ```0--3^2```.
 
 > Solution: By operator reduction, the expression reduces to ```0+3^2``` before any numerical operations take place. This of course becomes ```0+9.0```, simplifying to ```+9.0```.
+
+### Comparison and Logic
+
+The comparison operator, denoted by a single "equal" symbol ( ```=``` ), tests for equivalency between two numbers. If the left- and right-arguments are numerically equal, the returned result is ```+1.0```. Non-equal arguments return ```+0.0```.
+
+The logical AND, along with logical OR, are represented by the ampersand ( ```&``` ) and vertical slash ( ```|``` ), respectively. Like the comparison operator, the logical operators, as applied to numbers, return a ```+1.0``` for the affirmative case, and ```+0.0``` otherwise.
+
+## Guide: Types
+
 
 
