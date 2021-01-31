@@ -285,74 +285,369 @@
 
 <br/>
 
-<!-- Send README.md through https://markdowntohtml.com/ -->
 <center>
-<table width="97%" border="0">
+<a href="docs/example/main.php#Top" style="text-decoration:none"><font face="Arial"; color="#3366cc">Click to run Example Program</font></a>
+</center>
+
+<center>
+<table width="97%" border="0" cellpadding="10">
+  <tbody>
+  <tr>
+  <td>
+  <center>
+  <table width="100%" cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
-    <td>
-
-<h2 id="guide-numbers-and-operators">Guide: Numbers and Operators</h2>
-<h3 id="numerical-operators">Numerical Operators</h3>
-<p>Numerical expressions are defined as one-character operators <code>! ^ * / % + -</code> embedded between on two base-ten numbers (or rarely, one number) to produce a numerical result of double precision. Operators are treated in strict descending order as listed: no two operators are of equal precedence. The result of a numerical operation is always prefixed with a sign <code>+</code>, or <code>-</code>, and suffixed with a decimal remainder, even if <code>.0</code>. Expressions containing multiple operators are evaluated recursively.</p>
-<h3 id="operator-reduction">Operator Reduction</h3>
-<p>Before any numerical operations are considered, all input passes through an operator reduction filter, which reduces things like <code>+++</code> to a single <code>+</code>, and so on. Occurrences of <code>-+</code> are interpreted as <code>-</code>, making inputs such as <code>3-+3</code> evaluate to <code>+0.0</code>, as expected. Occurrences of a &quot;double negative&quot; <code>--</code> are interpreted as a single positive <code>+</code>.</p>
-<h3 id="duality-of-the-negative-sign">Duality of the Negative Sign</h3>
-<p>Following the (unfortunate) convention of traditional notation, the negative sign ( <code>-</code> ) plays a dual rule in numerical expressions. Apart from acting as the subtraction operator, the same symbol is used to denote stand-alone negative numbers, such as <code>-3.5</code>, in where no &quot;operation&quot; taking place at all.</p>
-<p>We adopt the convention where the negative sign prefers to bind to numbers (like an electron) to make them negative, instead of going between numbers to act as a subtraction operator.</p>
-<h4 id="exercise-">Exercise:</h4>
-<blockquote>
-<p>Predict the result of <code>0-3^2</code>.</p>
-<p>Solution: By operator precedence, the power operator ( <code>^</code> ) is regarded first, which triggers a &quot;search&quot; for numbers surrounding the operator. On the right, we have <code>2</code>, whereas on the left, the operator captures <code>-3</code>. This means <code>-3*-3</code> is treated as a stand-alone problem, solved by <code>+9.0</code>. The original expression becomes <code>0+9.0</code>, simplifying to <code>+9.0</code>.</p>
-</blockquote>
-<h4 id="exercise-">Exercise:</h4>
-<blockquote>
-<p>Predict the result of <code>0--3^2</code>.</p>
-<p>Solution: By operator reduction, the expression reduces to <code>0+3^2</code> before any numerical operations take place. The expression becomes <code>0+9.0</code>, simplifying to <code>+9.0</code>.</p>
-</blockquote>
-<h3 id="comparison-and-logic">Comparison and Logic</h3>
-<p>The comparison operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two numbers. If the left- and right-arguments are numerically equal, the returned result is <code>+1.0</code>. Non-equal arguments return <code>+0.0</code>.</p>
-<p>The logical AND, along with logical OR, are represented by the ampersand ( <code>&amp;</code> ) and vertical slash ( <code>|</code> ), respectively. Like the comparison operator, the logical operators, as applied to numbers, return a <code>+1.0</code> for the affirmative case, and <code>+0.0</code> otherwise.</p>
-<h2 id="guide-strings">Guide: Strings</h2>
-<p>Strings, henceforth called &quot;quotes&quot;, are always enclosed by the back-tick symbol ( <code>` </code> ) on the left, and the apostrophe ( <code>&#39;</code> ) on the right. The double-quote symbol ( <code>&quot;</code> ) is not reserved. For example, <code>`horse&#39;</code> is a valid quote, and so too is <code>`aB&quot;1e3&quot;cD&#39;</code>.</p>
-<p>Quotes can embed within quotes, meaning, for instance, <code>`cows say `moo&#39;&#39;</code>, is a perfectly valid quote.</p>
-<p>The range of allowed characters is dependent on the host environment. Terminal implementations tend to only resolve ASCII characters, whereas JavaScript implementations extend to allows Unicode characters in quotes.</p>
-<h3 id="quote-operations">Quote Operations</h3>
-<p>Quotes can be manipulated using (some of) the same operators that apply to numbers. Allowed operators <code>* / + -</code> follow the same precedence as their mathematical counterparts.</p>
-<h4 id="concatenation">Concatenation</h4>
-<p>Much as one would expect, quotes are concatenated with the plus ( <code>+</code> ) operator, for instance <code>`apple&#39; + `juice&#39;</code> becomes <code>`applejuice&#39;</code>.</p>
-<h4 id="subtraction">Subtraction</h4>
-<p>If [quote2] exactly matches the rightmost characters of [quote1], then the combination <code>[quote1] - [quote2]</code> returns a truncated version of [quote1] that excludes [quote2]. For example, <code>`file.txt&#39; - `.txt&#39;</code> resolves to <code>`file&#39;</code>.</p>
-<p>If [quote2] is not equal to the right-most part of [quote1], then only [quote1] is returned. As a corollary to this, the combination <code>`&#39; - `xyz&#39;</code> returns the empty quote, <code>`&#39;</code>.</p>
-<h4 id="multiplication">Multiplication</h4>
-<p>One quote can also be &quot;multiplied&quot; into another, where the combination <code>[quote1] * [quote2]</code> returns a version of [quote1] with [quote2] inserted after each character. For instance <code>`abc&#39; * `xy&#39;</code> results in <code>`axybxycxy&#39;</code>.</p>
-<h4 id="division">Division</h4>
-<p>The inverse of quote multiplication is quote division. That is, the combination <code>`axybxycxy&#39; / `xy&#39;</code> returns `abc&#39;. If [quote2] is not a sub-quote of [quote1], then only [quote1] is returned.</p>
-<h4 id="exercise-">Exercise:</h4>
-<blockquote>
-<p>Predict the result of <code>`abc&#39; / `xy&#39; * `xy&#39;</code>.</p>
-<p>Solution: By operator precedence, the combination <code>`xy&#39; * `xy&#39;</code> is considered first, resulting in <code>`xxyyxy&#39;</code>. The problem translates to <code>`abc&#39; / `xxyyxy&#39;</code>, resulting in simply <code>`abc&#39;</code>.</p>
-</blockquote>
-<h2 id="guide-formatting">Guide: Formatting</h2>
-<p>Sxript output is passed through a final formatting step before entering the environment. Most notably, quotes lose their bracketing characters, i.e. <code>` </code> and <code>&#39;</code> vanish. This also applies to embedded quotes, so <code>`cows say `moo&#39;&#39;</code> flattens to <code>cows say moo</code>.</p>
-<h3 id="escape-character">Escape Character</h3>
-<p>When the backslash character ( <code>\</code> ), or &quot;escape character&quot; appears in any output, the character to the right receives special treatment.</p>
-<p>The most obvious need for the escape character is for including the backtick ( <code>` </code> ) or apostrophe ( <code>&#39;</code> ) in a quote. This is achieved using respective combinations <code>\` </code>, and <code>\&#39;</code>.</p>
-<p>Tabs and returns are handled by the following:</p>
-<ul>
-<li><code>\t</code> becomes ASCII-9  (Tab)</li>
-<li><code>\n</code> becomes ASCII-10 (LF)</li>
-<li><code>\r</code> becomes ASCII-13 (CR)</li>
-<li><code>\\</code> becomes <code>\</code> after all other formatting takes place.</li>
-</ul>
-<h4 id="carriage-return">Carriage Return</h4>
-<p>Note that the role of ASCII-13, the Carriage Return, behaves differently per implementation. Through JavaScript, the quote <code>`hello\rthere&#39;</code> is broken apart at &quot;hello&quot;, and &quot;there&quot; is printed on a new line. Meanwhile, the QB64 and C++ terminal implementations return <code>`thereo&#39;</code>, because the cursor returns to the left-most position without starting a new line.</p>
-<h2 id="guide-functions">Guide: Functions</h2>
-<p>(Coming soon.)</p>
-
+      <td width="40%" style="background: #cccc99; border: 1px solid #000000; padding: 0.04in">
+        <center>
+        <font face="Courier New, monospace"; color="#000000"><b>Example Program</b></font>
+        </center>
+      </td>
+      <td width="40%" style="background: #cccc99; border: 1px solid #000000; padding: 0.04in">
+        <center>
+        <font face="Courier New, monospace"; color="#000000"><b>Discussion</b></font>
+        </center>
+      </td>
+      <td width="20%" style="background: #cccc99; border: 1px solid #000000; padding: 0.04in">
+        <center>
+        <font face="Courier New, monospace"; color="#000000"><b>Links</b></font>
+        </center>
+      </td>
     </tr>
-    </tbody>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        `...All programs are actually subprograms...':
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Quotes and Numbers pass through as stable. Lines are separated by the semicolon ( <b>:</b> ).
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/quotetype/main.php#Top"><font face="Courier New" color="#00ff7f">Quote</font></a>
+        ,
+        <a href="docs/numbertype/main.php#Top"><font face="Courier New" color="#00ff7f">Number</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        include(`../test/arithmetic.txt'):
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Execute subprogram stored on file, namely <font face="Courier New" color="#00ff7f">arithmetic.txt</font>.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/exeinclude/main.php#Top"><font face="Courier New" color="#00ff7f">Execute</font></a>
+        ,
+        <a href="docs/arithmetic/main.php#Top"><font face="Courier New" color="#00ff7f">arithmetic.txt</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        print_`Welcome!\n':
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Print a welcome message. Note the newline sequence \n before closing the quote.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/print/main.php#Top"><font face="Courier New" color="#00ff7f">Print</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        let(rollone,dice(6)):
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Call the <b>dice</b> function to generate a random number from a 6-sided dice, and store the result in variable <b>rollone</b>.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/func/main.php#Top"><font face="Courier New" color="#00ff7f">Function</font></a>
+        ,
+        <a href="docs/let/main.php#Top"><font face="Courier New" color="#00ff7f">Let</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        print_`Single roll: ' + quote([rollone]) + `\n':
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Print the stored result of single dice roll embedded in a quote. The variable reference is replaced by its literal value when enclosed in square brackets ( <b>[ ]</b> ).
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/variable/main.php#Top"><font face="Courier New" color="#00ff7f">Variable Reference</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        func(rolltwo,{&lt;dice([x]),dice([x])&gt;}):
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Define a single-line function that rolls two <b>[x]</b>-sided dice and returns a vector.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/func/main.php#Top"><font face="Courier New" color="#00ff7f">func</font></a>
+        ,
+        <a href="docs/vectortype/main.php#Top"><font face="Courier New" color="#00ff7f">Vector</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        print_`Your double dice roll is: '
+        <br/>
+        + quote(rolltwo(6)) + `\n\n':
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Whitespace and break returns only matter within quotes.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/whitespace/main.php#Top"><font face="Courier New" color="#00ff7f">Whitespace</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        func(rollmany,{
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Define a function called <b>rollmany</b>. The body occurs as occulted code.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/occulttype/main.php#Top"><font face="Courier New" color="#00ff7f">Occult</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        &nbsp;&nbsp;sub({
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Multi-line functions are contained in a subprogram or codeblock. 
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/subblock/main.php#Top"><font face="Courier New" color="#00ff7f">Subprogram</font></a>
+        /
+        <a href="docs/subblock/main.php#Top"><font face="Courier New" color="#00ff7f">Codeblock</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        &nbsp;&nbsp;&nbsp;&nbsp;let(a,[x]):
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Input arguments manifest as <b>[x]</b>, <b>[y]</b>, <b>[z]</b>, etc.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        ...
+        </font>
+      </td>
+    </tr>
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        &nbsp;&nbsp;&nbsp;&nbsp;let(b,[y]):
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Variables and functions defined in a subprogram are destroyed as the subprogram closes. Codeblocks preserve variables.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        ...
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        &nbsp;&nbsp;&nbsp;&nbsp;do:
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Elementary statements from imperative programming, namely <font face="Courier New" color="#00ff7f">if</font>, <font face="Courier New" color="#00ff7f">goto</font>, <font face="Courier New" color="#00ff7f">do/loop</font>, etc. are available within any (and limited to the same) given subprogram or codeblock.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        <a href="docs/ifat/main.php#Top"><font face="Courier New" color="#00ff7f">if</font></a>
+        ,
+        <a href="docs/anchorgoto/main.php#Top"><font face="Courier New" color="#00ff7f">goto</font></a>
+        ,
+        <a href="docs/doloop/main.php#Top"><font face="Courier New" color="#00ff7f">do/loop</font></a>
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        &nbsp;&nbsp;&nbsp;&nbsp;print_dice([a]),:
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        The only output carried away by the subprogram or codeblock is what follows <font face="Courier New" color="#00ff7f">print</font>.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        ...
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        &nbsp;&nbsp;&nbsp;&nbsp;loop:
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Re-iterate loop if (internal) iteration count less than <b>b</b>.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        ...
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        &nbsp;&nbsp;})
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Close subprogram.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        ...
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        }):
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        End definition of function <b>rollmany</b>.
+         </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        ...
+        </font>
+      </td>
+    </tr>
+
+    <tr height="40px">
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Courier New, monospace"; color="#add8e6">
+        print_rollmany(6,10)
+        </font>
+      </td>
+      <td width="40%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        Call <b>rollmany</b> function to roll 6-sided dice 10 times and print the result.
+        </font>
+      </td>
+      <td width="20%" style="background: #222222; border: 1px dotted #000000; padding: 0.04in">
+        <font face="Calibri, sans-serif"; color="#00ff7f">
+        ...
+        </font>
+      </td>
+    </tr>
+
+    <tbody>
+  </table>
+  </center>
+
+  </td></tr>
+  </tbody>
 </table>
+</center>
+
+<center>
+<a href="docs/example/main.php#Top" style="text-decoration:none"><font face="Arial"; color="#3366cc">Click to run Example Program</font></a>
 </center>
 
 <br/>
