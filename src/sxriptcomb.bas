@@ -1725,6 +1725,14 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         ScannedName = ""
         MidFragment = "`" + TypeCheck$(LEFT$(ArgArray(1), 1)) + "'"
     END IF
+    IF (ScannedName = "unf") THEN
+        ScannedName = ""
+        IF (TypeCheck$(LEFT$(ArgArray(1), 1)) = "number") THEN
+            MidFragment = LTRIM$(RTRIM$(STR$(VAL(ArgArray(1)))))
+        ELSE
+            MidFragment = ArgArray(1)
+        END IF
+    END IF
     IF (ScannedName = "quote") THEN
         ScannedName = ""
         MidFragment = "`" + ArgArray(1) + "'"

@@ -1693,6 +1693,14 @@ function functionCrunch(ScannedNameIn, MidFragmentIn) {
             ScannedName = "";
             MidFragment = "`" + typeCheck(lEFT(ArgArray[1], 1)) + "'";
         }
+        if (ScannedName === "unf") {
+            ScannedName = "";
+            if (typeCheck(lEFT(ArgArray[1], 1)) === "number") {
+                MidFragment = lTRIM(rTRIM(sTR(vAL(ArgArray[1]))));
+            } else {
+                MidFragment = ArgArray[1];
+            }
+        }
         if (ScannedName === "quote") {
             ScannedName = "";
             MidFragment = "`" + ArgArray[1] + "'";

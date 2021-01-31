@@ -18,6 +18,7 @@
 '            Added support for sqrt().
 ' 2021-01-30 Fixed handling of chr(32).
 ' 2021-01-31 Changing behavior of quote subtraction.
+'            Added unf() primitive.
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -1499,6 +1500,14 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     IF (ScannedName = "type") THEN
         ScannedName = ""
         MidFragment = "`" + TypeCheck$(LEFT$(ArgArray(1), 1)) + "'"
+    END IF
+    IF (ScannedName = "unf") THEN
+        ScannedName = ""
+        IF (TypeCheck$(LEFT$(ArgArray(1), 1)) = "number") THEN
+            MidFragment = LTRIM$(RTRIM$(STR$(VAL(ArgArray(1)))))
+        ELSE
+            MidFragment = ArgArray(1)
+        END IF
     END IF
     IF (ScannedName = "quote") THEN
         ScannedName = ""
