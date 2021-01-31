@@ -7,8 +7,8 @@ func(last,{elem([x],len([x]))}):
 func(range,{
   sub({
     let(a,[x]):
-    let(xmin,99999):
-    let(xmax,-99999):
+    let(xmin,elem([a],1)):
+    let(xmax,[xmin]):
     for(<i,1,len([a]),1>,{block({print_():
       let(b,elem([a],[i])):
       iff(greater([xmin],[b]),{let(xmin,[b])}):

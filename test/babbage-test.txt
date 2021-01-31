@@ -7,6 +7,6 @@ print_func(doit,{
   },{ 
     doit([x]+1)
   })
-})(1):
+})(1) - +25264.0:
 
 print_\n

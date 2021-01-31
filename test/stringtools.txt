@@ -40,13 +40,17 @@ func(strepl,{
     let(a,[x]):
     let(b,[y]):
     let(c,[z]):
-    let(i,0):
     let(r,`'):
-    len([a]):
-    do:
-      let(d,mid([a],let(i,[i]+1),1)):
-      let(r,[r]+iff([d]=[b],{[c]},{[d]})):
-    loop:
+    anchor_start:
+      let(k,instr([a],[b])):
+      iff(greater([k],0),{
+        let(r,[r]+left([a],[k]-1) + [c])
+      },{
+        let(r,[r]+[a])
+      }):
+      let(a,right([a],len([a])-[k]+1-len([b]))):
+      if_ greater([k],0) @ start:
+    anchor_done:
     print_[r]
   })
 }):

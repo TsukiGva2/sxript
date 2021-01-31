@@ -1,0 +1,144 @@
+body {
+  background-color: #222222;
+  color: #BBBBBB;
+  font-family: Courier New;
+  font-size: 18px;
+}
+
+.title {
+  font-family: Courier New;
+  font-size: 40px;
+  font-style: italic; 
+}
+
+.subtitle {
+  font-family: Courier New;
+  font-size: 36px;
+  font-weight: bold; 
+}
+
+h1 {
+  font-family: Courier New;
+  font-size: 26px;
+  font-weight: bold; 
+}
+
+h2 {
+  font-family: Courier New;
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+h3 {
+  font-family: Courier New;
+  font-size: 20px;
+}
+
+.indented {
+  margin-left: 10%;
+}
+
+.appendix {
+  font-size: 16px;
+}
+
+.quote {
+  font-family: Georgia;
+  font-style: italic;
+  width: 80%;
+}
+
+.citation {
+  font-size: 12px;
+  text-align: left;
+}
+
+.container {
+  width: 800px;
+  //width: 100%;
+  overflow: hidden;
+}
+
+.containerprose {
+  font-family: Georgia;
+  text-align: left;
+}
+
+.containerprose2 {
+  font-family: Georgia;
+  text-align: left;
+  width: 80%;
+}
+
+a:link {
+  color: #AACCFF;
+  font-family: Courier New;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #AACCFF;
+  font-family: Courier New;
+  text-decoration: none;
+}
+
+a:hover {
+  color: yellow;
+  font-family: Courier New;
+  text-decoration: underline;
+}
+
+a:active {
+  font-family: Courier New;
+  text-decoration: underline;
+}
+
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+.aligncenter {
+  float: center;
+}
+
+button.stylebutton {
+  color: Black;
+  background-color: #4CAF50; /* Green */
+  font-family: Courier New;
+  font-size: 16px;
+  padding: 12px 24px;
+  text-align: center;
+}
+
+button.stylebutton2 {
+  color: Black;
+  background-color: LightBlue;
+  font-family: Courier New;
+  font-size: 16px;
+  padding: 6px 24px;
+  text-align: center;
+}
+
+textarea.console {
+  color: LightBlue;
+  background-color: #222222;
+  font-family: Courier New;
+  font-weight: Bold;
+}
+
+textarea.light {
+  color: Black;
+  background-color: #CCCC99;
+  font-family: Courier New;
+}
+
+textarea.basicide {
+  color: White;
+  background-color: Blue;
+  font-family: Courier New;
+  font-weight: ;
+}
