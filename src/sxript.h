@@ -962,7 +962,8 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
 // 2021-01-27 Added support for abs().
 //            Added support for sgn().
 //            Added support for sqrt().
-
+// 2021-01-30 Fixed handling of chr(32).
+// 2021-01-31 Changing behavior of quote subtraction.
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 int countElements (std::string TheStringIn, std::string TheSeparatorIn) {
@@ -3575,7 +3576,8 @@ std::string numberCrunch (std::string TheStringIn) {
                             if (rIGHT(ArgLeft, lEN(ArgRight)) == ArgRight) {
                                 MidFragment = "`" + lEFT(ArgLeft, lEN(ArgLeft) - lEN(ArgRight)) + "'";
                             } else {
-                                MidFragment = "`" + ArgLeft + "'-`" + ArgRight + "'";
+                                //''MidFragment = "`" + ArgLeft + "'-`" + ArgRight + "'"
+                                MidFragment = "`" + ArgLeft + "'";
                             }
                         }
 

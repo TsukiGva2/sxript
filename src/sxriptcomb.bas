@@ -241,7 +241,8 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 ' 2021-01-27 Added support for abs().
 '            Added support for sgn().
 '            Added support for sqrt().
-
+' 2021-01-30 Fixed handling of chr(32).
+' 2021-01-31 Changing behavior of quote subtraction.
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -2940,7 +2941,8 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                         IF (RIGHT$(ArgLeft, LEN(ArgRight)) = ArgRight) THEN
                             MidFragment = "`" + LEFT$(ArgLeft, LEN(ArgLeft) - LEN(ArgRight)) + "'"
                         ELSE
-                            MidFragment = "`" + ArgLeft + "'-`" + ArgRight + "'"
+                            '''MidFragment = "`" + ArgLeft + "'-`" + ArgRight + "'"
+                            MidFragment = "`" + ArgLeft + "'"
                         END IF
                     END IF
 

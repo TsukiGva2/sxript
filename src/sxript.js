@@ -215,7 +215,8 @@ ScopeLevel = 1;
 // 2021-01-27 Added support for abs().
 //            Added support for sgn().
 //            Added support for sqrt().
-
+// 2021-01-30 Fixed handling of chr(32).
+// 2021-01-31 Changing behavior of quote subtraction.
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 function countElements(TheStringIn, TheSeparatorIn) {
@@ -2890,7 +2891,8 @@ function numberCrunch(TheStringIn) {
                             if (rIGHT(ArgLeft, lEN(ArgRight)) === ArgRight) {
                                 MidFragment = "`" + lEFT(ArgLeft, lEN(ArgLeft) - lEN(ArgRight)) + "'";
                             } else {
-                                MidFragment = "`" + ArgLeft + "'-`" + ArgRight + "'";
+                                //''MidFragment = "`" + ArgLeft + "'-`" + ArgRight + "'"
+                                MidFragment = "`" + ArgLeft + "'";
                             }
                         }
 
