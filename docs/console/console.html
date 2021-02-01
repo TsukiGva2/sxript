@@ -19,24 +19,23 @@ $(document).ready(function() {
     theinput = $("#textin").val();
     thecleaninput = theinput.replace(/^\s+|\s+$/g, "");
     theprocessedinput = thecleaninput;
-    if (document.getElementById("codeblock").checked) {
-      theprocessedinput = "block({" + theprocessedinput + "})";
-      if (document.getElementById("showinput").checked) {
-        document.mainform.areatext.value += "\n: " + theprocessedinput + "\n:";
+	
+	if (document.getElementById("whiteinput").checked) {
+	  theprocessedinput = thecleaninput;
+      document.mainform.areatext.value += "\n" + ": " + manageWhiteSpace(theprocessedinput) + "\n";
+	} else {
+	  if (document.getElementById("codeblock").checked) {
+        theprocessedinput = "block({" + theprocessedinput + "})";
       }
-    }
-    if (document.getElementById("subprogram").checked) {
-      theprocessedinput = "sub({" + theprocessedinput + "})";
-      if (document.getElementById("showinput").checked) {
-        document.mainform.areatext.value += "\n: " + theprocessedinput + "\n:";
+      if (document.getElementById("subprogram").checked) {
+        theprocessedinput = "sub({" + theprocessedinput + "})";
       }
-    }
-    if (document.getElementById("oneline").checked) {
       if (document.getElementById("showinput").checked) {
         document.mainform.areatext.value += "\n: " + theprocessedinput;
       }
-    }
-    document.mainform.areatext.value += "\n" + ": " + sxriptEval(theprocessedinput) + "\n";
+	  document.mainform.areatext.value += "\n" + ": " + sxriptEval(theprocessedinput) + "\n";
+	}
+
     document.mainform.areatext.scrollTop = document.mainform.areatext.scrollHeight;
     document.getElementById("textin").value = thecleaninput;
   });
@@ -95,7 +94,7 @@ form {
  
 <body bgcolor="#222222">
 
-<a name="Top"/a>
+<a name="Top"></a>
 
 <center>
 <table width="100%" border="0">
@@ -178,42 +177,33 @@ form {
     </td>
   </tr>
 
-  <tr valign="top">
+  <tr valign="center">
     <td width="50%">
-
-      <center>   
-      <table border="0" width="100%">
-        <tbody>
-        <tr>
-          <td align="left" width="33%">
-            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="oneline"/><label for="oneline">Single Line</label>]</font>
-          </td>
-          <td align="center" width="33%">
-            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="subprogram"/><label for="subprogram">Sub</label>]</font>
-          </td>
-          <td align="right" width="33%">
-            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="codeblock"/><label for="codeblock">Block</label>]</font>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
-      <table border="0" width="100%">
-        <tbody>
-        <tr valign="center">
-          <td align="left" width="33%">
-            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="printmodes" id="hideinput"/><label for="hideinput">Hide Input</label>]</font>
-          </td>
-          <td align="center" width="33%">
-            <button id="evalbutton" class="stylebutton" onclick="evalbutton.focus()"><b>Evaluate</b></button>
-          </td>
-          <td align="right" width="33%">
-            <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="printmodes" id="showinput"/><label for="showinput">Show Input</label>]</font>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      </center>
+    
+	<table border="0" width="100%">
+      <tbody>
+		<tr>
+		  <td width="33%">
+		    <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="oneline"/><label for="oneline"> Single Line</label>]</font>
+			<br/>
+			<font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="subprogram"/><label for="subprogram"> Sub</label>]</font>
+			<br/>
+			<font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="runmodes" id="codeblock"/><label for="codeblock"> Block</label>]</font>
+		  </td>
+		  <td align="center">
+		    <button id="evalbutton" class="stylebutton" onclick="evalbutton.focus()"><b>Evaluate</b></button>
+		  </td>
+		  <td>
+		    <font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="printmodes" id="showinput"/><label for="showinput"> Show Input</label>]</font>
+			</br>
+			<font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="printmodes" id="hideinput"/><label for="hideinput"> Hide Input</label>]</font>
+			<br/>
+			<font face="Courier New" size="3" color="#FFFFFF">[<input type="radio" style="vertical-align: middle" name="printmodes" id="whiteinput"/><label for="hideinput"> Whitespace</label>]</font>
+		  </td>
+		</tr>
+		<tr>
+		</tbody>
+	</table>
 
     </td>
     <td>
