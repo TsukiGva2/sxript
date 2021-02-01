@@ -4,13 +4,6 @@
   <title>Sxript Programming Language</title>
   <meta name="description" content="Sxript Programming Language" />
   <link rel="stylesheet" href="docs/sxriptstyles.css">
-  
-  <style>
-  body {
-    font-family: Helvectica;
-  }
-  </style>
-  
 </head>
 
 <body>
@@ -133,13 +126,14 @@ Sxript is conveyed as <i>open source free software</i>.
 <p>Predict the result of <code>0--3^2</code>.</p>
 <p>Solution: By operator reduction, the expression reduces to <code>0+3^2</code> before any numerical operations take place. The expression becomes <code>0+9.0</code>, simplifying to <code>+9.0</code>.</p>
 </blockquote>
+<p>.</p>
 <h2 id="numerical-comparison-and-logic">Numerical Comparison and Logic</h2>
 <p>The equivalency operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two numbers. If the left- and right-arguments are numerically equal, the returned result is <code>+1.0</code>. Non-equal arguments return <code>+0.0</code>.</p>
 <p>The logical AND, along with logical OR, are represented by the ampersand ( <code>&amp;</code> ) and vertical slash ( <code>|</code> ), respectively. Any non-zero inputs are considered &quot;on&quot;, and a zero-input is considered &quot;off&quot;. Like the equivalency operator, the logical operators, as applied to numbers, return a <code>+1.0</code> for the affirmative case, and <code>+0.0</code> otherwise.</p>
-<p>There is no operator notation for &quot;less than&quot; ( <code>&lt;</code> ) and &quot;greater than&quot; ( <code>&gt;</code> ), because the angle bracket symbols are reserved for vectors (see below). To perform such comparisons, we&#39;ll soon meet the <code>greater(x,y)</code> function.</p>
+<p>Side note: There is no operator notation for &quot;less than&quot; ( <code>&lt;</code> ) and &quot;greater than&quot; ( <code>&gt;</code> ), because the angle bracket symbols are reserved for vectors (see below). To perform such comparisons, we&#39;ll soon meet the <code>greater(x,y)</code> function.</p>
 <hr>
 <h1 id="guide-strings">Guide: Strings</h1>
-<p>Strings, henceforth called &quot;quotes&quot;, are always enclosed by the back-tick symbol ( <code>` </code> ) on the left, and the apostrophe ( <code>&#39;</code> ) on the right. The double-quote symbol ( <code>&quot;</code> ) is not reserved. For example, <code>`horse&#39;</code> is a valid quote, and so too is <code>`aB&quot;1e3&quot;cD&#39;</code>.</p>
+<p>Strings, henceforth called <em>quotes</em>, are always enclosed by the back-tick symbol ( <code>` </code> ) on the left, and the apostrophe ( <code>&#39;</code> ) on the right. The double-quote symbol ( <code>&quot;</code> ) is not reserved. For example, <code>`horse&#39;</code> is a valid quote, and so too is <code>`aB&quot;1e3&quot;cD&#39;</code>.</p>
 <p>Quotes can embed within quotes, meaning, for instance, <code>`cows say `moo&#39;&#39;</code>, is a perfectly valid quote.</p>
 <p>The range of allowed characters is dependent on the host environment. Terminal implementations tend to only resolve ASCII characters, whereas JavaScript implementations extend to allows Unicode characters in quotes.</p>
 <h2 id="quote-operations">Quote Operations</h2>
@@ -148,17 +142,17 @@ Sxript is conveyed as <i>open source free software</i>.
 <p>Much as one would expect, quotes are concatenated with the plus ( <code>+</code> ) operator, for instance <code>`apple&#39; + `juice&#39;</code> becomes <code>`applejuice&#39;</code>.</p>
 <h3 id="subtraction">Subtraction</h3>
 <p>If [quote2] exactly matches the rightmost characters of [quote1], then the combination <code>[quote1] - [quote2]</code> returns a truncated version of [quote1] that excludes [quote2]. For example, <code>`file.txt&#39; - `.txt&#39;</code> resolves to <code>`file&#39;</code>.</p>
-<p>If [quote2] is not equal to the right-most part of [quote1], then only [quote1] is returned. As a corollary to this, the combination <code>`&#39; - `xyz&#39;</code> returns the empty quote, <code>`&#39;</code>.</p>
+<p>If [quote2] is not equal to the right-most part of [quote1], then only [quote1] is returned. As an example of this, the combination <code>`&#39; - `xyz&#39;</code> returns the empty quote, <code>`&#39;</code>.</p>
 <h3 id="multiplication">Multiplication</h3>
-<p>One quote can also be &quot;multiplied&quot; into another, where the combination <code>[quote1] * [quote2]</code> returns a version of [quote1] with [quote2] inserted after each character. For instance <code>`abc&#39; * `xy&#39;</code> results in <code>`axybxycxy&#39;</code>.</p>
+<p>One quote can also be &quot;multiplied&quot; into another, where the combination <code>[quote1] * [quote2]</code> returns a version of [quote1] with [quote2] inserted after each character. For instance <code>`abc&#39; *</code>xy&#39;<code>results in</code> <code>axybxycxy&#39;</code>.</p>
 <h3 id="division">Division</h3>
-<p>The inverse of quote multiplication is quote division. That is, the combination <code>`axybxycxy&#39; / `xy&#39;</code> returns `abc&#39;. If [quote2] is not a sub-quote of [quote1], then only [quote1] is returned.</p>
+<p>The inverse of quote multiplication is quote division. That is, the combination <code>`axybxycxy&#39; / `xy&#39;</code> returns <code>`abc&#39;</code>. If [quote2] is not a sub-quote of [quote1], then only [quote1] is returned.</p>
 <h4 id="exercise-">Exercise:</h4>
 <blockquote>
 <p>Predict the result of <code>`abc&#39; / `xy&#39; * `xy&#39;</code>.</p>
 <p>Solution: By operator precedence, the combination <code>`xy&#39; * `xy&#39;</code> is considered first, resulting in <code>`xxyyxy&#39;</code>. The problem translates to <code>`abc&#39; / `xxyyxy&#39;</code>, resulting in simply <code>`abc&#39;</code>.</p>
 </blockquote>
-<p>...</p>
+<p>.</p>
 <h2 id="quote-comparison-and-logic">Quote Comparison and Logic</h2>
 <p>Quotes can be compared using the same operators that apply to numbers, following the same precedence.</p>
 <p>The equivalency operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two quotes. If the left- and right-arguments are equal, the returned result is <code>1</code>. Non-equal arguments return <code>0</code>. In contrast to numerical comparison, the result of quote comparison is not formatted as a number. As stand-alone symbols, <code>1</code> and <code>0</code> are considered &quot;words&quot; until &quot;touched&quot; by an operator.</p>
@@ -167,7 +161,7 @@ Sxript is conveyed as <i>open source free software</i>.
 <h1 id="guide-output-formatting">Guide: Output Formatting</h1>
 <p>Sxript output is passed through a final formatting step before entering the environment. Most notably, quotes lose their bracketing characters, i.e. <code>` </code> and <code>&#39;</code> vanish. This also applies to embedded quotes, so <code>`cows say `moo&#39;&#39;</code> flattens to <code>cows say moo</code>.</p>
 <h2 id="escape-character">Escape Character</h2>
-<p>When the backslash character ( <code>\</code> ), or &quot;escape character&quot; appears in any output, the character to the right receives special treatment.</p>
+<p>When the backslash character ( <code>\</code> ), or <em>escape character</em> appears in any output, the character to the right receives special treatment.</p>
 <p>The most obvious need for the escape character is for including the backtick ( <code>` </code> ) or apostrophe ( <code>&#39;</code> ) in a quote. This is achieved using respective combinations <code>\` </code>, and <code>\&#39;</code>.</p>
 <p>Tabs and returns are handled by the following:</p>
 <ul>
@@ -179,10 +173,31 @@ Sxript is conveyed as <i>open source free software</i>.
 <h3 id="carriage-return">Carriage Return</h3>
 <p>Note that the role of ASCII-13, i.e. the Carriage Return, behaves differently per implementation. Through JavaScript, the quote <code>`hello\rthere&#39;</code> is broken apart at <code>`hello&#39;</code>, and <code>`there&#39;</code> is printed on a new line. Meanwhile, the QB64 and C++ terminal implementations return <code>`thereo&#39;</code>, because the cursor returns to the left-most position without starting a new line.</p>
 <hr>
-<h1 id="guide-functions">Guide: Functions</h1>
-<h2 id="introduction">Introduction</h2>
-<p>Functions are </p>
-<p>(Coming soon.)</p>
+<h1 id="guide-codeblocks">Guide: Codeblocks</h1>
+<p>Sxript expressions can be chained together in a linear sequence, and sent for evaluation as a <em>codeblock</em>.</p>
+<h2 id="anatomy">Anatomy</h2>
+<p>A codeblock begins with the word <code>block</code>, followed by a set of curly braces enclosed in parentheses, as in <code>({})</code>. Inside this structure, we place any number of valid expressions, separated by the colon symbol ( <code>:</code> ). At least one expression must be prefixed with the word <code>print_</code>, with the underscore. All together, a codeblock may look like:</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">sub</span>(</span>{
+  <span class="hljs-number">1</span>+<span class="hljs-number">1</span>:
+  <span class="hljs-number">2</span>+<span class="hljs-number">2</span>:
+  print_3+<span class="hljs-number">3</span>
+})
+</code></pre><p>Note that the use of spaces, tabs, and new lines is entirely optional. The codeblock above is immediately condensed to <code>sub({1+1:2+2:print_3+3})</code> before proceeding.</p>
+<h2 id="evaluation">Evaluation</h2>
+<p>When evaluated, the expressions in a codeblock are resolved in left-to-right order. The <em>only</em> output of the codeblock, however, is whatever follows <code>print_</code>. (This is much like the &quot;return&quot; aspect of C-family functions.) For the example on hand, the codeblock will first evaluate <code>1+1</code>, followed by <code>2+2</code>, and finally <code>3+3</code>. The <em>only</em> oputput carried away from the codeblock is what follows <code>print_</code>, i.e. <code>+6.0</code>.</p>
+<h4 id="exercise-">Exercise:</h4>
+<blockquote>
+<p>Predict the result of: </p>
+<pre><code>block({
+  print_1<span class="hljs-string">+1</span>:
+  2<span class="hljs-string">+2</span>:
+  print_3<span class="hljs-string">+3</span>
+})
+</code></pre><p>Solution: This particular codeblock outputs two results, namely <code>+2.0</code> and <code>+6.0</code>. Of course, these are situatated as an expression of their own, namely <code>+2.0+6.0</code>, which evaluates to <code>+8.0</code>.</p>
+</blockquote>
+<p>.</p>
+
+
 
 
 

@@ -1,7 +1,7 @@
 body {
   background-color: #222222;
   color: #BBBBBB;
-  font-family: Courier New;
+  font-family: Helvectica;
   font-size: 18px;
 }
 
@@ -105,6 +105,15 @@ a:active {
 
 .aligncenter {
   float: center;
+}
+
+/* */
+
+code {
+  color: LightBlue;
+  /* font-family: Lucida Console; */
+  font-family: Courier New;
+  font-size: 16px;
 }
 
 button.stylebutton {
