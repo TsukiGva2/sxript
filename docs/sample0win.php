@@ -9,13 +9,13 @@
 <script type="text/javascript" src="../jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../evalbutton.js"></script>
 
-<link href="../styles.css" rel="stylesheet" type="text/css" />
+<link href="../sxriptstyles.css" rel="stylesheet" type="text/css" />
 
 </head>
  
 <body bgcolor="#CCCCCC">
 
-<a name="Top"/a>
+<a name="Top"></a>
 
 <center>
 <table width="100%" border="0">

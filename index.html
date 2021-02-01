@@ -3,11 +3,11 @@
 <head>
   <title>Sxript Programming Language</title>
   <meta name="description" content="Sxript Programming Language" />
-  <link rel="stylesheet" href="docs/mainstyles.css">
+  <link rel="stylesheet" href="docs/sxriptstyles.css">
   
   <style>
   body {
-    font-family: Georgia;
+    font-family: Helvectica;
   }
   </style>
   
@@ -16,7 +16,7 @@
 <body>
 
 <a name="Top"></a>
-<h2>Navigation</h2>
+<h3>Navigation</h3>
 
 <a href="#Top">[Top]</b></a> - 
 <a href="docs/console/console.html#Top">[Console]</a> - 
@@ -37,13 +37,13 @@
 <img src="img/sxlogoinv.png" alt=""/>
 </center>
 
-<h2>Abstract</h2>
+<h3>Abstract</h3>
 
 <blockquote>
 <i>Sxript</i> is an <a href="docs/flowchart/FlowChart.txt">interpreted</a> functional/procedural programming language designed for numerical evaluation and problem solving with high-order functions, variable storage, scoped subprograms, and arbitrary-precision numbers, along with file I/O, graphical output, and more. Sxript may be used as a stand-alone tool on most devices, or included as a component of any BASIC, JavaScript, or C++ application. All <a href="src/sxript.bm">source code</a> is written in a strict subset of the QB45 language, and is auto-translated by the <a href="make/BAS-TO-X.bas">BAS-TO-X</a> utility into other <a href="img/venn.png">languages</a>.
 </blockquote>
 
-<h2>Browser Instances</h2>
+<h3>Browser Instances</h3>
 
 <center>
 <table width="97%" border="0">
@@ -74,7 +74,7 @@
 </table>
 </center>
 
-<h2>Download</h2>
+<h3>Download</h3>
 
 <blockquote>
 <a href="https://github.com/wfbarnes/sxript">github.com/wfbarnes/sxript</a>
@@ -83,13 +83,13 @@
 To compile/build, place the sxript directory at the <i>same</i> level as (not inside) the QB64 folder and run setup*, depending on system.
 </blockquote>
 
-<h2>Legal</h2>
+<h3>Legal</h3>
 
 <blockquote>
 Sxript is conveyed as <i>open source free software</i>.
 </blockquote>
 
-<h2>Logo</h2>
+<h3>Logo</h3>
 
 <blockquote>
 <i>Signature of a Medieval Illiterate</i> - Frederick W. Umminger Jr., Yale Record, 1959.
@@ -98,7 +98,7 @@ Sxript is conveyed as <i>open source free software</i>.
 <hr/>
 
 <a name="Guide"></a>
-<h2>Guide</h2>
+<h3>Guide</h3>
 
 <a href="#Top">[Top]</b></a> - 
 <a href="docs/console/console.html#Top">[Console]</a> - 
@@ -108,19 +108,21 @@ Sxript is conveyed as <i>open source free software</i>.
 <a href="javascript:history.back()">[Back]</a>
 
 <br/>
+<br/>
 
 <!-- Send README.md through https://markdowntohtml.com/ -->
 <center>
 <div class="container" style="text-align:left">
 
-<h2 id="guide-numbers-and-operators">Guide: Numbers and Operators</h2>
-<h3 id="numerical-operators">Numerical Operators</h3>
+<hr>
+<h1 id="guide-numbers-and-operators">Guide: Numbers and Operators</h1>
+<h2 id="numerical-operators">Numerical Operators</h2>
 <p>Numerical expressions are defined as one-character operators <code>! ^ * / % + -</code> embedded between on two base-ten numbers (or rarely, one number) to produce a numerical result of double precision. Operators are treated in strict descending order as listed: no two operators are of equal precedence. The result of a numerical operation is always prefixed with a sign <code>+</code>, or <code>-</code>, and suffixed with a decimal remainder, even if <code>.0</code>. Expressions containing multiple operators are evaluated recursively.</p>
-<h3 id="operator-reduction">Operator Reduction</h3>
+<h2 id="operator-reduction">Operator Reduction</h2>
 <p>Before any numerical operations are considered, all input passes through an operator reduction filter, which reduces things like <code>+++</code> to a single <code>+</code>, and so on. Occurrences of <code>-+</code> are interpreted as <code>-</code>, making inputs such as <code>3-+3</code> evaluate to <code>+0.0</code>, as expected. Occurrences of a &quot;double negative&quot; <code>--</code> are interpreted as a single positive <code>+</code>.</p>
-<h3 id="duality-of-the-negative-sign">Duality of the Negative Sign</h3>
+<h2 id="duality-of-the-negative-sign">Duality of the Negative Sign</h2>
 <p>Following the (unfortunate) convention of traditional notation, the negative sign ( <code>-</code> ) plays a dual rule in numerical expressions. Apart from acting as the subtraction operator, the same symbol is used to denote stand-alone negative numbers, such as <code>-3.5</code>, in where no &quot;operation&quot; taking place at all.</p>
-<p>We adopt the convention where the negative sign prefers to bind to numbers (like an electron) to make them negative, instead of going between numbers to act as a subtraction operator.</p>
+<p>Sxript adopts a convention where the negative sign prefers to bind to numbers (like an electron) to make them negative, instead of going between numbers to act as a subtraction operator.</p>
 <h4 id="exercise-">Exercise:</h4>
 <blockquote>
 <p>Predict the result of <code>0-3^2</code>.</p>
@@ -131,32 +133,40 @@ Sxript is conveyed as <i>open source free software</i>.
 <p>Predict the result of <code>0--3^2</code>.</p>
 <p>Solution: By operator reduction, the expression reduces to <code>0+3^2</code> before any numerical operations take place. The expression becomes <code>0+9.0</code>, simplifying to <code>+9.0</code>.</p>
 </blockquote>
-<h3 id="comparison-and-logic">Comparison and Logic</h3>
-<p>The comparison operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two numbers. If the left- and right-arguments are numerically equal, the returned result is <code>+1.0</code>. Non-equal arguments return <code>+0.0</code>.</p>
-<p>The logical AND, along with logical OR, are represented by the ampersand ( <code>&amp;</code> ) and vertical slash ( <code>|</code> ), respectively. Like the comparison operator, the logical operators, as applied to numbers, return a <code>+1.0</code> for the affirmative case, and <code>+0.0</code> otherwise.</p>
-<h2 id="guide-strings">Guide: Strings</h2>
+<h2 id="numerical-comparison-and-logic">Numerical Comparison and Logic</h2>
+<p>The equivalency operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two numbers. If the left- and right-arguments are numerically equal, the returned result is <code>+1.0</code>. Non-equal arguments return <code>+0.0</code>.</p>
+<p>The logical AND, along with logical OR, are represented by the ampersand ( <code>&amp;</code> ) and vertical slash ( <code>|</code> ), respectively. Any non-zero inputs are considered &quot;on&quot;, and a zero-input is considered &quot;off&quot;. Like the equivalency operator, the logical operators, as applied to numbers, return a <code>+1.0</code> for the affirmative case, and <code>+0.0</code> otherwise.</p>
+<p>There is no operator notation for &quot;less than&quot; ( <code>&lt;</code> ) and &quot;greater than&quot; ( <code>&gt;</code> ), because the angle bracket symbols are reserved for vectors (see below). To perform such comparisons, we&#39;ll soon meet the <code>greater(x,y)</code> function.</p>
+<hr>
+<h1 id="guide-strings">Guide: Strings</h1>
 <p>Strings, henceforth called &quot;quotes&quot;, are always enclosed by the back-tick symbol ( <code>` </code> ) on the left, and the apostrophe ( <code>&#39;</code> ) on the right. The double-quote symbol ( <code>&quot;</code> ) is not reserved. For example, <code>`horse&#39;</code> is a valid quote, and so too is <code>`aB&quot;1e3&quot;cD&#39;</code>.</p>
 <p>Quotes can embed within quotes, meaning, for instance, <code>`cows say `moo&#39;&#39;</code>, is a perfectly valid quote.</p>
 <p>The range of allowed characters is dependent on the host environment. Terminal implementations tend to only resolve ASCII characters, whereas JavaScript implementations extend to allows Unicode characters in quotes.</p>
-<h3 id="quote-operations">Quote Operations</h3>
+<h2 id="quote-operations">Quote Operations</h2>
 <p>Quotes can be manipulated using (some of) the same operators that apply to numbers. Allowed operators <code>* / + -</code> follow the same precedence as their mathematical counterparts.</p>
-<h4 id="concatenation">Concatenation</h4>
+<h3 id="concatenation">Concatenation</h3>
 <p>Much as one would expect, quotes are concatenated with the plus ( <code>+</code> ) operator, for instance <code>`apple&#39; + `juice&#39;</code> becomes <code>`applejuice&#39;</code>.</p>
-<h4 id="subtraction">Subtraction</h4>
+<h3 id="subtraction">Subtraction</h3>
 <p>If [quote2] exactly matches the rightmost characters of [quote1], then the combination <code>[quote1] - [quote2]</code> returns a truncated version of [quote1] that excludes [quote2]. For example, <code>`file.txt&#39; - `.txt&#39;</code> resolves to <code>`file&#39;</code>.</p>
 <p>If [quote2] is not equal to the right-most part of [quote1], then only [quote1] is returned. As a corollary to this, the combination <code>`&#39; - `xyz&#39;</code> returns the empty quote, <code>`&#39;</code>.</p>
-<h4 id="multiplication">Multiplication</h4>
+<h3 id="multiplication">Multiplication</h3>
 <p>One quote can also be &quot;multiplied&quot; into another, where the combination <code>[quote1] * [quote2]</code> returns a version of [quote1] with [quote2] inserted after each character. For instance <code>`abc&#39; * `xy&#39;</code> results in <code>`axybxycxy&#39;</code>.</p>
-<h4 id="division">Division</h4>
+<h3 id="division">Division</h3>
 <p>The inverse of quote multiplication is quote division. That is, the combination <code>`axybxycxy&#39; / `xy&#39;</code> returns `abc&#39;. If [quote2] is not a sub-quote of [quote1], then only [quote1] is returned.</p>
 <h4 id="exercise-">Exercise:</h4>
 <blockquote>
 <p>Predict the result of <code>`abc&#39; / `xy&#39; * `xy&#39;</code>.</p>
 <p>Solution: By operator precedence, the combination <code>`xy&#39; * `xy&#39;</code> is considered first, resulting in <code>`xxyyxy&#39;</code>. The problem translates to <code>`abc&#39; / `xxyyxy&#39;</code>, resulting in simply <code>`abc&#39;</code>.</p>
 </blockquote>
-<h2 id="guide-formatting">Guide: Formatting</h2>
+<p>...</p>
+<h2 id="quote-comparison-and-logic">Quote Comparison and Logic</h2>
+<p>Quotes can be compared using the same operators that apply to numbers, following the same precedence.</p>
+<p>The equivalency operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two quotes. If the left- and right-arguments are equal, the returned result is <code>1</code>. Non-equal arguments return <code>0</code>. In contrast to numerical comparison, the result of quote comparison is not formatted as a number. As stand-alone symbols, <code>1</code> and <code>0</code> are considered &quot;words&quot; until &quot;touched&quot; by an operator.</p>
+<p>The logical AND, along with logical OR, also apply to quotes. Any non-empty inputs are considered &quot;on&quot;, and an empty-input is considered &quot;off&quot;. Like the equivalency operator, the logical operators, as applied to quotes, return a <code>1</code> for the affirmative case, and <code>0</code> otherwise.</p>
+<hr>
+<h1 id="guide-output-formatting">Guide: Output Formatting</h1>
 <p>Sxript output is passed through a final formatting step before entering the environment. Most notably, quotes lose their bracketing characters, i.e. <code>` </code> and <code>&#39;</code> vanish. This also applies to embedded quotes, so <code>`cows say `moo&#39;&#39;</code> flattens to <code>cows say moo</code>.</p>
-<h3 id="escape-character">Escape Character</h3>
+<h2 id="escape-character">Escape Character</h2>
 <p>When the backslash character ( <code>\</code> ), or &quot;escape character&quot; appears in any output, the character to the right receives special treatment.</p>
 <p>The most obvious need for the escape character is for including the backtick ( <code>` </code> ) or apostrophe ( <code>&#39;</code> ) in a quote. This is achieved using respective combinations <code>\` </code>, and <code>\&#39;</code>.</p>
 <p>Tabs and returns are handled by the following:</p>
@@ -166,10 +176,17 @@ Sxript is conveyed as <i>open source free software</i>.
 <li><code>\r</code> becomes ASCII-13 (CR)</li>
 <li><code>\\</code> becomes <code>\</code> after all other formatting takes place.</li>
 </ul>
-<h4 id="carriage-return">Carriage Return</h4>
-<p>Note that the role of ASCII-13, the Carriage Return, behaves differently per implementation. Through JavaScript, the quote <code>`hello\rthere&#39;</code> is broken apart at &quot;hello&quot;, and &quot;there&quot; is printed on a new line. Meanwhile, the QB64 and C++ terminal implementations return <code>`thereo&#39;</code>, because the cursor returns to the left-most position without starting a new line.</p>
-<h2 id="guide-functions">Guide: Functions</h2>
+<h3 id="carriage-return">Carriage Return</h3>
+<p>Note that the role of ASCII-13, i.e. the Carriage Return, behaves differently per implementation. Through JavaScript, the quote <code>`hello\rthere&#39;</code> is broken apart at <code>`hello&#39;</code>, and <code>`there&#39;</code> is printed on a new line. Meanwhile, the QB64 and C++ terminal implementations return <code>`thereo&#39;</code>, because the cursor returns to the left-most position without starting a new line.</p>
+<hr>
+<h1 id="guide-functions">Guide: Functions</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Functions are </p>
 <p>(Coming soon.)</p>
+
+
+
+
 
 </div>
 </center>
@@ -180,7 +197,7 @@ Sxript is conveyed as <i>open source free software</i>.
 <hr/>
 
 <a name="Applications"></a>
-<h2>Applications</h2>
+<h3>Applications</h3>
 
 <a href="#Top">[Top]</b></a> - 
 <a href="docs/console/console.html#Top">[Console]</a> - 
@@ -428,7 +445,7 @@ Sxript is conveyed as <i>open source free software</i>.
 </center>
 
 <a name="Index"></a>
-<h2>Index</h2>
+<h3>Index</h3>
 
 <a href="#Top">[Top]</b></a> - 
 <a href="docs/console/console.html#Top">[Console]</a> - 

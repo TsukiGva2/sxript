@@ -9,7 +9,7 @@
 <script type="text/javascript" src="../jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../evalbutton.js"></script>
 
-<link href="../mainstyles.css" rel="stylesheet" type="text/css" />
+<link href="../sxriptstyles.css" rel="stylesheet" type="text/css" />
 
 </head>
  

@@ -18,6 +18,8 @@ Linux Users: To handle problems with line endings, run the following line from t
 
 ``` find . -name '*.sh' -exec sed -i "s/\r//g" {} \; ```
 
+***
+
 # Guide: Numbers and Operators
 
 ## Numerical Operators
@@ -53,6 +55,8 @@ The equivalency operator, denoted by a single "equal" symbol ( ```=``` ), tests 
 The logical AND, along with logical OR, are represented by the ampersand ( ```&``` ) and vertical slash ( ```|``` ), respectively. Any non-zero inputs are considered "on", and a zero-input is considered "off". Like the equivalency operator, the logical operators, as applied to numbers, return a ```+1.0``` for the affirmative case, and ```+0.0``` otherwise.
 
 There is no operator notation for "less than" ( ```<``` ) and "greater than" ( ```>``` ), because the angle bracket symbols are reserved for vectors (see below). To perform such comparisons, we'll soon meet the ```greater(x,y)``` function.
+
+***
 
 # Guide: Strings
 
@@ -90,6 +94,8 @@ The inverse of quote multiplication is quote division. That is, the combination 
 
 > Solution: By operator precedence, the combination ``` `xy' * `xy'``` is considered first, resulting in ``` `xxyyxy'```. The problem translates to ``` `abc' / `xxyyxy'```, resulting in simply ``` `abc'```.
 
+...
+
 ## Quote Comparison and Logic
 
 Quotes can be compared using the same operators that apply to numbers, following the same precedence.
@@ -97,6 +103,8 @@ Quotes can be compared using the same operators that apply to numbers, following
 The equivalency operator, denoted by a single "equal" symbol ( ```=``` ), tests for equivalency between two quotes. If the left- and right-arguments are equal, the returned result is ```1```. Non-equal arguments return ```0```. In contrast to numerical comparison, the result of quote comparison is not formatted as a number. As stand-alone symbols, ```1``` and ```0``` are considered "words" until "touched" by an operator.
 
 The logical AND, along with logical OR, also apply to quotes. Any non-empty inputs are considered "on", and an empty-input is considered "off". Like the equivalency operator, the logical operators, as applied to quotes, return a ```1``` for the affirmative case, and ```0``` otherwise.
+
+***
 
 # Guide: Output Formatting
 
@@ -117,6 +125,8 @@ Tabs and returns are handled by the following:
 ### Carriage Return
 
 Note that the role of ASCII-13, i.e. the Carriage Return, behaves differently per implementation. Through JavaScript, the quote ``` `hello\rthere'``` is broken apart at ``` `hello'```, and ``` `there'``` is printed on a new line. Meanwhile, the QB64 and C++ terminal implementations return ``` `thereo'```, because the cursor returns to the left-most position without starting a new line.
+
+***
 
 # Guide: Functions
 
