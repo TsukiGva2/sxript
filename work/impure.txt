@@ -1,0 +1,154 @@
+`A pig is an impure function that contains mutable data.':
+func(pig,{
+  a0:   
+  b0:
+  c0:
+  sub({ `public method':
+    print_oink([x],[y])                     
+  }):
+  sub({ `public method':
+    print_groan()                          
+  }):
+  sub({ `private method':
+    let(privatething,`i feel like a '):
+    print_[privatething] + `cow privately'
+  })
+}):
+
+`A pig uses its body to perform detailed actions, such as oink.':
+`This function needs data from the pig, along with two future arguments.'
+func(oink,{ 
+  sub({
+    let(a,dat(pig,1)): `These let statements are optional':
+    let(b,dat(pig,2)): `in the sense that dat() can be':
+    let(c,dat(pig,3)): `directly called below':
+    let(m,2+3):
+    3:
+    do:
+      print_  
+      [x]+[y]+cos([m])+[a]+cos([b])+[c]:
+    loop
+  })
+}):
+
+`A pig may also groan without any data or argument.':
+func(groan,{`gggrrroooaaannn'}):
+
+`---End of pig-specific definitions---':
+
+`For fetching data from a function body':
+func(dat,{
+  unoccult(elem(report([x]),[y]))
+}):
+
+`For rewriting a function with three mutable data fields.':
+func(feed,{
+  func([x],
+    replace(
+    replace(
+    replace(
+    report([x])
+    ,1,[y])
+    ,2,[z])
+    ,3,[t])
+  )
+}):
+
+`Function for performing action':
+func(action,{
+  $(
+    elem( report([x]), len(report([x]))-[y] )
+  )([z],[t])
+}):
+
+`This call to "feed" permanently changes the pig.':
+feed(pig,1,2,6):
+
+`Instruct the pig to do different things.':
+`The second argument selects method number from the bottom-up.':
+print_action(pig,0,3,5)\n:
+print_action(pig,1,3,5)\n:
+print_action(pig,2,3,5)\n\n\n:
+
+`----------':
+
+`A counter is an impure function that contains mutable data.':
+func(counter,{
+  0:
+  ( 
+    click(counter,act(counter,1,[x]))
+  ):
+  (
+    dat(counter,1)+[x]
+  ):
+  sub({ `private method for reporting on itself':
+    print_dat(counter,1)
+  })
+}):
+
+`For rewriting a function with one mutable data field.':
+func(click,{
+  func([x],
+    replace(
+    report([x])
+    ,1,[y])
+  )
+}):
+
+`Function for performing act':
+func(act,{
+  $(
+    elem( report([x]), len(report([x]))-[y] )
+  )([z])
+}):
+
+act(counter,2,1) \n:
+act(counter,2,1) \n:
+act(counter,2,1) \n:
+act(counter,2,1) \n:
+act(counter,2,1) \n:
+act(counter,2,1) \n:
+act(counter,2,1) \n:
+act(counter,2,1) \n:
+print_act(counter,0,0) \n:
+
+act(counter,2,5) \n:
+print_act(counter,0,0) \n:
+
+`----------':
+
+`A counter is an impure function that contains mutable data.':
+func(counter,{
+  0:
+  ( 
+    click(counter,act(counter,1,[x]))
+  ):
+  sub({
+    let(m,`whatever process we would like'):
+    print_dat(counter,1)+[x]+rand(1)-.5
+  }):
+  sub({ `private method for reporting on itself':
+    print_dat(counter,1)
+  })
+}):
+
+`For rewriting a function with one mutable data field.':
+func(click,{
+  func([x],
+    replace(
+    report([x])
+    ,1,[y])
+  )
+}):
+
+`Function for performing act':
+func(act,{
+  $(
+    elem( report([x]), len(report([x]))-[y] )
+  )([z])
+}):
+
+act(counter,2,1) \n:
+act(counter,2,2) \n:
+act(counter,2,3) \n:
+print_act(counter,0,0) \n:

@@ -126,7 +126,7 @@ Sxript is conveyed as <i>open source free software</i>.
 <p>Predict the result of <code>0--3^2</code>.</p>
 <p>Solution: By operator reduction, the expression reduces to <code>0+3^2</code> before any numerical operations take place. The expression becomes <code>0+9.0</code>, simplifying to <code>+9.0</code>.</p>
 </blockquote>
-<p>.</p>
+<p>...</p>
 <h2 id="numerical-comparison-and-logic">Numerical Comparison and Logic</h2>
 <p>The equivalency operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two numbers. If the left- and right-arguments are numerically equal, the returned result is <code>+1.0</code>. Non-equal arguments return <code>+0.0</code>.</p>
 <p>The logical AND, along with logical OR, are represented by the ampersand ( <code>&amp;</code> ) and vertical slash ( <code>|</code> ), respectively. Any non-zero inputs are considered &quot;on&quot;, and a zero-input is considered &quot;off&quot;. Like the equivalency operator, the logical operators, as applied to numbers, return a <code>+1.0</code> for the affirmative case, and <code>+0.0</code> otherwise.</p>
@@ -144,7 +144,7 @@ Sxript is conveyed as <i>open source free software</i>.
 <p>If [quote2] exactly matches the rightmost characters of [quote1], then the combination <code>[quote1] - [quote2]</code> returns a truncated version of [quote1] that excludes [quote2]. For example, <code>`file.txt&#39; - `.txt&#39;</code> resolves to <code>`file&#39;</code>.</p>
 <p>If [quote2] is not equal to the right-most part of [quote1], then only [quote1] is returned. As an example of this, the combination <code>`&#39; - `xyz&#39;</code> returns the empty quote, <code>`&#39;</code>.</p>
 <h3 id="multiplication">Multiplication</h3>
-<p>One quote can also be &quot;multiplied&quot; into another, where the combination <code>[quote1] * [quote2]</code> returns a version of [quote1] with [quote2] inserted after each character. For instance <code>`abc&#39; *</code>xy&#39;<code>results in</code> <code>axybxycxy&#39;</code>.</p>
+<p>One quote can also be &quot;multiplied&quot; into another, where the combination <code>[quote1] * [quote2]</code> returns a version of [quote1] with [quote2] inserted after each character. For instance <code>`abc&#39; * `xy&#39;</code> results in <code>`axybxycxy&#39;</code>.</p>
 <h3 id="division">Division</h3>
 <p>The inverse of quote multiplication is quote division. That is, the combination <code>`axybxycxy&#39; / `xy&#39;</code> returns <code>`abc&#39;</code>. If [quote2] is not a sub-quote of [quote1], then only [quote1] is returned.</p>
 <h4 id="exercise-">Exercise:</h4>
@@ -152,7 +152,7 @@ Sxript is conveyed as <i>open source free software</i>.
 <p>Predict the result of <code>`abc&#39; / `xy&#39; * `xy&#39;</code>.</p>
 <p>Solution: By operator precedence, the combination <code>`xy&#39; * `xy&#39;</code> is considered first, resulting in <code>`xxyyxy&#39;</code>. The problem translates to <code>`abc&#39; / `xxyyxy&#39;</code>, resulting in simply <code>`abc&#39;</code>.</p>
 </blockquote>
-<p>.</p>
+<p>...</p>
 <h2 id="quote-comparison-and-logic">Quote Comparison and Logic</h2>
 <p>Quotes can be compared using the same operators that apply to numbers, following the same precedence.</p>
 <p>The equivalency operator, denoted by a single &quot;equal&quot; symbol ( <code>=</code> ), tests for equivalency between two quotes. If the left- and right-arguments are equal, the returned result is <code>1</code>. Non-equal arguments return <code>0</code>. In contrast to numerical comparison, the result of quote comparison is not formatted as a number. As stand-alone symbols, <code>1</code> and <code>0</code> are considered &quot;words&quot; until &quot;touched&quot; by an operator.</p>
@@ -173,18 +173,18 @@ Sxript is conveyed as <i>open source free software</i>.
 <h3 id="carriage-return">Carriage Return</h3>
 <p>Note that the role of ASCII-13, i.e. the Carriage Return, behaves differently per implementation. Through JavaScript, the quote <code>`hello\rthere&#39;</code> is broken apart at <code>`hello&#39;</code>, and <code>`there&#39;</code> is printed on a new line. Meanwhile, the QB64 and C++ terminal implementations return <code>`thereo&#39;</code>, because the cursor returns to the left-most position without starting a new line.</p>
 <hr>
-<h1 id="guide-codeblocks">Guide: Codeblocks</h1>
-<p>Sxript expressions can be chained together in a linear sequence, and sent for evaluation as a <em>codeblock</em>.</p>
-<h2 id="anatomy">Anatomy</h2>
-<p>A codeblock begins with the word <code>block</code>, followed by a set of curly braces enclosed in parentheses, as in <code>({})</code>. Inside this structure, we place any number of valid expressions, separated by the colon symbol ( <code>:</code> ). At least one expression must be prefixed with the word <code>print_</code>, with the underscore. All together, a codeblock may look like:</p>
+<h1 id="guide-code-blocks">Guide: Code Blocks</h1>
+<p>Sxript expressions can be chained together in a linear sequence, and sent for evaluation as a <em>code block</em>, or simply, &quot;block&quot;.</p>
+<h2 id="block-anatomy">Block Anatomy</h2>
+<p>A code block begins with the word <code>block</code>, followed by a set of curly braces enclosed in parentheses, as in <code>({})</code>. Inside this structure, we place any number of valid expressions, separated by the colon symbol ( <code>:</code> ). At least one expression must be prefixed with the word <code>print_</code>, with the underscore. All together, a code block may look like:</p>
 <pre><code><span class="hljs-function"><span class="hljs-keyword">sub</span>(</span>{
   <span class="hljs-number">1</span>+<span class="hljs-number">1</span>:
   <span class="hljs-number">2</span>+<span class="hljs-number">2</span>:
   print_3+<span class="hljs-number">3</span>
 })
-</code></pre><p>Note that the use of spaces, tabs, and new lines is entirely optional. The codeblock above is immediately condensed to <code>sub({1+1:2+2:print_3+3})</code> before proceeding.</p>
-<h2 id="evaluation">Evaluation</h2>
-<p>When evaluated, the expressions in a codeblock are resolved in left-to-right order. The <em>only</em> output of the codeblock, however, is whatever follows <code>print_</code>. (This is much like the &quot;return&quot; aspect of C-family functions.) For the example on hand, the codeblock will first evaluate <code>1+1</code>, followed by <code>2+2</code>, and finally <code>3+3</code>. The <em>only</em> oputput carried away from the codeblock is what follows <code>print_</code>, i.e. <code>+6.0</code>.</p>
+</code></pre><p>Note that the use of spaces, tabs, and new lines is entirely optional. The code block above is immediately condensed to <code>sub({1+1:2+2:print_3+3})</code> before proceeding.</p>
+<h2 id="block-evaluation">Block Evaluation</h2>
+<p>When evaluated, the expressions in a code block are resolved in left-to-right order. The <em>only</em> output of the code block, however, is whatever follows <code>print_</code>. (This is much like the &quot;return&quot; aspect of C-family functions.) For the example on hand, the code block will first evaluate <code>1+1</code>, followed by <code>2+2</code>, and finally <code>3+3</code>. The <em>only</em> output carried away from the code block is what follows <code>print_</code>, i.e. <code>+6.0</code>.</p>
 <h4 id="exercise-">Exercise:</h4>
 <blockquote>
 <p>Predict the result of: </p>
@@ -193,9 +193,87 @@ Sxript is conveyed as <i>open source free software</i>.
   2<span class="hljs-string">+2</span>:
   print_3<span class="hljs-string">+3</span>
 })
-</code></pre><p>Solution: This particular codeblock outputs two results, namely <code>+2.0</code> and <code>+6.0</code>. Of course, these are situatated as an expression of their own, namely <code>+2.0+6.0</code>, which evaluates to <code>+8.0</code>.</p>
+</code></pre><p>Solution: This code block stacks two outputs, namely <code>+2.0</code> and <code>+6.0</code>. Of course, these are situated as an expression of their own, namely <code>+2.0+6.0</code>, which evaluates to <code>+8.0</code>.</p>
 </blockquote>
-<p>.</p>
+<p>...</p>
+<h2 id="comments">Comments</h2>
+<p>One may wonder why a code block may contain certain expressions that are not used in constructing output. Indeed, we may replace the expression <code>2+2</code> in the above with a quote, serving the role of a <em>comment</em>:</p>
+<pre><code>block<span class="hljs-comment">({
+  print_1+1:
+  `Comments are just quotes':
+  print_3+3
+})</span>
+</code></pre><p>Note that comments must obey all of the &quot;usual&quot; rules for quote placement. (Comments are lines of code.)</p>
+<h2 id="block-embedding">Block Embedding</h2>
+<p>Code blocks may nest within code blocks to make calculations more organized. If the output of a code block is matched to its surroundings, evaluation continues without a hitch. For example, the following code returns a value of <code>+10.0</code> (be sure to puzzle this out):</p>
+<pre><code><span class="hljs-keyword">block({
+</span>  print_
+  <span class="hljs-number">4</span> +
+  <span class="hljs-keyword">block({
+</span>    `Inner <span class="hljs-meta">code</span> <span class="hljs-keyword">block':
+</span>    print_1+<span class="hljs-number">1</span>:
+    print_2+<span class="hljs-number">2</span>
+  }):
+  `Outer <span class="hljs-keyword">block':
+</span>})
+</code></pre><p>Note again that the use of spaces, indentation, and new lines (outside of quotes) is entirely for clarity.</p>
+<hr>
+<h1 id="guide-procedural-subsystem">Guide: Procedural Subsystem</h1>
+<p>Several &quot;procedural&quot; keywords, or <em>statements</em> are used for &quot;jumping around&quot; expressions inside  a code block. All at once, these are <code>do</code>, <code>loop</code>, <code>goto_</code>, <code>anchor_</code>, and <code>if_</code>. Procedural statements may <em>only</em> mingle within their own code block. An embedded code block is unaware of what the parent block is doing with procedural statements, and vice-versa.</p>
+<h2 id="do-loop">do ... loop</h2>
+<p>The <code>do</code> ... <code>loop</code> structure is a mechanism for iterative evaluation. The &quot;body&quot; of the loop is any expression(s) contained between <code>do</code> and <code>loop</code>. The number of iterations is defined by the number that directly precedes the <code>do</code> statement. For instance, the following code block contains a loop that is iterated five times:</p>
+<pre><code>block({
+  print_`Hello w' + :
+  5:
+  <span class="hljs-keyword">do</span>:
+    print_`o' + :
+  <span class="hljs-keyword">loop</span>:
+  print_`rld!'
+})
+</code></pre><h4 id="exercise-">Exercise:</h4>
+<blockquote>
+<p>Predict the result of the above code block.</p>
+<p>Solution: The output is constructed from: <code>`Hello w&#39;+`o&#39;+`o&#39;+`o&#39;+`o&#39;+`o&#39;+`rld!&#39;</code>, resulting in <code>`Hello wooooorld!&#39;</code>.</p>
+</blockquote>
+<p>...</p>
+<h3 id="nested-loops">Nested Loops</h3>
+<p>Multiple <code>do</code> ... <code>loop</code> structures can exist in the same code block, with nesting being no exception.</p>
+<h4 id="exercise-">Exercise:</h4>
+<blockquote>
+<p>Predict the result of the following code block:</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">block</span>({
+  <span class="hljs-attribute">3</span>:
+  <span class="hljs-attribute">do</span>:
+    <span class="hljs-number">2</span>:
+    <span class="hljs-attribute">do</span>:
+      <span class="hljs-number">4</span>:
+      <span class="hljs-attribute">do</span>:
+        <span class="hljs-attribute">print_1</span>:
+      <span class="hljs-attribute">loop</span>:
+    <span class="hljs-attribute">loop</span>:
+  <span class="hljs-attribute">loop</span>:
+})
+</code></pre><blockquote>
+<p>Solution: The <code>print_</code> statement is embedded in all three <code>do</code> ... <code>loop</code> structures. Multiplying the number of iterations, we find 3 <em> 2 </em> 4 = 24. Thus, the output is 24 copies of the <code>1</code>, namely <code>111111111111111111111111</code>.</p>
+</blockquote>
+<p>...</p>
+<h2 id="anchor-goto">anchor ... goto</h2>
+<p>Within a code block, we may define an <em>anchor</em> point, much like a label or line label, for which control may be passed. This achieved using <code>anchor_</code>, followed by a unique word to denote the anchor name. Anchors are used in conjunction with the <code>goto_</code> statement followed by the anchor name - this is the classic GOTO scenario that we love to hate. </p>
+<p>The following spaghetti code illustrates the use of <code>anchor_</code> and <code>goto_</code>. After all of the skipping around, the output of this block is <code>134</code>:</p>
+<pre><code>block({
+<span class="hljs-symbol">   print_1:</span>
+<span class="hljs-symbol">    goto_a:</span>
+<span class="hljs-symbol">  anchor_b:</span>
+<span class="hljs-symbol">   print_2:</span>
+<span class="hljs-symbol">  anchor_a:</span>
+<span class="hljs-symbol">   print_3:</span>
+<span class="hljs-symbol">    goto_c:</span>
+<span class="hljs-symbol">    goto_b:</span>
+<span class="hljs-symbol">  anchor_c:</span>
+   print_4
+})
+</code></pre>
 
 
 

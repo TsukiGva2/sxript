@@ -48,7 +48,7 @@ Sxript adopts a convention where the negative sign prefers to bind to numbers (l
 
 > Solution: By operator reduction, the expression reduces to `0+3^2` before any numerical operations take place. The expression becomes `0+9.0`, simplifying to `+9.0`.
 
-.
+...
 
 ## Numerical Comparison and Logic
 
@@ -84,7 +84,7 @@ If [quote2] is not equal to the right-most part of [quote1], then only [quote1] 
 
 ### Multiplication
 
-One quote can also be "multiplied" into another, where the combination `[quote1] * [quote2]` returns a version of [quote1] with [quote2] inserted after each character. For instance ` `abc' * `xy'` results in ` `axybxycxy'`.
+One quote can also be "multiplied" into another, where the combination `[quote1] * [quote2]` returns a version of [quote1] with [quote2] inserted after each character. For instance ``` `abc' * `xy'``` results in ``` `axybxycxy'```.
 
 ### Division
 
@@ -96,7 +96,7 @@ The inverse of quote multiplication is quote division. That is, the combination 
 
 > Solution: By operator precedence, the combination ``` `xy' * `xy'``` is considered first, resulting in ``` `xxyyxy'```. The problem translates to ``` `abc' / `xxyyxy'```, resulting in simply ``` `abc'```.
 
-.
+...
 
 ## Quote Comparison and Logic
 
@@ -130,13 +130,13 @@ Note that the role of ASCII-13, i.e. the Carriage Return, behaves differently pe
 
 ***
 
-# Guide: Codeblocks
+# Guide: Code Blocks
 
-Sxript expressions can be chained together in a linear sequence, and sent for evaluation as a *codeblock*.
+Sxript expressions can be chained together in a linear sequence, and sent for evaluation as a *code block*, or simply, "block".
 
-## Anatomy
+## Block Anatomy
 
-A codeblock begins with the word `block`, followed by a set of curly braces enclosed in parentheses, as in `({})`. Inside this structure, we place any number of valid expressions, separated by the colon symbol ( `:` ). At least one expression must be prefixed with the word `print_`, with the underscore. All together, a codeblock may look like:
+A code block begins with the word `block`, followed by a set of curly braces enclosed in parentheses, as in `({})`. Inside this structure, we place any number of valid expressions, separated by the colon symbol ( `:` ). At least one expression must be prefixed with the word `print_`, with the underscore. All together, a code block may look like:
 
 ```
 sub({
@@ -145,11 +145,11 @@ sub({
   print_3+3
 })
 ```
-Note that the use of spaces, tabs, and new lines is entirely optional. The codeblock above is immediately condensed to `sub({1+1:2+2:print_3+3})` before proceeding.
+Note that the use of spaces, tabs, and new lines is entirely optional. The code block above is immediately condensed to `sub({1+1:2+2:print_3+3})` before proceeding.
 
-## Evaluation
+## Block Evaluation
 
-When evaluated, the expressions in a codeblock are resolved in left-to-right order. The *only* output of the codeblock, however, is whatever follows `print_`. (This is much like the "return" aspect of C-family functions.) For the example on hand, the codeblock will first evaluate `1+1`, followed by `2+2`, and finally `3+3`. The *only* oputput carried away from the codeblock is what follows `print_`, i.e. `+6.0`.
+When evaluated, the expressions in a code block are resolved in left-to-right order. The *only* output of the code block, however, is whatever follows `print_`. (This is much like the "return" aspect of C-family functions.) For the example on hand, the code block will first evaluate `1+1`, followed by `2+2`, and finally `3+3`. The *only* output carried away from the code block is what follows `print_`, i.e. `+6.0`.
 
 #### Exercise:
 
@@ -161,8 +161,114 @@ block({
   print_3+3
 })
 ```
+> Solution: This code block stacks two outputs, namely `+2.0` and `+6.0`. Of course, these are situated as an expression of their own, namely `+2.0+6.0`, which evaluates to `+8.0`.
 
-> Solution: This particular codeblock outputs two results, namely `+2.0` and `+6.0`. Of course, these are situatated as an expression of their own, namely `+2.0+6.0`, which evaluates to `+8.0`.
+...
 
-.
+## Comments
 
+One may wonder why a code block may contain certain expressions that are not used in constructing output. Indeed, we may replace the expression `2+2` in the above with a quote, serving the role of a *comment*:
+
+```
+block({
+  print_1+1:
+  `Comments are just quotes':
+  print_3+3
+})
+```
+Note that comments must obey all of the "usual" rules for quote placement. (Comments are lines of code.)
+
+## Block Embedding
+
+Code blocks may nest within code blocks to make calculations more organized. If the output of a code block is matched to its surroundings, evaluation continues without a hitch. For example, the following code returns a value of `+10.0` (be sure to puzzle this out):
+
+```
+block({
+  print_
+  4 +
+  block({
+    `Inner code block':
+    print_1+1:
+    print_2+2
+  }):
+  `Outer block':
+})
+```
+
+Note again that the use of spaces, indentation, and new lines (outside of quotes) is entirely for clarity.
+
+***
+
+# Guide: Procedural Subsystem
+
+Several "procedural" keywords are used for "jumping around" expressions inside  a code block. All at once, these are `do`, `loop`, `goto_`, `anchor_`, and `if_`. Procedural statements may *only* mingle within their own code block. An embedded code block is unaware of what the parent block is doing with procedural statements, and vice-versa.
+
+## do ... loop
+
+The `do` ... `loop` structure is a mechanism for iterative evaluation. The "body" of the loop is any expression(s) contained between `do` and `loop`. The number of iterations is defined by the number that directly precedes the `do` statement. For instance, the following code block contains a loop that is iterated five times:
+
+```
+block({
+  print_`Hello w' + :
+  5:
+  do:
+    print_`o' + :
+  loop:
+  print_`rld!'
+})
+```
+#### Exercise:
+
+> Predict the result of the above code block.
+
+> Solution: The output is constructed from: ``` `Hello w'+`o'+`o'+`o'+`o'+`o'+`rld!'  ```, resulting in ``` `Hello wooooorld!'```.
+
+...
+
+### Nested Loops
+
+Multiple `do` ... `loop` structures can exist in the same code block, with nesting being no exception.
+
+#### Exercise:
+
+> Predict the result of the following code block:
+
+```
+block({
+  3:
+  do:
+    2:
+    do:
+      4:
+      do:
+        print_1:
+      loop:
+    loop:
+  loop:
+})
+```
+
+> Solution: The `print_` statement is embedded in all three `do` ... `loop` structures. Multiplying the number of iterations, we find 3 * 2 * 4 = 24. Thus, the output is 24 copies of the `1`, namely `111111111111111111111111`.
+
+...
+
+## anchor ... goto
+
+Within a code block, we may define an *anchor* point, much like a label or line label, for which control may be passed. This achieved using `anchor_`, followed by a unique word to denote the anchor name. Anchors are used in conjunction with the `goto_` statement followed by the anchor name - this is the classic GOTO scenario that we love to hate. 
+
+The following spaghetti code illustrates the use of `anchor_` and `goto_`. After all of the skipping around, the output of this block is `134`:
+
+```
+block({
+   print_1:
+    goto_a:
+  anchor_b:
+   print_2:
+  anchor_a:
+   print_3:
+    goto_c:
+    goto_b:
+  anchor_c:
+   print_4
+})
+```
