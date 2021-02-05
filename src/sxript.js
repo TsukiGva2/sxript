@@ -219,7 +219,9 @@ ScopeLevel = 1;
 // 2021-01-31 Changing behavior of quote subtraction.
 //            Added unf() primitive.
 // 2021-02-04 Modified vector bitwise handling.
-
+// 2021-02-05 Expanded quote-number multiplication via operator.
+//            Expanded vector-number multiplication via operator.
+//            Expanded vector-quote multiplication via operator.
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 function countElements(TheStringIn, TheSeparatorIn) {
@@ -2838,6 +2840,15 @@ function numberCrunch(TheStringIn) {
                 // Case: quote @ number
                 if (TheReturn === TheString) {
                     if ((TypeLeft === "quote") && (TypeRight === "number")) {
+                        if (TheOperator === "*") {
+                            ArgLeft = removeWrapping(ArgLeft, "`'");
+                            c = "";
+                            for (k = 1; k <= iNT(vAL(ArgRight)); k += 1) {
+                                c = c + ArgLeft;
+                            }
+                            c = "`" + c + "'";
+                            MidFragment = c;
+                        }
                         if (TheOperator === "+") {
                             ArgLeft = removeWrapping(ArgLeft, "`'");
                             c = ArgLeft + ArgRight;
@@ -2856,6 +2867,16 @@ function numberCrunch(TheStringIn) {
                     }
                 }
 
+                //''
+                // Case: vector @ number
+                if (TheReturn === TheString) {
+                    if ((TypeLeft === "vector") && (TypeRight === "number")) {
+                        MidFragment = structureApplyFunc(ArgLeft, ArgRight + TheOperator, "<>");
+                        TheReturn = LeftFragment + MidFragment + RightFragment;
+                    }
+                }
+                //''
+
                 // Case: quote @ vector
                 if (TheReturn === TheString) {
                     if ((TypeLeft === "quote") && (TypeRight === "vector")) {
@@ -2863,6 +2884,16 @@ function numberCrunch(TheStringIn) {
                         TheReturn = LeftFragment + MidFragment + RightFragment;
                     }
                 }
+
+                //''
+                // Case: vector @ quote
+                if (TheReturn === TheString) {
+                    if ((TypeLeft === "vector") && (TypeRight === "quote")) {
+                        MidFragment = structureApplyFunc(ArgLeft, ArgRight + TheOperator, "<>");
+                        TheReturn = LeftFragment + MidFragment + RightFragment;
+                    }
+                }
+                //''
 
                 // Case: quote @ quote
                 if (TheReturn === TheString) {
@@ -2959,7 +2990,6 @@ function numberCrunch(TheStringIn) {
                         if (TheOperator === "-") {
                             MidFragment = vectorASMD(ArgLeft, ArgRight, "-");
                         }
-                        //''
                         if (TheOperator === "=") {
                             MidFragment = vectorASMD(ArgLeft, ArgRight, "=");
                         }
@@ -2969,33 +2999,6 @@ function numberCrunch(TheStringIn) {
                         if (TheOperator === "|") {
                             MidFragment = vectorASMD(ArgLeft, ArgRight, "|");
                         }
-
-                        //IF (TheOperator = "=") THEN
-                        //    IF (ArgLeft = ArgRight) THEN
-                        //        c = "1"
-                        //    ELSE
-                        //        c = "0"
-                        //    END IF
-                        //    MidFragment = c
-                        //END IF
-
-                        //IF (TheOperator = "&") THEN
-                        //    IF ((ArgLeft <> "<>") AND (ArgRight <> "<>")) THEN
-                        //        c = "1"
-                        //    ELSE
-                        //        c = "0"
-                        //    END IF
-                        //    MidFragment = c
-                        //END IF
-
-                        //IF (TheOperator = "|") THEN
-                        //    IF ((ArgLeft <> "<>") OR (ArgRight <> "<>")) THEN
-                        //        c = "1"
-                        //    ELSE
-                        //        c = "0"
-                        //    END IF
-                        //    MidFragment = c
-                        //END IF
 
                         TheReturn = LeftFragment + MidFragment + RightFragment;
                     }

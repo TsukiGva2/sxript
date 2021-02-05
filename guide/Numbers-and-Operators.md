@@ -10,7 +10,7 @@ Before any numerical operations are considered, all input passes through an oper
 
 ## Duality of the Negative Sign
 
-Following the (unfortunate) convention of traditional notation, the negative sign ( `-` ) plays a dual rule in numerical expressions. Apart from acting as the subtraction operator, the same symbol is used to denote stand-alone negative numbers, such as `-3.5`, in where no "operation" taking place at all.
+Following the (unfortunate) convention of traditional notation, the negative sign ( `-` ) plays a dual rule in numerical expressions. Apart from acting as the subtraction operator, the same symbol is used to denote stand-alone negative numbers, such as `-3.5`, in where no "operation" takes place at all.
 
 Sxript adopts a convention where the negative sign prefers to bind to numbers (like an electron) to make them negative, instead of going between numbers to act as a subtraction operator.
 

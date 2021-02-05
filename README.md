@@ -40,16 +40,17 @@ Sxript is conveyed as open source free software. Do what thou wilt.
 
 # Guide
 
-[Guide - Section 1: Numbers and Operators](guide/guide1.md)
+[Guide - Section 1: Numbers and Operators](guide/Numbers-and-Operators.md)
 
-[Guide - Section 2: Quotes (Strings)](guide/guide2.md)
+[Guide - Section 2: Quotes (Strings)](guide/Quotes-Strings.md)
 
-[Guide - Section 3: Output Formatting](guide/guide3.md)
+[Guide - Section 3: Vectors (Lists)](guide/Vectors-Lists.md)
 
-[Guide - Section 4: Code Blocks](guide/guide4.md)
+[Guide - Section 4: Operator Overloading](guide/Operator-Overloading.md)
 
-[Guide - Section 5: Procedural Subsystem](guide/guide5.md)
+[Guide - Section 5: Output Formatting](guide/Output-Formatting.md)
 
-[Guide - Section 6: Vectors (Lists)](guide/guide6.md)
+[Guide - Section 6: Code Blocks](guide/Code-Blocks.md)
 
-[Guide - Section 7: Operator Overloading](guide/guide7.md)
+[Guide - Section 7: Procedural Subsystem](guide/Procedural-Subsystem.md)
+

@@ -245,7 +245,9 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 ' 2021-01-31 Changing behavior of quote subtraction.
 '            Added unf() primitive.
 ' 2021-02-04 Modified vector bitwise handling.
-
+' 2021-02-05 Expanded quote-number multiplication via operator.
+'            Expanded vector-number multiplication via operator.
+'            Expanded vector-quote multiplication via operator.
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -2888,6 +2890,15 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
             ' Case: quote @ number
             IF (TheReturn = TheString) THEN
                 IF ((TypeLeft = "quote") AND (TypeRight = "number")) THEN
+                    IF (TheOperator = "*") THEN
+                        ArgLeft = RemoveWrapping$(ArgLeft, "`'")
+                        c = ""
+                        FOR k = 1 TO INT(VAL(ArgRight))
+                            c = c + ArgLeft
+                        NEXT
+                        c = "`" + c + "'"
+                        MidFragment = c
+                    END IF
                     IF (TheOperator = "+") THEN
                         ArgLeft = RemoveWrapping$(ArgLeft, "`'")
                         c = ArgLeft + ArgRight
@@ -2906,6 +2917,16 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                 END IF
             END IF
 
+            '''
+            ' Case: vector @ number
+            IF (TheReturn = TheString) THEN
+                IF ((TypeLeft = "vector") AND (TypeRight = "number")) THEN
+                    MidFragment = StructureApplyFunc$(ArgLeft, ArgRight + TheOperator, "<>")
+                    TheReturn = LeftFragment + MidFragment + RightFragment
+                END IF
+            END IF
+            '''
+
             ' Case: quote @ vector
             IF (TheReturn = TheString) THEN
                 IF ((TypeLeft = "quote") AND (TypeRight = "vector")) THEN
@@ -2913,6 +2934,16 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                     TheReturn = LeftFragment + MidFragment + RightFragment
                 END IF
             END IF
+
+            '''
+            ' Case: vector @ quote
+            IF (TheReturn = TheString) THEN
+                IF ((TypeLeft = "vector") AND (TypeRight = "quote")) THEN
+                    MidFragment = StructureApplyFunc$(ArgLeft, ArgRight + TheOperator, "<>")
+                    TheReturn = LeftFragment + MidFragment + RightFragment
+                END IF
+            END IF
+            '''
 
             ' Case: quote @ quote
             IF (TheReturn = TheString) THEN
@@ -3009,7 +3040,6 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                     IF (TheOperator = "-") THEN
                         MidFragment = VectorASMD$(ArgLeft, ArgRight, "-")
                     END IF
-                    '''
                     IF (TheOperator = "=") THEN
                         MidFragment = VectorASMD$(ArgLeft, ArgRight, "=")
                     END IF
@@ -3019,33 +3049,6 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                     IF (TheOperator = "|") THEN
                         MidFragment = VectorASMD$(ArgLeft, ArgRight, "|")
                     END IF
-
-                    'IF (TheOperator = "=") THEN
-                    '    IF (ArgLeft = ArgRight) THEN
-                    '        c = "1"
-                    '    ELSE
-                    '        c = "0"
-                    '    END IF
-                    '    MidFragment = c
-                    'END IF
-
-                    'IF (TheOperator = "&") THEN
-                    '    IF ((ArgLeft <> "<>") AND (ArgRight <> "<>")) THEN
-                    '        c = "1"
-                    '    ELSE
-                    '        c = "0"
-                    '    END IF
-                    '    MidFragment = c
-                    'END IF
-
-                    'IF (TheOperator = "|") THEN
-                    '    IF ((ArgLeft <> "<>") OR (ArgRight <> "<>")) THEN
-                    '        c = "1"
-                    '    ELSE
-                    '        c = "0"
-                    '    END IF
-                    '    MidFragment = c
-                    'END IF
 
                     TheReturn = LeftFragment + MidFragment + RightFragment
                 END IF

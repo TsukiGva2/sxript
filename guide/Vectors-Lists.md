@@ -4,15 +4,15 @@ A *vector* is a structure for keeping separate pieces of data in a linear list, 
 
 ## Vector Anatomy
 
-A vector is enclosed by a left- ( `<` ) and right-angle-brackets ( `>` ). The formal name for "piece of data" in a vector is an *element*. Each element is separated by a comma ( `,` ).
+A vector is enclosed by left- ( `<` ) and right-angle-brackets ( `>` ). The formal name for "piece of data" in a vector is an *element*. Each element is separated by a comma ( `,` ).
 
-For example, the following vectors containing mixtures numbers, quotes, and other "words' are each valid:
+For example, the following vectors containing mixtures of numbers, quotes, and other "words' are each valid:
 
-```
-<1,2,+3.0,4,`Computer`>
-<a,b,c,d,e>
-<1,`Keyboard',3.14,`Toyota'>
-```
+``` <1,2,+3.0,4,`Computer`>```
+
+``` <a,b,c,d,e>```
+
+``` <1,`Keyboard',3.14,`Toyota'>```
 
 A vector may also contain an embedded vector (or several) among its elements:
 
@@ -50,7 +50,7 @@ Any generalization of a matrix is called a *super-list*. For instance, the follo
 >
 ```
 
-Note that the use of spacing and line breaks in the above is entirely optional. Such an input would be flattened to 
+Note that the use of spaces, tabs, and line breaks is entirely optional. Such an input is flattened to 
 
 ```<<a,b,c>,<d,<e,f,g>,h>,<i,j,<k,l,m,<o,p,q>>,r,s,t>>```
 
