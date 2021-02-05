@@ -1,4 +1,4 @@
-# Guide: Strings
+# Guide: Quotes (Strings)
 
 Strings, henceforth called *quotes*, are always enclosed by the back-tick symbol ( ``` ` ``` ) on the left, and the apostrophe ( ` ' ` ) on the right. The double-quote symbol ( ` " ` ) is not reserved. For example, ``` `horse' ``` is a valid quote, and so too is ``` `aB"1e3"cD'```.
 
@@ -16,13 +16,13 @@ Much as one would expect, quotes are concatenated with the plus ( `+` ) operator
 
 ### Subtraction
 
-If [quote2] exactly matches the rightmost characters of [quote1], then the combination `[quote1] - [quote2]` returns a truncated version of [quote1] that excludes [quote2]. For example, ``` `file.txt' - `.txt'``` resolves to ``` `file'```.
+If `[quote2]` exactly matches the rightmost characters of `[quote1]`, then the combination `[quote1] - [quote2]` returns a truncated version of [quote1] that excludes [quote2]. For example, ``` `file.txt' - `.txt'``` resolves to ``` `file'```.
 
-If [quote2] is not equal to the right-most part of [quote1], then only [quote1] is returned. As an example of this, the combination ``` `' - `xyz'``` returns the empty quote, ``` `'```.
+If `[quote2]` is not equal to the right-most part of `[quote1]`, then only `[quote1]` is returned. As an example of this, the combination ``` `' - `xyz'``` returns the empty quote, ``` `'```.
 
 ### Multiplication
 
-One quote can also be "multiplied" into another, where the combination `[quote1] * [quote2]` returns a version of [quote1] with [quote2] inserted after each character. For instance ``` `abc' * `xy'``` results in ``` `axybxycxy'```.
+One quote can also be "multiplied" into another, where the combination `[quote1] * [quote2]` returns a version of `[quote1]` with `[quote2]` inserted after each character. For instance ``` `abc' * `xy'``` results in ``` `axybxycxy'```.
 
 ### Division
 

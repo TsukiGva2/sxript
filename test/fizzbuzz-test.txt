@@ -4,8 +4,9 @@ let(i,1):
 100:
 do:
   let(a,`')                                   :
-  iff([i]%3=0,{let(a,[a]+`Fizz')},{})         :
-  iff([i]%5=0,{let(a,[a]+`Buzz')},{})         :
-  print_iff(not([a]=`'),{<[i],[a]>,`\n'},{})  :
+  iff([i]%3=0,{let(a,[a]+`Fizz')})            :
+  iff([i]%5=0,{let(a,[a]+`Buzz')})            :
+  print_iff(not([a]=`'),{
+    [a]`\n'},{[i]`\n'})                       :
   let(i,[i]+1)                                :
 loop

@@ -243,6 +243,9 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 '            Added support for sqrt().
 ' 2021-01-30 Fixed handling of chr(32).
 ' 2021-01-31 Changing behavior of quote subtraction.
+'            Added unf() primitive.
+' 2021-02-04 Modified vector bitwise handling.
+
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -2749,8 +2752,7 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                 END IF
             END IF
 
-            ' Case: number @ number
-            ' (Check for division by zero.)
+            ' Case: number @ number (numeric)
             IF (TheReturn = TheString) THEN
                 IF ((TypeLeft = "number") AND (TypeRight = "number")) THEN
 
@@ -3007,33 +3009,43 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                     IF (TheOperator = "-") THEN
                         MidFragment = VectorASMD$(ArgLeft, ArgRight, "-")
                     END IF
-
+                    '''
                     IF (TheOperator = "=") THEN
-                        IF (ArgLeft = ArgRight) THEN
-                            c = "1"
-                        ELSE
-                            c = "0"
-                        END IF
-                        MidFragment = c
+                        MidFragment = VectorASMD$(ArgLeft, ArgRight, "=")
                     END IF
-
                     IF (TheOperator = "&") THEN
-                        IF ((ArgLeft <> "<>") AND (ArgRight <> "<>")) THEN
-                            c = "1"
-                        ELSE
-                            c = "0"
-                        END IF
-                        MidFragment = c
+                        MidFragment = VectorASMD$(ArgLeft, ArgRight, "&")
+                    END IF
+                    IF (TheOperator = "|") THEN
+                        MidFragment = VectorASMD$(ArgLeft, ArgRight, "|")
                     END IF
 
-                    IF (TheOperator = "|") THEN
-                        IF ((ArgLeft <> "<>") OR (ArgRight <> "<>")) THEN
-                            c = "1"
-                        ELSE
-                            c = "0"
-                        END IF
-                        MidFragment = c
-                    END IF
+                    'IF (TheOperator = "=") THEN
+                    '    IF (ArgLeft = ArgRight) THEN
+                    '        c = "1"
+                    '    ELSE
+                    '        c = "0"
+                    '    END IF
+                    '    MidFragment = c
+                    'END IF
+
+                    'IF (TheOperator = "&") THEN
+                    '    IF ((ArgLeft <> "<>") AND (ArgRight <> "<>")) THEN
+                    '        c = "1"
+                    '    ELSE
+                    '        c = "0"
+                    '    END IF
+                    '    MidFragment = c
+                    'END IF
+
+                    'IF (TheOperator = "|") THEN
+                    '    IF ((ArgLeft <> "<>") OR (ArgRight <> "<>")) THEN
+                    '        c = "1"
+                    '    ELSE
+                    '        c = "0"
+                    '    END IF
+                    '    MidFragment = c
+                    'END IF
 
                     TheReturn = LeftFragment + MidFragment + RightFragment
                 END IF

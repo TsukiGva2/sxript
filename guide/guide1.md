@@ -32,4 +32,6 @@ The equivalency operator, denoted by a single "equal" symbol ( `=` ), tests for 
 
 The logical AND, along with logical OR, are represented by the ampersand ( `&` ) and vertical slash ( `|` ), respectively. Any non-zero inputs are considered "on", and a zero-input is considered "off". Like the equivalency operator, the logical operators, as applied to numbers, return a `+1.0` for the affirmative case, and `+0.0` otherwise.
 
-Side note: There is no operator notation for "less than" ( `<` ) and "greater than" ( `>` ), because the angle bracket symbols are reserved for vectors. To perform such comparisons, we'll soon meet the `greater(x,y)` function.
+## Remark
+
+There is no operator notation for "less than" ( `<` ) and "greater than" ( `>` ), because the angle bracket symbols are reserved for vectors. To perform such comparisons, we'll soon meet the `greater(x,y)` function.

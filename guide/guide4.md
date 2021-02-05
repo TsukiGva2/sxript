@@ -48,7 +48,7 @@ Note that comments must obey all of the "usual" rules for quote placement. (Comm
 
 ## Block Embedding
 
-Code blocks may nest within code blocks to make calculations more organized. If the output of a code block is matched to its surroundings, evaluation continues without a hitch. For example, the following code returns a value of `+10.0` (be sure to puzzle this out):
+Code blocks may nest within code blocks to keep calculations organized. If the output of a code block is matched to its surroundings, evaluation continues without a hitch. For example, the following code returns a value of `+10.0` (be sure to puzzle this out):
 
 ```
 block({

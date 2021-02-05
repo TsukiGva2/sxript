@@ -964,6 +964,9 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
 //            Added support for sqrt().
 // 2021-01-30 Fixed handling of chr(32).
 // 2021-01-31 Changing behavior of quote subtraction.
+//            Added unf() primitive.
+// 2021-02-04 Modified vector bitwise handling.
+
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 int countElements (std::string TheStringIn, std::string TheSeparatorIn) {
@@ -3394,8 +3397,7 @@ std::string numberCrunch (std::string TheStringIn) {
                     }
                 }
 
-                // Case: number @ number
-                // (Check for division by zero.)
+                // Case: number @ number (numeric)
                 if (TheReturn == TheString) {
                     if ((TypeLeft == "number") & (TypeRight == "number")) {
 
@@ -3642,33 +3644,43 @@ std::string numberCrunch (std::string TheStringIn) {
                         if (TheOperator == "-") {
                             MidFragment = vectorASMD(ArgLeft, ArgRight, "-");
                         }
-
+                        //''
                         if (TheOperator == "=") {
-                            if (ArgLeft == ArgRight) {
-                                c = "1";
-                            } else {
-                                c = "0";
-                            }
-                            MidFragment = c;
+                            MidFragment = vectorASMD(ArgLeft, ArgRight, "=");
                         }
-
                         if (TheOperator == "&") {
-                            if ((ArgLeft != "<>") & (ArgRight != "<>")) {
-                                c = "1";
-                            } else {
-                                c = "0";
-                            }
-                            MidFragment = c;
+                            MidFragment = vectorASMD(ArgLeft, ArgRight, "&");
+                        }
+                        if (TheOperator == "|") {
+                            MidFragment = vectorASMD(ArgLeft, ArgRight, "|");
                         }
 
-                        if (TheOperator == "|") {
-                            if ((ArgLeft != "<>") | (ArgRight != "<>")) {
-                                c = "1";
-                            } else {
-                                c = "0";
-                            }
-                            MidFragment = c;
-                        }
+                        //IF (TheOperator = "=") THEN
+                        //    IF (ArgLeft = ArgRight) THEN
+                        //        c = "1"
+                        //    ELSE
+                        //        c = "0"
+                        //    END IF
+                        //    MidFragment = c
+                        //END IF
+
+                        //IF (TheOperator = "&") THEN
+                        //    IF ((ArgLeft <> "<>") AND (ArgRight <> "<>")) THEN
+                        //        c = "1"
+                        //    ELSE
+                        //        c = "0"
+                        //    END IF
+                        //    MidFragment = c
+                        //END IF
+
+                        //IF (TheOperator = "|") THEN
+                        //    IF ((ArgLeft <> "<>") OR (ArgRight <> "<>")) THEN
+                        //        c = "1"
+                        //    ELSE
+                        //        c = "0"
+                        //    END IF
+                        //    MidFragment = c
+                        //END IF
 
                         TheReturn = LeftFragment + MidFragment + RightFragment;
                     }
