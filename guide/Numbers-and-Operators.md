@@ -2,7 +2,7 @@
 
 ## Numerical Operators
 
-Numerical expressions are defined as one-character operators ` ! ^ * / % + - ` embedded between a pair of base-ten numbers (or rarely, one number) to produce a numerical result of double precision. Operators are treated in strict descending order as listed: no two operators are of equal precedence. The result of a numerical operation is always prefixed with a sign `+`, or `-`, and suffixed with a decimal remainder, even if `.0`. Expressions containing multiple operators are evaluated recursively.
+Numerical expressions are defined as one-character operators ` ! ^ * / % + - ` embedded between a pair of base-ten numbers (or rarely, one number) to produce a numerical result of double precision. Operators are treated in strict descending order as listed: no two operators are of equal precedence. The result of a numerical operation is always prefixed with a sign, `+` or `-`, and suffixed with a decimal remainder, even if `.0`. Expressions containing multiple operators are evaluated recursively.
 
 ## Operator Reduction
 
