@@ -18,4 +18,4 @@ The "mixing rules" numbers and quotes extend to vectors. In symbolic notation: S
 
 The commuted operation `[v] [op] [a]` is translated to `[a] [op] [v]` before evaluation.
 
-For example, the operation ``` `abc' * <1,2,`xyz'>``` simply distributes ``` `abc'``` onto `1`, then `2`, and finally ``` `xyz'```. The individual results are enclosed into a vector of three elements, ``` `<`abc',`abcabc',`axyzbxyzcxyz'>```.
+For example, the operation ``` `abc' * <1,2,`xyz'>``` simply distributes ``` `abc'``` onto `1`, then `2`, and finally ``` `xyz'```. The individual results are enclosed into a vector of three elements, ``` <`abc',`abcabc',`axyzbxyzcxyz'> ```.

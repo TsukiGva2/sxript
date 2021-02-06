@@ -54,3 +54,7 @@ Sxript is conveyed as open source free software. Do what thou wilt.
 
 [Guide - Section 7: Procedural Subsystem](guide/Procedural-Subsystem.md)
 
+[Guide - Section 8: Parentheses and Layering](guide/Parentheses-and-Layering.md)
+
+[Guide - Section 9: Primitives](guide/Primitives.md)
+
