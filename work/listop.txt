@@ -1,0 +1,44 @@
+include(`../test/impure.txt'):
+
+func(f,{
+  [x]([y])
+}):
+
+func(g,{
+  f([x],elem([y],1))
+}):
+
+func(newvec,{<for(<i,1,[x]-1,1>,{,})>}):
+
+func(indvec,{
+  sub({
+    feed(counter,<0>):
+    print_
+    apply(
+      $({[x]+tick()}),
+      apply(
+        $({0}),newvec([x])
+      )
+    )
+  })
+}):
+
+func(#,{
+  sub({
+    let(a,elem([x],1)):
+    let(b,right([x],len([x])-1)):
+    print_reduce($({[x][a][y]}),[b])
+  })
+}):
+
+func(x,{
+  sub({
+    print_f(#, stack(<[x]>,[y]) )
+  })
+}):
+
+print_
+f(#, <*,2,f(#,<+,2,g(cos,<2>)>),2,g(sin,<2>),2,2,2>) 
+- 2*(2+cos(2))*2*sin(2)*2*2*2 ,:
+
+print_x(*,indvec(5)) - 120:

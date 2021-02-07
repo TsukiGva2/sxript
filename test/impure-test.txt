@@ -1,0 +1,90 @@
+include(`../test/impure.txt'):
+
+`A pig is an impure function that contains mutable data.':
+func(pig,{
+  <
+    a0,
+    b0,
+    c0
+  >:   
+  sub({ `public method':
+    print_oink([x])                     
+  }):
+  sub({ `public method':
+    print_groan()                          
+  }):
+  sub({ `private method':
+    let(privatething,`i feel like a '):
+    print_[privatething] + `cow privately'
+  })
+}):
+
+`A pig uses its body to perform detailed actions, such as oink.':
+`This function needs data from the pig, along with two future arguments.'
+func(oink,{ 
+  sub({
+    let(a,dat(pig,1)): `These let statements are optional':
+    let(b,dat(pig,2)): `in the sense that dat() can be':
+    let(c,dat(pig,3)): `directly called instead below':
+    let(m,2+3):
+    3:
+    do:
+      print_  
+      elem([x],1)+elem([x],2)+cos([m])+[a]+cos([b])+[c]:
+    loop
+  })
+}):
+
+`A pig may also groan without any data or argument.':
+func(groan,{`gggrrroooaaannn'}):
+
+`---End of pig-specific definitions---':
+
+`A counter is an impure function that contains mutable data.':
+
+func(counter,{
+  <
+    a0
+  >:   
+  ( 
+    feed(counter,action(counter,1,[x]))
+  ):
+  (
+    <dat(counter,1)+elem([x],1)>
+  ):
+  sub({
+    print_<dat(counter,1)>
+  })
+}):
+
+`---End of counter-specific definitions---':
+
+`---Uses for a pig---':
+
+`This call to "feed" permanently changes the pig.':
+feed(pig,<1,2,6>):
+
+`Instruct the pig to do different things.':
+`The second argument selects method number from the bottom-up.':
+print_action(pig,0,<3,5>) \n:
+print_action(pig,1,<3,5>) \n:
+print_action(pig,2,<3,5>) \n\n:
+
+`---Uses for a counter---':
+
+feed(counter,<0>):
+
+func(stepcounter,{action(counter,2,<1>)}):
+stepcounter():
+stepcounter():
+stepcounter():
+
+func(reportcounter,{unvector(action(counter,0,<0>))}):
+print_reportcounter(stepcounter()) \n:
+print_reportcounter(stepcounter()) \n:
+print_reportcounter(stepcounter()) \n:
+
+func(tick,{reportcounter(stepcounter())}):
+print_tick() \n:
+print_tick() \n:
+print_tick() \n:

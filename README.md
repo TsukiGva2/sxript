@@ -56,5 +56,6 @@ Sxript is conveyed as open source free software. Do what thou wilt.
 
 [Section 8: Parentheses and Layering](guide/Parentheses-and-Layering.md)
 
-[Section 9: Primitives](guide/Primitives.md)
+[Section 9: Introduction to Primitives](guide/Intro-to-Primitives.md)
 
+[Section 10: Types](guide/Types.md)

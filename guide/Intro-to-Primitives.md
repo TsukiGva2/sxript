@@ -1,4 +1,4 @@
-# Guide: Primitives
+# Guide: Introduction to Primitives
 
 ## Functions
 
@@ -40,4 +40,8 @@ Any *word* is any chain of one or more characters without bracketing symbols suc
 
 > Of the two prototypes not specified above, write them below.
 
-> Solution: `len(number)=number`, `len(word)=number`
+> Solution: Length of a number: `len(number)=number`, Length of a word: `len(word)=number`
+
+## The Primitive(x) Notation
+
+## Arguments

@@ -1,0 +1,17 @@
+func(dat,{
+  elem(unoccult(elem(report([x]),1)),[y])
+}):
+
+func(feed,{
+  func([x],
+    replace(report([x]),1,[y])
+  )
+}):
+
+func(action,{
+  $(
+    elem(report([x]),len(report([x]))-[y])
+  )([z])
+}):
+
+print_`impure.txt':

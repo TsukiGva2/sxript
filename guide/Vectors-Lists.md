@@ -70,7 +70,7 @@ The expression `<1,2,3>+<4,5,6>` is translated to `<1+4,2+5,3+6>`, which of cour
 
 #### Quote
 
-This construction also works for quotes. Jumping right to an interesting example, a vector ```<`hello', ` ', `world'>``` multiplied by another vector ```<`!',`?',`##'>```, yields the exotic result: ```<h!e!l!l!o!, ?,w##o##r##l##d##>```.
+This construction also works for quotes. Jumping right to an interesting example, a vector ```<`hello', ` ', `world'>``` multiplied by another vector ```<`!',`?',`##'>```, yields the exotic result: ```<`h!e!l!l!o!',` ?',`w##o##r##l##d##'>```.
 
 #### Super-List
 
