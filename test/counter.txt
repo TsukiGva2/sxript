@@ -1,0 +1,33 @@
+include(`../test/impure.txt'):
+
+`A counter is an impure function that contains mutable data.':
+func(counter,{
+  <
+    a0:
+  >:
+  sub({
+    print_
+    map(
+      unoccult(elem(report(counter),1)),
+      $({[x][y]}),
+      [x]
+    )
+  }):
+  ( 
+    feed(counter,action(counter,2,[x]))
+  ):
+  sub({
+    print_elem(unoccult(elem(report(counter),1)),[x])
+  })
+}):
+
+func(app,{
+  action(
+    action(
+      counter,1,replace(newvec(len([proto])),
+      [x],[y])),0,[x])
+}):
+
+func(tick,{app(1,+1)}):
+
+print_`counter.txt':

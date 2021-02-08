@@ -38,26 +38,13 @@ func(oink,{
 `A pig may also groan without any data or argument.':
 func(groan,{`gggrrroooaaannn'}):
 
-`---End of pig-specific definitions---':
-
-`A counter is an impure function that contains mutable data.':
-
-func(counter,{
-  <
-    a0
-  >:   
-  ( 
-    feed(counter,action(counter,1,[x]))
-  ):
-  (
-    <dat(counter,1)+elem([x],1)>
-  ):
-  sub({
-    print_<dat(counter,1)>
-  })
+`Helper function':
+func(dat,{
+  elem(unoccult(elem(report([x]),1)),[y])
 }):
 
-`---End of counter-specific definitions---':
+`---End of pig-specific definitions---':
+
 
 `---Uses for a pig---':
 
@@ -69,22 +56,3 @@ feed(pig,<1,2,6>):
 print_action(pig,0,<3,5>) \n:
 print_action(pig,1,<3,5>) \n:
 print_action(pig,2,<3,5>) \n\n:
-
-`---Uses for a counter---':
-
-feed(counter,<0>):
-
-func(stepcounter,{action(counter,2,<1>)}):
-stepcounter():
-stepcounter():
-stepcounter():
-
-func(reportcounter,{unvector(action(counter,0,<0>))}):
-print_reportcounter(stepcounter()) \n:
-print_reportcounter(stepcounter()) \n:
-print_reportcounter(stepcounter()) \n:
-
-func(tick,{reportcounter(stepcounter())}):
-print_tick() \n:
-print_tick() \n:
-print_tick() \n:

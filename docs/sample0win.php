@@ -22,7 +22,7 @@
     <tbody>
     <tr>
     <td>
-    <font face="Arial" color="#003399" size="4"><b>Navgation</b></font>
+    <h3><b>Navgation</h3>
     </td>
     </tr>
     </tbody>
@@ -34,12 +34,12 @@
     <tbody>
     <tr>
     <td>
-    <a href="../../index.html#Home" style="text-decoration:none"><font face="Courier New"; color="Black"> [Home] </font></a>
-    <a href="../console/console.html#Top" style="text-decoration:none"><font face="Courier New"; color="Black"> [Console] </font></a>
-    <a href="../../index.html#Guide" style="text-decoration:none"><font face="Courier New"; color="Black"> [Guide] </font></a>
-    <a href="../../index.html#Applications" style="text-decoration:none"><font face="Courier New"; color="Black"> [Applications] </font></a>
-    <a href="../../index.html#Index" style="text-decoration:none"><font face="Courier New"; color="Black"> [Index] </font></a>
-    <a href="javascript:history.back()" style="text-decoration:none"><font face="Courier New"; color="Black"> [Back] </font></a>
+    <a href="../../index.html#Home">[Home]</a> -
+    <a href="../console/console.html#Top">[Console]</a> -
+    <a href="../../index.html#Guide">[Guide]</a> -
+    <a href="../../index.html#Applications">[Applications]</a> -
+    <a href="../../index.html#Index">[Index]</a> -
+    <a href="javascript:history.back()">[Back]</a>
     </td>
     </tr>
     </tbody>
@@ -64,7 +64,7 @@
     <tr>
     <td>
     <center>
-    <font face="Courier New" color="#003399" size="6"><?php echo $headline ?></font>
+    <h1><?php echo $headline ?></h1>
     </center>
     </td>
     </tr>

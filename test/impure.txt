@@ -1,7 +1,3 @@
-func(dat,{
-  elem(unoccult(elem(report([x]),1)),[y])
-}):
-
 func(feed,{
   func([x],
     replace(report([x]),1,[y])
@@ -13,5 +9,7 @@ func(action,{
     elem(report([x]),len(report([x]))-[y])
   )([z])
 }):
+
+func(newvec,{<for(<i,1,[x]-1,1>,{,})>}):
 
 print_`impure.txt':

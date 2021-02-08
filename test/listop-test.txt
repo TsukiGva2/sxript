@@ -40,5 +40,5 @@ func(x,{
 print_
 f(#, <*,2,f(#,<+,2,g(cos,<2>)>),2,g(sin,<2>),2,2,2>) 
 - 2*(2+cos(2))*2*sin(2)*2*2*2 ,:
-
-print_x(*,indvec(5)) - 120:
+print_
+x(*,indvec(5)) - 120:

@@ -1,0 +1,22 @@
+include(`../test/counter.txt'):
+
+feed(counter,let(proto,<0,0,0,`'>)):
+
+print_app(1,+3) \n:
+print_app(1,*3) \n:
+print_app(1,+3) \n:
+print_app(1,-3) \n:
+
+print_app(4,+`a') \n:
+print_app(4,+`b') \n:
+print_app(4,+`c') \n:
+print_app(4,+`a') \n:
+print_app(4,+`b') \n:
+print_app(4,+`c') \n:
+print_app(4,/`c') \n:
+
+feed(counter,let(proto,<0>)):
+
+print_tick() \n:
+print_tick() \n:
+print_tick() \n:
