@@ -248,6 +248,7 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 ' 2021-02-05 Expanded quote-number multiplication via operator.
 '            Expanded vector-number multiplication via operator.
 '            Expanded vector-quote multiplication via operator.
+' 2021-02-09 Fixing bug in scientific notation evident in JS/C++ implementatins.
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -1730,14 +1731,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         ScannedName = ""
         MidFragment = "`" + TypeCheck$(LEFT$(ArgArray(1), 1)) + "'"
     END IF
-    IF (ScannedName = "unf") THEN
-        ScannedName = ""
-        IF (TypeCheck$(LEFT$(ArgArray(1), 1)) = "number") THEN
-            MidFragment = LTRIM$(RTRIM$(STR$(VAL(ArgArray(1)))))
-        ELSE
-            MidFragment = ArgArray(1)
-        END IF
-    END IF
+
     IF (ScannedName = "quote") THEN
         ScannedName = ""
         MidFragment = "`" + ArgArray(1) + "'"
@@ -1832,16 +1826,6 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     END IF
 
     ' Numerical:
-    IF (ScannedName = "greater") THEN
-        ScannedName = ""
-        c = ArgArray(1)
-        d = ArgArray(2)
-        IF (VAL(c) > VAL(d)) THEN
-            MidFragment = "1"
-        ELSE
-            MidFragment = "0"
-        END IF
-    END IF
 
     IF (ScannedName = "abs") THEN
         ScannedName = ""
@@ -1852,34 +1836,12 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         END IF
     END IF
 
-    IF (ScannedName = "int") THEN
+    IF (ScannedName = "atan") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
             t = VAL(ArgArray(1))
-            t = INT(t)
+            t = ATN(t)
             MidFragment = LTRIM$(RTRIM$(STR$(t)))
-        END IF
-    END IF
-
-    IF (ScannedName = "sgn") THEN
-        ScannedName = ""
-        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
-            t = VAL(ArgArray(1))
-            t = SGN(t)
-            MidFragment = LTRIM$(RTRIM$(STR$(t)))
-        END IF
-    END IF
-
-    IF (ScannedName = "sqrt") THEN
-        ScannedName = ""
-        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
-            t = VAL(ArgArray(1))
-            IF (t >= 0) THEN
-                t = SQR(t)
-                MidFragment = LTRIM$(RTRIM$(STR$(t)))
-            ELSE
-                MidFragment = "{ERROR: Negative argument sent to sqrt().}"
-            END IF
         END IF
     END IF
 
@@ -1892,29 +1854,22 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         END IF
     END IF
 
-    IF (ScannedName = "sin") THEN
+    IF (ScannedName = "greater") THEN
         ScannedName = ""
-        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
-            t = VAL(ArgArray(1))
-            t = SIN(t)
-            MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        c = ArgArray(1)
+        d = ArgArray(2)
+        IF (VAL(c) > VAL(d)) THEN
+            MidFragment = "1"
+        ELSE
+            MidFragment = "0"
         END IF
     END IF
 
-    IF (ScannedName = "tan") THEN
+    IF (ScannedName = "int") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
             t = VAL(ArgArray(1))
-            t = TAN(t)
-            MidFragment = LTRIM$(RTRIM$(STR$(t)))
-        END IF
-    END IF
-
-    IF (ScannedName = "atan") THEN
-        ScannedName = ""
-        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
-            t = VAL(ArgArray(1))
-            t = ATN(t)
+            t = INT(t)
             MidFragment = LTRIM$(RTRIM$(STR$(t)))
         END IF
     END IF
@@ -1962,6 +1917,55 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
             ' JavaScript: ENDSKIP
 
             MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        END IF
+    END IF
+
+    IF (ScannedName = "sgn") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
+            t = VAL(ArgArray(1))
+            t = SGN(t)
+            MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        END IF
+    END IF
+
+    IF (ScannedName = "sin") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
+            t = VAL(ArgArray(1))
+            t = SIN(t)
+            MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        END IF
+    END IF
+
+    IF (ScannedName = "sqrt") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
+            t = VAL(ArgArray(1))
+            IF (t >= 0) THEN
+                t = SQR(t)
+                MidFragment = LTRIM$(RTRIM$(STR$(t)))
+            ELSE
+                MidFragment = "{ERROR: Negative argument sent to sqrt().}"
+            END IF
+        END IF
+    END IF
+
+    IF (ScannedName = "tan") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "number") THEN
+            t = VAL(ArgArray(1))
+            t = TAN(t)
+            MidFragment = LTRIM$(RTRIM$(STR$(t)))
+        END IF
+    END IF
+
+    IF (ScannedName = "unf") THEN
+        ScannedName = ""
+        IF (TypeCheck$(LEFT$(ArgArray(1), 1)) = "number") THEN
+            MidFragment = LTRIM$(RTRIM$(STR$(VAL(ArgArray(1)))))
+        ELSE
+            MidFragment = ArgArray(1)
         END IF
     END IF
 
@@ -2018,26 +2022,16 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     END IF
 
     ' Strings (strict):
-    IF (ScannedName = "instr") THEN
-        ScannedName = ""
-        c = RemoveWrapping$(ArgArray(1), "`'")
-        d = RemoveWrapping$(ArgArray(2), "`'")
-        MidFragment = LTRIM$(RTRIM$(STR$(INSTR(c, d))))
-    END IF
 
-    IF (ScannedName = "ucase") THEN
+    ' CPP: STARTSKIP
+    IF (ScannedName = "asc") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "quote") THEN
-            MidFragment = UCASE$(ArgArray(1))
+            c = RemoveWrapping$(ArgArray(1), "`'")
+            MidFragment = LTRIM$(RTRIM$(STR$(ASC(c))))
         END IF
     END IF
-
-    IF (ScannedName = "lcase") THEN
-        ScannedName = ""
-        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "quote") THEN
-            MidFragment = LCASE$(ArgArray(1))
-        END IF
-    END IF
+    ' CPP: ENDSKIP
 
     IF (ScannedName = "chr") THEN
         ScannedName = ""
@@ -2050,15 +2044,26 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         END IF
     END IF
 
-    ' CPP: STARTSKIP
-    IF (ScannedName = "asc") THEN
+    IF (ScannedName = "instr") THEN
+        ScannedName = ""
+        c = RemoveWrapping$(ArgArray(1), "`'")
+        d = RemoveWrapping$(ArgArray(2), "`'")
+        MidFragment = LTRIM$(RTRIM$(STR$(INSTR(c, d))))
+    END IF
+
+    IF (ScannedName = "lcase") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "quote") THEN
-            c = RemoveWrapping$(ArgArray(1), "`'")
-            MidFragment = LTRIM$(RTRIM$(STR$(ASC(c))))
+            MidFragment = LCASE$(ArgArray(1))
         END IF
     END IF
-    ' CPP: ENDSKIP
+
+    IF (ScannedName = "ucase") THEN
+        ScannedName = ""
+        IF (TypeCheck$(MID$(ArgArray(1), 1, 1)) = "quote") THEN
+            MidFragment = UCASE$(ArgArray(1))
+        END IF
+    END IF
 
     ' Elements:
     IF (ScannedName = "mid") THEN
@@ -2754,7 +2759,7 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                 END IF
             END IF
 
-            ' Case: number @ number (numeric)
+            ' Case: number @ number
             IF (TheReturn = TheString) THEN
                 IF ((TypeLeft = "number") AND (TypeRight = "number")) THEN
 
@@ -2846,6 +2851,15 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
                         ELSE
                             MidFragment = LTRIM$(RTRIM$(STR$(t3)))
                         END IF
+
+                        '''
+                        '2021 edit: Added this.
+                        ' This could be faster with a non-recursive word replacement function.
+                        IF ((INSTR(MidFragment, ".") < 1) AND (INSTR(MidFragment, "e") > 1)) THEN
+                            MidFragment = ReplaceWord$(MidFragment, "e", ".0X", -1)
+                            MidFragment = ReplaceWord$(MidFragment, "X", "e", -1)
+                        END IF
+                        '''
 
                         ' Inserts ".0" for numbers not containing decimals.
                         IF (INSTR(MidFragment, ".") < 1) THEN

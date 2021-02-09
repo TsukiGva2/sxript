@@ -969,6 +969,7 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
 // 2021-02-05 Expanded quote-number multiplication via operator.
 //            Expanded vector-number multiplication via operator.
 //            Expanded vector-quote multiplication via operator.
+// 2021-02-09 Fixing bug in scientific notation evident in JS/C++ implementatins.
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 int countElements (std::string TheStringIn, std::string TheSeparatorIn) {
@@ -2398,14 +2399,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             ScannedName = "";
             MidFragment = "`" + typeCheck(lEFT(ArgArray[1], 1)) + "'";
         }
-        if (ScannedName == "unf") {
-            ScannedName = "";
-            if (typeCheck(lEFT(ArgArray[1], 1)) == "number") {
-                MidFragment = lTRIM(rTRIM(sTR(vAL(ArgArray[1]))));
-            } else {
-                MidFragment = ArgArray[1];
-            }
-        }
+
         if (ScannedName == "quote") {
             ScannedName = "";
             MidFragment = "`" + ArgArray[1] + "'";
@@ -2500,16 +2494,6 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         }
 
         // Numerical:
-        if (ScannedName == "greater") {
-            ScannedName = "";
-            c = ArgArray[1];
-            d = ArgArray[2];
-            if (vAL(c) > vAL(d)) {
-                MidFragment = "1";
-            } else {
-                MidFragment = "0";
-            }
-        }
 
         if (ScannedName == "abs") {
             ScannedName = "";
@@ -2520,34 +2504,12 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             }
         }
 
-        if (ScannedName == "int") {
+        if (ScannedName == "atan") {
             ScannedName = "";
             if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
                 t = vAL(ArgArray[1]);
-                t = iNT(t);
+                t = atan(t);
                 MidFragment = lTRIM(rTRIM(sTR(t)));
-            }
-        }
-
-        if (ScannedName == "sgn") {
-            ScannedName = "";
-            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
-                t = vAL(ArgArray[1]);
-                t = sGN(t);
-                MidFragment = lTRIM(rTRIM(sTR(t)));
-            }
-        }
-
-        if (ScannedName == "sqrt") {
-            ScannedName = "";
-            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
-                t = vAL(ArgArray[1]);
-                if (t >= 0) {
-                    t = sQR(t);
-                    MidFragment = lTRIM(rTRIM(sTR(t)));
-                } else {
-                    MidFragment = "{ERROR: Negative argument sent to sqrt().}";
-                }
             }
         }
 
@@ -2560,29 +2522,22 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             }
         }
 
-        if (ScannedName == "sin") {
+        if (ScannedName == "greater") {
             ScannedName = "";
-            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
-                t = vAL(ArgArray[1]);
-                t = sin(t);
-                MidFragment = lTRIM(rTRIM(sTR(t)));
+            c = ArgArray[1];
+            d = ArgArray[2];
+            if (vAL(c) > vAL(d)) {
+                MidFragment = "1";
+            } else {
+                MidFragment = "0";
             }
         }
 
-        if (ScannedName == "tan") {
+        if (ScannedName == "int") {
             ScannedName = "";
             if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
                 t = vAL(ArgArray[1]);
-                t = tan(t);
-                MidFragment = lTRIM(rTRIM(sTR(t)));
-            }
-        }
-
-        if (ScannedName == "atan") {
-            ScannedName = "";
-            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
-                t = vAL(ArgArray[1]);
-                t = atan(t);
+                t = iNT(t);
                 MidFragment = lTRIM(rTRIM(sTR(t)));
             }
         }
@@ -2616,6 +2571,55 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
                 // JavaScript: ENDSKIP
 
                 MidFragment = lTRIM(rTRIM(sTR(t)));
+            }
+        }
+
+        if (ScannedName == "sgn") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
+                t = vAL(ArgArray[1]);
+                t = sGN(t);
+                MidFragment = lTRIM(rTRIM(sTR(t)));
+            }
+        }
+
+        if (ScannedName == "sin") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
+                t = vAL(ArgArray[1]);
+                t = sin(t);
+                MidFragment = lTRIM(rTRIM(sTR(t)));
+            }
+        }
+
+        if (ScannedName == "sqrt") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
+                t = vAL(ArgArray[1]);
+                if (t >= 0) {
+                    t = sQR(t);
+                    MidFragment = lTRIM(rTRIM(sTR(t)));
+                } else {
+                    MidFragment = "{ERROR: Negative argument sent to sqrt().}";
+                }
+            }
+        }
+
+        if (ScannedName == "tan") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "number") {
+                t = vAL(ArgArray[1]);
+                t = tan(t);
+                MidFragment = lTRIM(rTRIM(sTR(t)));
+            }
+        }
+
+        if (ScannedName == "unf") {
+            ScannedName = "";
+            if (typeCheck(lEFT(ArgArray[1], 1)) == "number") {
+                MidFragment = lTRIM(rTRIM(sTR(vAL(ArgArray[1]))));
+            } else {
+                MidFragment = ArgArray[1];
             }
         }
 
@@ -2672,26 +2676,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         }
 
         // Strings (strict):
-        if (ScannedName == "instr") {
-            ScannedName = "";
-            c = removeWrapping(ArgArray[1], "`'");
-            d = removeWrapping(ArgArray[2], "`'");
-            MidFragment = lTRIM(rTRIM(sTR(iNSTR(c, d))));
-        }
 
-        if (ScannedName == "ucase") {
-            ScannedName = "";
-            if (typeCheck(mID(ArgArray[1], 1, 1)) == "quote") {
-                MidFragment = uCASE(ArgArray[1]);
-            }
-        }
-
-        if (ScannedName == "lcase") {
-            ScannedName = "";
-            if (typeCheck(mID(ArgArray[1], 1, 1)) == "quote") {
-                MidFragment = lCASE(ArgArray[1]);
-            }
-        }
 
         if (ScannedName == "chr") {
             ScannedName = "";
@@ -2704,6 +2689,26 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             }
         }
 
+        if (ScannedName == "instr") {
+            ScannedName = "";
+            c = removeWrapping(ArgArray[1], "`'");
+            d = removeWrapping(ArgArray[2], "`'");
+            MidFragment = lTRIM(rTRIM(sTR(iNSTR(c, d))));
+        }
+
+        if (ScannedName == "lcase") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "quote") {
+                MidFragment = lCASE(ArgArray[1]);
+            }
+        }
+
+        if (ScannedName == "ucase") {
+            ScannedName = "";
+            if (typeCheck(mID(ArgArray[1], 1, 1)) == "quote") {
+                MidFragment = uCASE(ArgArray[1]);
+            }
+        }
 
         // Elements:
         if (ScannedName == "mid") {
@@ -3399,7 +3404,7 @@ std::string numberCrunch (std::string TheStringIn) {
                     }
                 }
 
-                // Case: number @ number (numeric)
+                // Case: number @ number
                 if (TheReturn == TheString) {
                     if ((TypeLeft == "number") & (TypeRight == "number")) {
 
@@ -3481,6 +3486,15 @@ std::string numberCrunch (std::string TheStringIn) {
                             } else {
                                 MidFragment = lTRIM(rTRIM(sTR(t3)));
                             }
+
+                            //''
+                            //2021 edit: Added this.
+                            // This could be faster with a non-recursive word replacement function.
+                            if ((iNSTR(MidFragment, ".") < 1) & (iNSTR(MidFragment, "e") > 1)) {
+                                MidFragment = replaceWord(MidFragment, "e", ".0X", -1);
+                                MidFragment = replaceWord(MidFragment, "X", "e", -1);
+                            }
+                            //''
 
                             // Inserts ".0" for numbers not containing decimals.
                             if (iNSTR(MidFragment, ".") < 1) {

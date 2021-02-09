@@ -14,7 +14,9 @@ block({
 })
 ```
 
-Note that the use of spaces, tabs, and line breaks is entirely optional. The code block above is immediately condensed to `sub({1+1:2+2:print_3+3})` before proceeding.
+## Whitespace
+
+The use of spaces, tabs, and line breaks is entirely optional. For instance, the code block above is immediately flattented to `sub({1+1:2+2:print_3+3})` before evaluation.
 
 ## Block Evaluation
 

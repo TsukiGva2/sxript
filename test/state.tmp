@@ -23,6 +23,8 @@ complexfunc.txt
 complexnum-test.txt
 complexnum.txt
 conwaygol-test.txt
+counter-test.txt
+counter.txt
 curry-test.txt
 datatypes-test.txt
 dinesman-test.txt
@@ -55,6 +57,8 @@ highorder-test.txt
 icons-test.txt
 ifat-test.txt
 iff-test.txt
+impure-test.txt
+impure.txt
 instr-test.txt
 int-test.txt
 koch-test.txt
@@ -69,6 +73,7 @@ linalg-test.txt
 linalg.txt
 listmem-test.txt
 listmem.txt
+listop-test.txt
 map-test.txt
 mathconstants-test.txt
 mathconstants.txt
