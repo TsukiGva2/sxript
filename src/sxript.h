@@ -58,6 +58,7 @@ std::string evalStep (std::string TheStringIn);
 // DECLARE FUNCTION VectorASMD$ (Vector1In AS STRING, Vector2In AS STRING, TheOperatorIn AS STRING);
 // DECLARE FUNCTION StructureEval$ (TheVectorIn AS STRING, TheLeftBrackIn AS STRING, TheRightBrackIn AS STRING);
 // DECLARE FUNCTION StructureApplyFunc$ (TheVectorIn AS STRING, TheFunctionIn AS STRING, TheBracketsIn AS STRING);
+// DECLARE FUNCTION StructureTailOp$ (TheVectorIn AS STRING, TheFunctionIn AS STRING, TheBracketsIn AS STRING);
 // DECLARE FUNCTION FormatForTerminal$ (TheStringIn AS STRING);
 // DECLARE FUNCTION EvalStep$ (TheStringIn AS STRING);
 // DECLARE FUNCTION InternalEval$ (TheStringIn AS STRING);
@@ -969,7 +970,9 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
 // 2021-02-05 Expanded quote-number multiplication via operator.
 //            Expanded vector-number multiplication via operator.
 //            Expanded vector-quote multiplication via operator.
-// 2021-02-09 Fixing bug in scientific notation evident in JS/C++ implementatins.
+// 2021-02-09 Fixed bug in scientific notation evident in JS/C++ implementatins.
+//            Added trivial "identity" functions.
+// 2021-02-10 Added function StructureApplyTailOp$.
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 int countElements (std::string TheStringIn, std::string TheSeparatorIn) {
@@ -2171,6 +2174,30 @@ std::string structureApplyFunc (std::string TheVectorIn, std::string TheFunction
 
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
+std::string structureApplyTailOp (std::string TheVectorIn, std::string TheFunctionIn, std::string TheBracketsIn) {
+        std::string TheReturn;
+        std::string TheVector;
+        std::string TheFunction;
+        std::string TheBrackets;
+        int size;
+        TheVector = TheVectorIn;
+        TheFunction = TheFunctionIn;
+        TheBrackets = TheBracketsIn;
+        int k;
+        TheReturn = lEFT(TheBrackets, 1);
+        size = countElements(TheVector, ",");
+        for (k = 1; k <= size; k += 1) {
+            TheReturn = TheReturn + "(" + returnElement(TheVector, k, ",") + TheFunction + ")";
+            if (k < size) {
+                TheReturn = TheReturn + ",";
+            }
+        }
+        TheReturn = TheReturn + rIGHT(TheBrackets, 1);
+        return TheReturn;
+}
+
+// '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
+
 std::string formatForTerminal (std::string TheStringIn) {
         std::string TheReturn;
         std::string TheString;
@@ -2238,7 +2265,24 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             ArgArray[1] = MidFragment;
         }
 
+        // Identity:
+
+        if (ScannedName == "identity") {
+            ScannedName = "";
+            c = ArgArray[1];
+            //d = ArgArray(2)
+            MidFragment = c;
+        }
+
+        if (ScannedName == "join") {
+            ScannedName = "";
+            c = ArgArray[1];
+            d = ArgArray[2];
+            MidFragment = c + d;
+        }
+
         // Variables:
+
         if (ScannedName == "let") {
             ScannedName = "";
             n = countElements(MidFragment, ",");
@@ -2298,7 +2342,8 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             MidFragment = internalEval("let(" + f + "," + c + ")");
         }
 
-        // Functions:
+        // Function:
+
         if (ScannedName == "func") {
             ScannedName = "";
             c = removeWrapping(ArgArray[1], "`'");
@@ -2318,6 +2363,8 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
                 MidFragment = c;
             }
         }
+
+        // Lambda:
 
         if ((ScannedName == "lambda") | (ScannedName == "$")) {
             ScannedName = "";
@@ -2339,6 +2386,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         }
 
         // Date / Time:
+
         if (ScannedName == "time") {
             ScannedName = "";
 
@@ -2362,6 +2410,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         }
 
         // Memory:
+
         if (ScannedName == "report") {
             ScannedName = "";
             if (MidFragment == "()") {
@@ -2394,12 +2443,12 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             MidFragment = "report()";
         }
 
-        // Type-wrapping and unwrapping functions.
+        // Type-wrapping and unwrapping:
+
         if (ScannedName == "type") {
             ScannedName = "";
             MidFragment = "`" + typeCheck(lEFT(ArgArray[1], 1)) + "'";
         }
-
         if (ScannedName == "quote") {
             ScannedName = "";
             MidFragment = "`" + ArgArray[1] + "'";
@@ -2434,6 +2483,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         }
 
         // Subprograms:
+
         if (ScannedName == "sub") {
             ScannedName = "";
             MidFragment = subExecute(removeWrapping(MidFragment, "{}"), "inline", "_yes");
@@ -2452,6 +2502,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         }
 
         // Flow-Control:
+
         if (ScannedName == "iff") {
             ScannedName = "";
             c = ArgArray[1];
@@ -2493,7 +2544,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             MidFragment = e;
         }
 
-        // Numerical:
+        // Numeric (strict):
 
         if (ScannedName == "abs") {
             ScannedName = "";
@@ -2641,6 +2692,7 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
         }
 
         // Largenum:
+
         if (ScannedName == "largeadd") {
             ScannedName = "";
             c = ArgArray[1];
@@ -2710,7 +2762,8 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             }
         }
 
-        // Elements:
+        // Elements (shared):
+
         if (ScannedName == "mid") {
             ScannedName = "";
             c = ArgArray[1];
@@ -2766,7 +2819,6 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
                     MidFragment = lEFT(c, 1) + rIGHT(c, 1);
                 }
             }
-
         }
 
         if (ScannedName == "left") {
@@ -2812,7 +2864,6 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
                     MidFragment = lEFT(c, 1) + rIGHT(c, 1);
                 }
             }
-
         }
 
         if (ScannedName == "right") {
@@ -2947,6 +2998,8 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             MidFragment = c;
         }
 
+        // Vectors (strict):
+
         if (ScannedName == "column") {
             ScannedName = "";
             c = ArgArray[1];
@@ -2984,22 +3037,13 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             MidFragment = c;
         }
 
+        // Vectors (processing):
+
         if (ScannedName == "apply") {
             ScannedName = "";
             if (typeCheck(mID(ArgArray[2], 1, 1)) == "vector") {
                 MidFragment = structureApplyFunc(ArgArray[2], ArgArray[1], "<>");
             }
-        }
-
-        if (ScannedName == "reduce") {
-            ScannedName = "";
-            d = ArgArray[1];
-            e = ArgArray[2];
-            c = d + "(" + returnElement(e, 1, ",") + "," + returnElement(e, 2, ",") + ")";
-            for (k = 2; k <= countElements(e, ",") - 1; k += 1) {
-                c = d + "(" + c + "," + returnElement(e, k + 1, ",") + ")";
-            }
-            MidFragment = c;
         }
 
         if (ScannedName == "map") {
@@ -3021,6 +3065,17 @@ std::string functionCrunch (std::string ScannedNameIn, std::string MidFragmentIn
             }
             f = f + rIGHT(c, 1);
             MidFragment = f;
+        }
+
+        if (ScannedName == "reduce") {
+            ScannedName = "";
+            d = ArgArray[1];
+            e = ArgArray[2];
+            c = d + "(" + returnElement(e, 1, ",") + "," + returnElement(e, 2, ",") + ")";
+            for (k = 2; k <= countElements(e, ",") - 1; k += 1) {
+                c = d + "(" + c + "," + returnElement(e, k + 1, ",") + ")";
+            }
+            MidFragment = c;
         }
 
         TheReturn = ScannedName + MidFragment;
@@ -3570,7 +3625,7 @@ std::string numberCrunch (std::string TheStringIn) {
                 // Case: vector @ number
                 if (TheReturn == TheString) {
                     if ((TypeLeft == "vector") & (TypeRight == "number")) {
-                        MidFragment = structureApplyFunc(ArgLeft, ArgRight + TheOperator, "<>");
+                        MidFragment = structureApplyTailOp(ArgLeft, TheOperator + ArgRight, "<>");
                         TheReturn = LeftFragment + MidFragment + RightFragment;
                     }
                 }
@@ -3588,7 +3643,7 @@ std::string numberCrunch (std::string TheStringIn) {
                 // Case: vector @ quote
                 if (TheReturn == TheString) {
                     if ((TypeLeft == "vector") & (TypeRight == "quote")) {
-                        MidFragment = structureApplyFunc(ArgLeft, ArgRight + TheOperator, "<>");
+                        MidFragment = structureApplyTailOp(ArgLeft, TheOperator + ArgRight, "<>");
                         TheReturn = LeftFragment + MidFragment + RightFragment;
                     }
                 }

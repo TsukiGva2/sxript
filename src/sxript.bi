@@ -28,6 +28,7 @@ DECLARE FUNCTION ReturnElement$ (TheStringIn AS STRING, TheArgNumberIn AS INTEGE
 DECLARE FUNCTION VectorASMD$ (Vector1In AS STRING, Vector2In AS STRING, TheOperatorIn AS STRING)
 DECLARE FUNCTION StructureEval$ (TheVectorIn AS STRING, TheLeftBrackIn AS STRING, TheRightBrackIn AS STRING)
 DECLARE FUNCTION StructureApplyFunc$ (TheVectorIn AS STRING, TheFunctionIn AS STRING, TheBracketsIn AS STRING)
+DECLARE FUNCTION StructureTailOp$ (TheVectorIn AS STRING, TheFunctionIn AS STRING, TheBracketsIn AS STRING)
 DECLARE FUNCTION FormatForTerminal$ (TheStringIn AS STRING)
 DECLARE FUNCTION EvalStep$ (TheStringIn AS STRING)
 DECLARE FUNCTION InternalEval$ (TheStringIn AS STRING)

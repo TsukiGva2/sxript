@@ -16,6 +16,10 @@ A quote can be duplicated `N` times by multiplying an the integer `N` into eithe
 
 The "mixing rules" for numbers and quotes extend to vectors. In symbolic notation: Suppose `[a]` is a number or a quote, and `[v]` is a vector having `N` elements represented by `elem([v],j)`, where any `elem([v],j)` is a number, quote, or vector, and `j` is an index between `1` and `N`, inclusive. Introducing an operator `[op]` such that `[a] [op] elem([v],j)` is clearly defined for all `N` elements, it follows that the operation `[a] [op] [v]` results in a vector `[r]`, of `N` elements, where `elem([r],j)` equals `[a] [op] elem([v],j)` for all `j`.
 
-The commuted operation `[v] [op] [a]` is translated to `[a] [op] [v]` before evaluation.
+By the same token, the commuted operation `[v] [op] [a]` results in a vector having elements `elem([v],j) [op] [a]`.
 
-For example, the operation ``` `abc' * <1,2,`xyz'>``` simply distributes ``` `abc'``` onto `1`, then `2`, and finally ``` `xyz'```. The individual results are enclosed into a vector of three elements, ``` <`abc',`abcabc',`axyzbxyzcxyz'> ```.
+### Examples
+
+The operation ``` `abc' * <1,2,`xyz'>``` simply distributes ``` `abc'``` onto `1`, then `2`, and finally ``` `xyz'```. The individual results are enclosed into a vector of three elements, ``` <`abc',`abcabc',`axyzbxyzcxyz'> ```.
+
+For a more practical but mundane example, the following expression adds ``` `.txt'``` to a vector of bare "filenames": ``` <`file1',`file2',`file3'> + `.txt'```

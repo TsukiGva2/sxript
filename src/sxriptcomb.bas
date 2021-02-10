@@ -57,6 +57,7 @@ DECLARE FUNCTION ReturnElement$ (TheStringIn AS STRING, TheArgNumberIn AS INTEGE
 DECLARE FUNCTION VectorASMD$ (Vector1In AS STRING, Vector2In AS STRING, TheOperatorIn AS STRING)
 DECLARE FUNCTION StructureEval$ (TheVectorIn AS STRING, TheLeftBrackIn AS STRING, TheRightBrackIn AS STRING)
 DECLARE FUNCTION StructureApplyFunc$ (TheVectorIn AS STRING, TheFunctionIn AS STRING, TheBracketsIn AS STRING)
+DECLARE FUNCTION StructureTailOp$ (TheVectorIn AS STRING, TheFunctionIn AS STRING, TheBracketsIn AS STRING)
 DECLARE FUNCTION FormatForTerminal$ (TheStringIn AS STRING)
 DECLARE FUNCTION EvalStep$ (TheStringIn AS STRING)
 DECLARE FUNCTION InternalEval$ (TheStringIn AS STRING)
@@ -248,7 +249,9 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 ' 2021-02-05 Expanded quote-number multiplication via operator.
 '            Expanded vector-number multiplication via operator.
 '            Expanded vector-quote multiplication via operator.
-' 2021-02-09 Fixing bug in scientific notation evident in JS/C++ implementatins.
+' 2021-02-09 Fixed bug in scientific notation evident in JS/C++ implementatins.
+'            Added trivial "identity" functions.
+' 2021-02-10 Added function StructureApplyTailOp$.
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -1465,6 +1468,30 @@ END FUNCTION
 
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
+FUNCTION StructureApplyTailOp$ (TheVectorIn AS STRING, TheFunctionIn AS STRING, TheBracketsIn AS STRING)
+    DIM TheReturn AS STRING
+    DIM TheVector AS STRING
+    DIM TheFunction AS STRING
+    DIM TheBrackets AS STRING
+    DIM size AS INTEGER
+    TheVector = TheVectorIn
+    TheFunction = TheFunctionIn
+    TheBrackets = TheBracketsIn
+    DIM k AS INTEGER
+    TheReturn = LEFT$(TheBrackets, 1)
+    size = CountElements(TheVector, ",")
+    FOR k = 1 TO size
+        TheReturn = TheReturn + "(" + ReturnElement$(TheVector, k, ",") + TheFunction + ")"
+        IF (k < size) THEN
+            TheReturn = TheReturn + ","
+        END IF
+    NEXT
+    TheReturn = TheReturn + RIGHT$(TheBrackets, 1)
+    StructureApplyTailOp$ = TheReturn
+END FUNCTION
+
+' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
+
 FUNCTION FormatForTerminal$ (TheStringIn AS STRING)
     DIM TheReturn AS STRING
     DIM TheString AS STRING
@@ -1532,7 +1559,24 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         ArgArray(1) = MidFragment
     END IF
 
+    ' Identity:
+
+    IF (ScannedName = "identity") THEN
+        ScannedName = ""
+        c = ArgArray(1)
+        'd = ArgArray(2)
+        MidFragment = c
+    END IF
+
+    IF (ScannedName = "join") THEN
+        ScannedName = ""
+        c = ArgArray(1)
+        d = ArgArray(2)
+        MidFragment = c + d
+    END IF
+
     ' Variables:
+
     IF (ScannedName = "let") THEN
         ScannedName = ""
         n = CountElements(MidFragment, ",")
@@ -1600,7 +1644,8 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         MidFragment = InternalEval$("let(" + f + "," + c + ")")
     END IF
 
-    ' Functions:
+    ' Function:
+
     IF (ScannedName = "func") THEN
         ScannedName = ""
         c = RemoveWrapping$(ArgArray(1), "`'")
@@ -1620,6 +1665,8 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
             MidFragment = c
         END IF
     END IF
+
+    ' Lambda:
 
     IF ((ScannedName = "lambda") OR (ScannedName = "$")) THEN
         ScannedName = ""
@@ -1641,6 +1688,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     END IF
 
     ' Date / Time:
+
     IF (ScannedName = "time") THEN
         ScannedName = ""
 
@@ -1694,6 +1742,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     END IF
 
     ' Memory:
+
     IF (ScannedName = "report") THEN
         ScannedName = ""
         IF (MidFragment = "()") THEN
@@ -1726,12 +1775,12 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         MidFragment = "report()"
     END IF
 
-    ' Type-wrapping and unwrapping functions.
+    ' Type-wrapping and unwrapping:
+
     IF (ScannedName = "type") THEN
         ScannedName = ""
         MidFragment = "`" + TypeCheck$(LEFT$(ArgArray(1), 1)) + "'"
     END IF
-
     IF (ScannedName = "quote") THEN
         ScannedName = ""
         MidFragment = "`" + ArgArray(1) + "'"
@@ -1766,6 +1815,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     END IF
 
     ' Subprograms:
+
     IF (ScannedName = "sub") THEN
         ScannedName = ""
         MidFragment = SubExecute$(RemoveWrapping$(MidFragment, "{}"), "inline", "_yes")
@@ -1784,6 +1834,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     END IF
 
     ' Flow-Control:
+
     IF (ScannedName = "iff") THEN
         ScannedName = ""
         c = ArgArray(1)
@@ -1825,7 +1876,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         MidFragment = e
     END IF
 
-    ' Numerical:
+    ' Numeric (strict):
 
     IF (ScannedName = "abs") THEN
         ScannedName = ""
@@ -1987,6 +2038,7 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
     END IF
 
     ' Largenum:
+
     IF (ScannedName = "largeadd") THEN
         ScannedName = ""
         c = ArgArray(1)
@@ -2065,7 +2117,8 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         END IF
     END IF
 
-    ' Elements:
+    ' Elements (shared):
+
     IF (ScannedName = "mid") THEN
         ScannedName = ""
         c = ArgArray(1)
@@ -2121,7 +2174,6 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
                 MidFragment = LEFT$(c, 1) + RIGHT$(c, 1)
             END IF
         END IF
-
     END IF
 
     IF (ScannedName = "left") THEN
@@ -2167,7 +2219,6 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
                 MidFragment = LEFT$(c, 1) + RIGHT$(c, 1)
             END IF
         END IF
-
     END IF
 
     IF (ScannedName = "right") THEN
@@ -2302,6 +2353,8 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         MidFragment = c
     END IF
 
+    ' Vectors (strict):
+
     IF (ScannedName = "column") THEN
         ScannedName = ""
         c = ArgArray(1)
@@ -2339,22 +2392,13 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         MidFragment = c
     END IF
 
+    ' Vectors (processing):
+
     IF (ScannedName = "apply") THEN
         ScannedName = ""
         IF (TypeCheck$(MID$(ArgArray(2), 1, 1)) = "vector") THEN
             MidFragment = StructureApplyFunc$(ArgArray(2), ArgArray(1), "<>")
         END IF
-    END IF
-
-    IF (ScannedName = "reduce") THEN
-        ScannedName = ""
-        d = ArgArray(1)
-        e = ArgArray(2)
-        c = d + "(" + ReturnElement$(e, 1, ",") + "," + ReturnElement$(e, 2, ",") + ")"
-        FOR k = 2 TO CountElements(e, ",") - 1
-            c = d + "(" + c + "," + ReturnElement$(e, k + 1, ",") + ")"
-        NEXT
-        MidFragment = c
     END IF
 
     IF (ScannedName = "map") THEN
@@ -2376,6 +2420,17 @@ FUNCTION FunctionCrunch$ (ScannedNameIn AS STRING, MidFragmentIn AS STRING)
         NEXT
         f = f + RIGHT$(c, 1)
         MidFragment = f
+    END IF
+
+    IF (ScannedName = "reduce") THEN
+        ScannedName = ""
+        d = ArgArray(1)
+        e = ArgArray(2)
+        c = d + "(" + ReturnElement$(e, 1, ",") + "," + ReturnElement$(e, 2, ",") + ")"
+        FOR k = 2 TO CountElements(e, ",") - 1
+            c = d + "(" + c + "," + ReturnElement$(e, k + 1, ",") + ")"
+        NEXT
+        MidFragment = c
     END IF
 
     TheReturn = ScannedName + MidFragment
@@ -2935,7 +2990,7 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
             ' Case: vector @ number
             IF (TheReturn = TheString) THEN
                 IF ((TypeLeft = "vector") AND (TypeRight = "number")) THEN
-                    MidFragment = StructureApplyFunc$(ArgLeft, ArgRight + TheOperator, "<>")
+                    MidFragment = StructureApplyTailOp$(ArgLeft, TheOperator + ArgRight, "<>")
                     TheReturn = LeftFragment + MidFragment + RightFragment
                 END IF
             END IF
@@ -2953,7 +3008,7 @@ FUNCTION NumberCrunch$ (TheStringIn AS STRING)
             ' Case: vector @ quote
             IF (TheReturn = TheString) THEN
                 IF ((TypeLeft = "vector") AND (TypeRight = "quote")) THEN
-                    MidFragment = StructureApplyFunc$(ArgLeft, ArgRight + TheOperator, "<>")
+                    MidFragment = StructureApplyTailOp$(ArgLeft, TheOperator + ArgRight, "<>")
                     TheReturn = LeftFragment + MidFragment + RightFragment
                 END IF
             END IF

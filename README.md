@@ -34,4 +34,6 @@
 
 [Section 10: Index of Types](guide/Type-Index.md)
 
-[Section 11: Index of Primitives](guide/Primitive-Index.md)
+[Section 11: Basic Primitives](guide/Basic-Primitives.md)
+
+[Section 12: Apply, Map, Reduce](guide/Apply-Map-Reduce.md)

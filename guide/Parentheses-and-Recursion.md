@@ -16,6 +16,6 @@ By default, the elements in a vector are evaluated in left-to-right order, start
 
 Now we come to an important definition. Any content contained in curly braces ( `{}` ) is called *occulted* code, or occulted expressions, considered as a single piece of data. Occulted expressions, whether they contain parentheses or not, are invisible to the evaluation mechanism.
 
-The simplest use of occulted code occurs in a code block, in where the form `block({a:b:c})` contains the occulted structure `{a:b:c}`.
+The simplest use of occulted code occurs in a code block, in where the form `block({a:b:c})` contains the occulted structure `{a:b:c}`. Each *element* of occulted ode is separated by the colon symbol ( `:` ).
 
 The special form `block()` opens (or "un-occults") the contents for evaluation. Control is passed inside the code block, and the entire `block({a:b:c})` expression simplifies to whatever is carried off by `print_` statement(s) contained in `{a:b:c}`.
