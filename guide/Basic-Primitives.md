@@ -5,7 +5,7 @@
 In the following, `x` and `y` are numbers.
 
 | Prototype | Description
-|---|---|
+|---|---
 | `abs(x)=number` | Removes sign information from number `x`.
 | `atan(x)=number` | Returns trigonometric arc-tangent of `x`.
 | `cos(x)=number` | Returns trigonometric cosine of `x` (argument in radians).
@@ -86,12 +86,20 @@ The following primitives take no argument.
 | `time()=quote` | Returns the system time.
 | |
 
-## Identity Primitives
+## The `identity` Primitive
 
-One special primitive that does absolutely nothing with its argument is called the `identity`, having prototype `identity(x)=x`, which simply re-sends its input as output. The `identity` primitive has no profound implications. A second special primitive takes *two* arguments and simply joins them together as if typed beside each other, represented by `join(x,y)=xy`.
+One special primitive that does absolutely nothing with its argument is called the `identity`, having prototype `identity(x)=x`, which simply re-sends its input as output. The `identity` primitive has no profound implications.
 
 | Prototype | Description
 |---|---
 | `identity(z)=z` | Returns `z`.
+| |
+
+## The `join` Primitive
+
+Another second special primitive takes *two* arguments and simply joins them together as if typed beside each other, represented by `join(x,y)=xy`.
+
+| Prototype | Description
+|---|---
 | `join(w,z)=wz` | Returns `wz`.
 | |
