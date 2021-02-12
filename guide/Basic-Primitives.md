@@ -18,9 +18,8 @@ In the following, `x` and `y` are numbers.
 | `sqrt(x)=number` | Returns the square root of `x`.
 | `tan(x)=number` | Returns trigonometric tangent of `x` (argument in radians).
 | `unf(x)=number` | Converts `x` to formatted number.
-| |
 
-## Quote: Basic Primitives
+## Quotes: Basic Primitives
 
 In the following, `x` is a quote, `n` is a number, and `z` is arbitrary.
 
@@ -37,9 +36,8 @@ In the following, `x` is a quote, `n` is a number, and `z` is arbitrary.
 | `right(x,n)=quote` | Returns a sub-quote of the right-most `n` characters from quote `x`.
 | `ucase(x)=quote` | Replaces all lowercase characters in `x` to uppercase.
 | `unquote(x)=z` | Removes quote bracketing symbols ( ``` ` ``` and `'` ) from `x`.
-| |
 
-## Vector: Basic Primitives
+## Vectors: Basic Primitives
 
 In the following, `x` and `y` are vectors, `n` is a number, and `z` is arbitrary.
 
@@ -56,7 +54,6 @@ In the following, `x` and `y` are vectors, `n` is a number, and `z` is arbitrary
 | `stack(x,y)=vector` | Appends `x` onto `y` and returns the result.
 | `unvector(x)=z` | Removes vector bracketing symbols ( `<` and `>` ) from `x`.
 | `vector(x)=vector` | Encloses `x` in vector bracketing symbols ( `<` and `>` ).
-| |
 
 ## Occult: Basic Primitives
 
@@ -74,7 +71,6 @@ In the following, `x` and `y` are vectors, `n` is a number, and `z` is arbitrary
 | `smooth(x)=occult` | Removes all empty elements from occulted structure `x` and returns the result.
 | `stack(x,y)=occult` | Appends `x` onto `y` and returns the result.
 | `unoccult(x)=z` | Removes occult bracketing symbols ( `{` and `}` ) from `x`.
-| |
 
 ## Time-Keeping Primitives
 
@@ -84,7 +80,6 @@ The following primitives take no argument.
 |---|---
 | `date()=quote` | Returns the system date.
 | `time()=quote` | Returns the system time.
-| |
 
 ## The `identity` Primitive
 
@@ -93,7 +88,6 @@ One special primitive that does absolutely nothing with its argument is called t
 | Prototype | Description
 |---|---
 | `identity(z)=z` | Returns `z`.
-| |
 
 ## The `join` Primitive
 
@@ -102,4 +96,3 @@ Another second special primitive takes *two* arguments and simply joins them tog
 | Prototype | Description
 |---|---
 | `join(w,z)=wz` | Returns `wz`.
-| |

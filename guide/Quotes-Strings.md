@@ -26,7 +26,7 @@ One quote can also be "multiplied" into another, where the combination `[quote1]
 
 ### Division
 
-The inverse of quote multiplication is quote division. That is, the combination ``` `axybxycxy' / `xy'``` returns ``` `abc' ```. If [quote2] is not a sub-quote of [quote1], then only [quote1] is returned.
+The inverse of quote multiplication is quote division. That is, the combination ``` `axybxycxy' / `xy'``` returns ``` `abc' ```. If `[quote2]` is not a sub-quote of `[quote1]`, then only `[quote1]` is returned.
 
 #### Exercise:
 

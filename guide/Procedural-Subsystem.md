@@ -4,7 +4,7 @@ Several "procedural" keywords, or *statements* are used for "jumping around" exp
 
 ## 1/3) do ... loop
 
-The `do` ... `loop` structure is a mechanism for iterative evaluation. The "body" of the loop is any expression(s) contained between `do` and `loop`. The number of iterations is defined by the number that directly precedes the `do` statement. For instance, the following code block contains a loop that is iterated five times:
+The `do` ... `loop` structure is a mechanism for iterative evaluation, formally called a *count-controlled loop*. The "body" of the loop is any expression(s) contained between `do` and `loop`. The number of iterations is defined by the number that directly precedes the `do` statement. For instance, the following code block contains a loop that is iterated five times:
 
 ```
 block({
@@ -92,8 +92,10 @@ block({
 
 By changing the condition away from `1`, for instance `if_ 3 @ a`, then the output of the code block is `not true`.
 
+This apparatus is the rat material for setting up a *condition-controlled loop*.
+
 ## Remark
 
 The procedural subsystem is the *only* means of writing multi-lined programs in Sxript, and the set of commands detailed here is the *entire* set. You will not be impinged upon by more underscored procedural commands later on.
 
-With so few keywords, it is entirely possible to write an enormous code block wired with many loops, anchors, and goto statements. Before long, such a spaghetti-code program becomes difficult to follow, let alone improve or repurpose. This practice is of course discouraged in all languages, with Sxript being no exception. Eventually we'll have reviewed enough of the language features to dodge this possibility.
+Using few keywords, it is still possible to write an enormous code block wired with many loops, anchors, and goto statements. Before long, such a spaghetti-code program becomes difficult to follow, let alone improve or repurpose. This practice is of course discouraged in all languages, with Sxript being no exception.

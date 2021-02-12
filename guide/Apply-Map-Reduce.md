@@ -1,6 +1,6 @@
 # Guide: Apply, Map, Reduce
 
-Here we introduce three powerful primitives that apply to vectors: `apply`, `map`, and `reduce`.
+Here we introduce three powerful primitives that apply to vectors: `apply`, `map`, and `reduce`. Each of these invoke the notion of a *collection-controlled loop*.
 
 ## Apply
 
@@ -19,7 +19,6 @@ Expanding this, the `apply` primitive applies function `f([x])` to each of the `
 | ``` apply(len,<`dog',`cat',`mouse'>) ``` | `<3,3,5>`
 | `apply(rand,<1,2,3>)` | `<.8627438545227051,.954358458518982,2.44416081905365>` (varies)
 | `apply(sqrt,<9,16,25,121>)` | `<3,4,5,11>`
-| |
 
 ## Map
 
@@ -38,7 +37,6 @@ In more detail, the `map` primitive applies a function `f([x],[y])` to each of t
 | `map(map(<1,2,3>,join,<+,*,->),join,<7,8,9>)` | `<+8.0,+16.0,-6.0>`
 | ``` map(<`dog',`cat',`mouse'>,instr,<`o',`z',`u'>) ``` | `<2,0,3>`
 | `map(<<a,b,c>,<d,e,f>,<g,h,i>>,left,<1,2,3>)` | `<<a>,<d,e>,<g,h,i>>`
-| |
 
 ## Reduce
 
@@ -54,11 +52,9 @@ The `reduce` primitive uses a two-argument function `f(x,y)` to collapse a vecto
 | `reduce(greater,<4,3,0>)` | `greater(greater(4,3),0)` | `1`
 | `reduce(join,4*<1,2,3>)` | `join(join(+4.0,+8.0),+12.0)` | `+24.0`
 | `reduce(join,<5*,4*,3*,2*,1>)` | `join(join(join(join(5*,4*),3*),2*),1)` | `+120.0`
-| |
 
-### Examples cont'd.
+### Examples, cont'd.
 
 | Expression | Result
 |---|---
 | ``` reduce(join,map(<`dog',`cat',`mouse'>+` ',join,<+,+,>))``` | ``` `dog cat mouse ' ``` 
-| |
