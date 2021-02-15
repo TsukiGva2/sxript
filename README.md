@@ -50,7 +50,7 @@
 
 ## [9: Introduction to Primitives](guide/Intro-to-Primitives.md)
 
-> `prim(x,y)=result`
+> `prim(x,y)=z`
 
 ## [10: Index of Types](guide/Type-Index.md)
 
@@ -62,8 +62,11 @@
 
 ## [12: Apply, Map, Reduce](guide/Apply-Map-Reduce.md)
 
-> `apply(f,v)=v`, `map(v1,f,v2)=v3`, `reduce(f,v)=z`
+> `apply(f,v)`, `map(v1,f,v2)`, `reduce(f,v)`
 
 ## [13: Flow-Control Primitives](guide/Flow-Control-Primitives.md)
 
-> ...
+> `iff(condition,occult1,occult2)`, `for(<j,i,f,d>,occult)`
+
+## [14: Intermission](guide/Intermission.md)
+

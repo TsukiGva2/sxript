@@ -1382,18 +1382,18 @@ std::string replaceRaw (std::string TheStringIn, std::string TheWordIn, std::str
             CurlyBal = 0;
             for (k = 1; k <= lEN(TheReturn) - lEN(TheWord) + 1; k += 1) {
                 c = mID(TheReturn, k, lEN(TheWord));
-                if (c == "{") {
-                    CurlyBal = CurlyBal + 1;
+                //IF (c = "{") THEN
+                //    CurlyBal = CurlyBal + 1
+                //END IF
+                //IF (c = "}") THEN
+                //    CurlyBal = CurlyBal - 1
+                //END IF
+                //IF (CurlyBal = 0) THEN
+                if (c == TheWord) {
+                    TheReturn = lEFT(TheReturn, k - 1) + TheReplacement + rIGHT(TheReturn, lEN(TheReturn) - k - lEN(TheWord) + 1);
+                    break;
                 }
-                if (c == "}") {
-                    CurlyBal = CurlyBal - 1;
-                }
-                if (CurlyBal == 0) {
-                    if (c == TheWord) {
-                        TheReturn = lEFT(TheReturn, k - 1) + TheReplacement + rIGHT(TheReturn, lEN(TheReturn) - k - lEN(TheWord) + 1);
-                        break;
-                    }
-                }
+                //END IF
             }
         }
         if ((iNSTR(TheReturn, TheWord) > 0) & (TheReturn != TheString)) {

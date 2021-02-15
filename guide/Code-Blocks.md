@@ -20,7 +20,9 @@ The use of spaces, tabs, and line breaks is entirely optional. For instance, the
 
 ## Block Evaluation
 
-When evaluated, the expressions in a code block are resolved in left-to-right order. The *only* output of the code block, however, is whatever follows `print_`. (This is much like the "return" aspect of C-family functions.) For the example on hand, the code block will first evaluate `1+1`, followed by `2+2`, and finally `3+3`. The *only* output carried away from the code block is what follows `print_`, i.e. `+6.0`.
+When evaluated, the expressions in a code block are resolved in left-to-right order. The output of the code block, however, is strictly limited to expressions following `print_`. (This is much like the "return" aspect of C-family functions.) A code block is "erased" after evaluation, and the surviving output is whatever followed `print_`.
+
+For the example on hand, the code block will first evaluate `1+1`, followed by `2+2`, and finally `3+3`. The *only* output carried away from the code block is what follows `print_`, i.e. `+6.0`.
 
 #### Exercise:
 

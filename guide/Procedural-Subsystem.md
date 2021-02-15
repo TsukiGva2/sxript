@@ -77,20 +77,20 @@ block({
 
 A second means of jumping to an anchor point is the "conditional if" structure:
 
-> `if_ condition @ anchor_name`
+> `if_ condition @name`
 
-The so-called `condition` is a placeholder for any Sxript expression. If the condition reduces to anything numerically equivalent to `+1.0`, then control is passed to `anchor_name`. Otherwise, control is passed to the next line, if any. For instance, in the following code block, the statement `if_ 1 @ a` detects a `1` between the underscore ( `_` ) and the `@`-symbol, always returning `true`.
+The so-called `condition` is a placeholder for any Sxript expression. If the condition reduces to anything numerically equivalent to `+1.0`, then control is passed to the anchor called `name`. Otherwise, control is passed to the next line, if any. For instance, in the following code block, the statement `if_ 1 @a` detects a `1` between the underscore ( `_` ) and the `@`-symbol, always returning `true`.
 
 ```
 block({
-  if_ 1 @ a:
+  if_ 1 @a:
   print_`not '+:
   anchor_a:
   print_`true'
 })
 ```
 
-By changing the condition away from `1`, for instance `if_ 3 @ a`, then the output of the code block is `not true`.
+By changing the condition away from `1`, for instance `if_ 3 @a`, then the output of the code block is `not true`.
 
 This apparatus is the rat material for setting up a *condition-controlled loop*.
 

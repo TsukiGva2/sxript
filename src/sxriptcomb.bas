@@ -661,18 +661,18 @@ FUNCTION ReplaceRaw$ (TheStringIn AS STRING, TheWordIn AS STRING, TheReplacement
         CurlyBal = 0
         FOR k = 1 TO LEN(TheReturn) - LEN(TheWord) + 1
             c = MID$(TheReturn, k, LEN(TheWord))
-            IF (c = "{") THEN
-                CurlyBal = CurlyBal + 1
+            'IF (c = "{") THEN
+            '    CurlyBal = CurlyBal + 1
+            'END IF
+            'IF (c = "}") THEN
+            '    CurlyBal = CurlyBal - 1
+            'END IF
+            'IF (CurlyBal = 0) THEN
+            IF (c = TheWord) THEN
+                TheReturn = LEFT$(TheReturn, k - 1) + TheReplacement + RIGHT$(TheReturn, LEN(TheReturn) - k - LEN(TheWord) + 1)
+                EXIT FOR
             END IF
-            IF (c = "}") THEN
-                CurlyBal = CurlyBal - 1
-            END IF
-            IF (CurlyBal = 0) THEN
-                IF (c = TheWord) THEN
-                    TheReturn = LEFT$(TheReturn, k - 1) + TheReplacement + RIGHT$(TheReturn, LEN(TheReturn) - k - LEN(TheWord) + 1)
-                    EXIT FOR
-                END IF
-            END IF
+            'END IF
         NEXT
     END IF
     IF ((INSTR(TheReturn, TheWord) > 0) AND (TheReturn <> TheString)) THEN
