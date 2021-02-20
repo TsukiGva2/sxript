@@ -4,9 +4,11 @@
 
 ## Browser Instances (use now)
 
-### [Console](http://wfbarnes.net/sxript/docs/console/console.html)
+### [Calculator](apps/calculator/index.php)
 
-### [Calculator](http://wfbarnes.net/sxript/docs/calculator/calculator.html)
+### [Console](apps/console/)
+
+### [Terminal](apps/terminal/)
 
 ***
 
