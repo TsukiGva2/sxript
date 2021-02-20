@@ -4,11 +4,11 @@
 
 ## Browser Instances (use now)
 
-### [Calculator](apps/calculator/index.php)
+### [Calculator](../../apps/calculator/index.php)
 
-### [Console](apps/console/)
+### [Console](../../apps/console/)
 
-### [Terminal](apps/terminal/)
+### [Terminal](../../apps/terminal/)
 
 ***
 
