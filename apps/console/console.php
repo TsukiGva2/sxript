@@ -2,11 +2,9 @@
 
 <head>
 
-<meta name="viewport" content="device-width, initial-scale=1">
-
 <title>Sxript Console</title>
 
-<script type="text/javascript" src="../jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../../web-js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../../src/sxript.js"></script>
 <script type="text/javascript" src="../../src/qbf.js"></script>
 <script>
@@ -78,7 +76,8 @@ $(document).ready(function() {
 </script>
 
 <!--link href="../mainstyles.css" rel="stylesheet" type="text/css" /-->
-<link rel="stylesheet" href="../sxriptstyles.css">
+<link rel="stylesheet" href="../../web-css/styles-main.css">
+<link rel="stylesheet" href="../../web-css/styles-console.css">
 
 <style type='text/css'>
 form {
@@ -91,41 +90,17 @@ form {
 
 </head>
  
-<body bgcolor="#222222">
+<body>
 
 <a name="Top"></a>
 
-<center>
-<table width="100%" border="0">
-    <tbody>
-    <tr>
-    <td>
-    <font face="Arial" color="White" size="4"><b>Navigation</b></font>
-    </td>
-    </tr>
-    </tbody>
-</table>
-</center>
+<h3>Navgation</h3>
 
-<center>
-<table width="97%" border="0">
-    <tbody>
-    <tr>
-    <td>
-    <a href="../../#Top" style="text-decoration:none"><b><font face="Courier New"; color="Grey"> [Top] </font></b></a>
-    <a href="#Top" style="text-decoration:none"><b><font face="Courier New"; color="White"> [Console] </font></b></a>
-    <a href="../../#Guide" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Guide] </font></a>
-    <a href="../../#Applications" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Applications] </font></a>
-    <a href="../../#Index" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Index] </font></a>
-    <a href="javascript:history.back()" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Back] </font></a>
-    </td>
-    <td align="right">
-    <a href="../../../../index.html" style="text-decoration:none"><font face="Courier New"; color="Grey"> [Home] </font></a>
-    </td>
-    </tr>
-    </tbody>
-</table>
-</center>
+<?php $pathtoroot = "../../"; ?>
+
+<div class="indented">
+  <?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+</div>
 
 <center>
 <table width="100%" border="0">

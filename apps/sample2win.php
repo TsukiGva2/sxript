@@ -6,10 +6,10 @@
 
 <script type="text/javascript" src="../../src/qbf.js"></script>
 <script type="text/javascript" src="../../src/sxript.js"></script>
-<script type="text/javascript" src="../jquery-1.11.3.js"></script>
-<script type="text/javascript" src="../evalbutton.js"></script>
-
-<link href="../sxriptstyles.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../web-js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="../../web-js/evalbutton.js"></script>
+<link href="../../web-css/styles-main.css" rel="stylesheet" type="text/css" />
+<link href="../../web-css/styles-console.css" rel="stylesheet" type="text/css" />
 
 </head>
  
@@ -17,34 +17,13 @@
 
 <a name="Top"></a>
 
-<center>
-<table width="100%" border="0">
-    <tbody>
-    <tr>
-    <td>
-    <h3>Navgation</h3>
-    </td>
-    </tr>
-    </tbody>
-</table>
-</center>
+<h3>Navgation</h3>
 
-<center>
-<table width="97%" border="0">
-    <tbody>
-    <tr>
-    <td>
-    <a href="../../index.html#Home">[Home]</a> -
-    <a href="../console/console.html#Top">[Console]</a> -
-    <a href="../../index.html#Guide">[Guide]</a> -
-    <a href="../../index.html#Applications">[Applications]</a> -
-    <a href="../../index.html#Index">[Index]</a> -
-    <a href="javascript:history.back()">[Back]</a>
-    </td>
-    </tr>
-    </tbody>
-</table>
-</center>
+<?php $pathtoroot = "../../"; ?>
+
+<div class="indented">
+  <?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+</div>
 
 <center>
 <table width="100%" border="0">

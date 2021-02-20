@@ -1,0 +1,26 @@
+form {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+textarea.console {
+  border: none;
+  color: LightBlue;
+  background-color: #222222;
+  font-family: Courier New;
+  font-weight: Bold;
+  max-width: 100%;
+  width: 100%;
+}
+
+textarea.inputbar {
+  color: LightBlue;
+  background-color: #111111;
+  font-family: Courier New;
+  font-weight: Bold;
+  max-width: 100%;
+  width: 100%;
+}
+

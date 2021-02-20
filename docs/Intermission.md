@@ -1,14 +1,14 @@
 # Guide: Intermission
 
-By this point, we've witnessed enough to write programs that *approach* being useful. At the very least, we may practice building "toys" that help concretize the ground already covered.
+By this point, we've witnessed enough to write programs that *approach* being useful. At the very least, we may practice building "toys" that help solidify the ground covered to this point.
 
-## Creating Vectors Semi-Manually
+## Vectors and `for` Loops
 
 Vectors `<a,b,c,d,...>` are easily typed when the number of elements is reasonable, however situations often arise in which vectors are "systematic" enough to be created with a `for` loop.
 
 ### Numerical Elements
 
-If a vector is to have purely numerical content, its elements may be composed by referencing the iteration variable. Building the case slowly, begin with `for(<i,1,10,1>,{unf([i])})`, which would return `12345678910` if evaluated. By inserting the vector separator symbol just after the `unf([i])`-structure, namely `for(<i,1,10,1>,{unf([i]),})`, the output becomes `1,2,3,4,5,6,7,8,9,10,`. Such an output is not well-defined. To assure the output is a vector, wrap the whole expression in ( `<>` ) to write `<for(<i,1,10,1>,{unf([i]),})>` which simplifies to `<1,2,3,4,5,6,7,8,9,10,>`. Notice there is an empty element at the end, which is eliminated with the `smooth` primitive. Finally then, we have that `smooth(<for(<i,1,10,1>,{unf([i]),})>)` produces the clean result `<1,2,3,4,5,6,7,8,9,10>`.
+If a vector is to have purely numerical content, its elements may be composed by referencing the iteration variable. Building the case slowly, begin with `for(<i,1,10,1>,{unf([i])})`, which would return `12345678910` if evaluated. By inserting the vector separator symbol just after the `unf([i])`-structure, namely `for(<i,1,10,1>,{unf([i]),})`, the output becomes `1,2,3,4,5,6,7,8,9,10,`. Such an output is not well-defined. To assure the output is a vector, wrap the whole expression in ( `<>` ) to write `<for(<i,1,10,1>,{unf([i]),})>` which simplifies to `<1,2,3,4,5,6,7,8,9,10,>`. The empty element at the end is eliminated with the `smooth` primitive. Finally then, we have that `smooth(<for(<i,1,10,1>,{unf([i]),})>)` produces the clean result `<1,2,3,4,5,6,7,8,9,10>`.
 
 If such a vector needs to have negative elements, we have (at least) two options. Since arithmetic operations distribute into vectors such that `-1 * <1,2,3,4,5>` simplifies to  `<-1.0,-2.0,-3.0,-4.0,-5.0>`, it should follow that `-1 * smooth(<for(<i,1,5,1>,{unf([i]),})>)` produces the same result. Instead, we may reference `-1*[i]` in the original expression to write `smooth(<for(<i,1,5,1>,{-1*[i],})>)`, producing the same result yet again.
 
@@ -45,6 +45,8 @@ apply(block,<
 >)
 ```
 
+Output:
+
 ```
 <
 hello world
@@ -70,6 +72,8 @@ for(<i,97,122,1>,{
 })
 ```
 
+Output:
+
 ```
 97 a	98 b	99 c	100 d	101 e	102 f	103 g	104 h	105 i	106 j	107 k	108 l	109 m	110 n	111 o	112 p	113 q	114 r	115 s	116 t	117 u	118 v	119 w	120 x	121 y	122 z	
 ```
@@ -81,7 +85,7 @@ Of course, many ASCII characters are special to Sxript syntax. To produce a more
 ```
 for(<i,32,126,1>,{
   block({
-    print_quote(unf([i]))+` ':
+    print_quote(unf([i])) + ` ':
     if_[i]=39  @ascii39:
     if_[i]=40  @ascii40:
     if_[i]=41  @ascii41:
@@ -114,6 +118,8 @@ for(<i,32,126,1>,{
   })
 })
 ```
+
+Output:
 
 ```
 32  	33 !	34 "	35 #	36 $	37 %	38 &	39 '	40 (	41 )	42 *	43 +	44 ,	45 -	46 .	47 /	48 0	49 1	50 2	51 3	52 4	53 5	54 6	55 7	56 8	57 9	58 :	59 ;	60 <	61 =	62 >	63 ?	64 @	65 A	66 B	67 C	68 D	69 E	70 F	71 G	72 H	73 I	74 J	75 K	76 L	77 M	78 N	79 O	80 P	81 Q	82 R	83 S	84 T	85 U	86 V	87 W	88 X	89 Y	90 Z	91 [	92 \	93 ]	94 ^	95 _	96 `	97 a	98 b	99 c	100 d	101 e	102 f	103 g	104 h	105 i	106 j	107 k	108 l	109 m	110 n	111 o	112 p	113 q	114 r	115 s	116 t	117 u	118 v	119 w	120 x	121 y	122 z	123 {	124 |	125 }	126 ~	

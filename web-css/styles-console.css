@@ -1,0 +1,43 @@
+code {
+  color: LightBlue;
+  font-family: Courier New;
+  font-size: 16px;
+}
+
+button.stylebutton {
+  color: Black;
+  background-color: #4CAF50; /* Green */
+  font-family: Courier New;
+  font-size: 16px;
+  padding: 12px 24px;
+  text-align: center;
+}
+
+button.stylebutton2 {
+  color: Black;
+  background-color: LightBlue;
+  font-family: Courier New;
+  font-size: 16px;
+  padding: 6px 24px;
+  text-align: center;
+}
+
+textarea.console {
+  color: LightBlue;
+  background-color: #222222;
+  font-family: Courier New;
+  font-weight: Bold;
+}
+
+textarea.light {
+  color: Black;
+  background-color: #CCCC99;
+  font-family: Courier New;
+}
+
+textarea.basicide {
+  color: White;
+  background-color: Blue;
+  font-family: Courier New;
+  font-weight: ;
+}

@@ -40,36 +40,9 @@ h3 {
   margin-left: 10%;
 }
 
-.appendix {
-  font-size: 16px;
-}
-
-.quote {
-  font-family: Georgia;
-  font-style: italic;
-  width: 80%;
-}
-
-.citation {
-  font-size: 12px;
-  text-align: left;
-}
-
 .container {
   width: 800px;
-  //width: 100%;
   overflow: hidden;
-}
-
-.containerprose {
-  font-family: Georgia;
-  text-align: left;
-}
-
-.containerprose2 {
-  font-family: Georgia;
-  text-align: left;
-  width: 80%;
 }
 
 a:link {
