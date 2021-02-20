@@ -100,7 +100,7 @@ form {
 <?php $pathtoroot = "../../"; ?>
 
 <div class="indented">
-  <?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+  <?php include($_SERVER['DOCUMENT_ROOT']."/sxript/web-php/header.php"); ?>
 </div>
 
 <center>

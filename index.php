@@ -14,7 +14,7 @@
 <h3>Navgation</h3>
 
 <div class="indented">
-  <?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+  <?php include($_SERVER['DOCUMENT_ROOT']."/sxript/web-php/header.php"); ?>
 </div>
 
 <hr/>
@@ -93,7 +93,7 @@ Sxript is conveyed as <i>open source free software</i>. Do what thou wilt.
 <h3>Guide</h3>
 
 <div class="indented">
-  <?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+  <?php include($_SERVER['DOCUMENT_ROOT']."/sxript/web-php/header.php"); ?>
 </div>
 
 <br/>
@@ -113,7 +113,7 @@ Sxript is conveyed as <i>open source free software</i>. Do what thou wilt.
 <h3>Applications</h3>
 
 <div class="indented">
-  <?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+  <?php include($_SERVER['DOCUMENT_ROOT']."/sxript/web-php/header.php"); ?>
 </div>
 
 <center>
@@ -354,7 +354,7 @@ Sxript is conveyed as <i>open source free software</i>. Do what thou wilt.
 <h3>Index</h3>
 
 <div class="indented">
-  <?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+  <?php include($_SERVER['DOCUMENT_ROOT']."/sxript/web-php/header.php"); ?>
 </div>
 
 <center>

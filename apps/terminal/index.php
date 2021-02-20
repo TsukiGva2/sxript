@@ -55,7 +55,7 @@ function process (txtin) {
 </form>
 
 <?php $pathtoroot = "../../"; ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."../sxript/web-php/header.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/sxript/web-php/header.php"); ?>
 
 <script>
 document.getElementById("textin").focus();
