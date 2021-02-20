@@ -3,6 +3,7 @@
 
 <title>Terminal</title>
 
+<link rel="icon" href="../../src/sxript.ico">
 <script type="text/javascript" src="../../web-js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../../src/sxript.js"></script>
 <script type="text/javascript" src="../../src/qbf.js"></script>
@@ -49,7 +50,7 @@ function process (txtin) {
 </form>
 
 <form name="mainform">
-<textarea id="areatext" class="console" readonly rows="40">
+<textarea id="areatext" class="console" readonly rows="16">
 </textarea>
 </form>
 
@@ -61,11 +62,7 @@ document.getElementById("textin").focus();
 
 (function () {
   "use strict";
-  var z;
-  document.mainform.areatext.value = "";
-  for (z = 1; z <= SxriptLogoSize; z += 1) {
-   document.mainform.areatext.value += SxriptLogoText[z] + "\n";
-  }
+  document.mainform.areatext.value = "\n";
   document.mainform.areatext.value += "*** Welcome to Sxript ***" + "\n";
   document.mainform.areatext.value += "   (JavaScript Build)" + "\n";
   document.mainform.areatext.value += "\n";

@@ -2,8 +2,8 @@ func(deriv, {
   (([x]([y]+[z])) - ([x]([y]-[z]))) / (2*[z])
 }):
 
-func(itersolve,{
-  [y] - ([x]([y])) / deriv([x],[y],[z])
+func(linapx,{
+  [y] - ([x]([y])) / deriv([x],[y],0.001)
 }):
 
 func(newtonsolve, {
@@ -11,14 +11,14 @@ func(newtonsolve, {
     let(fxn,[x]):
     let(ans,[y]):
     for(<k,1,[z],1>, {
-      let(ans,itersolve([fxn],[ans],0.001))
+      let(ans,linapx([fxn],[ans]))
     }):
     print_[ans]
   })
 }):
 
 func(lhopital,{
-  deriv([x],[z],.001) / deriv([y],[z],.001)
+  deriv([x],[z],0.001) / deriv([y],[z],0.001)
 }):
 
 func(integral,{

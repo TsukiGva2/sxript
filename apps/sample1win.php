@@ -4,6 +4,7 @@
     
 <title><?php echo $headline ?></title>
 
+<link rel="icon" href="../../src/sxript.ico">
 <script type="text/javascript" src="../../src/qbf.js"></script>
 <script type="text/javascript" src="../../src/sxript.js"></script>
 <script type="text/javascript" src="../../web-js/jquery-1.11.3.js"></script>

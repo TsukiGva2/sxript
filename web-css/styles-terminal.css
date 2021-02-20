@@ -11,6 +11,7 @@ textarea.console {
   background-color: #222222;
   font-family: Courier New;
   font-weight: Bold;
+  font-size: 16px;
   max-width: 100%;
   width: 100%;
 }
@@ -20,6 +21,7 @@ textarea.inputbar {
   background-color: #111111;
   font-family: Courier New;
   font-weight: Bold;
+  font-size: 16px;
   max-width: 100%;
   width: 100%;
 }

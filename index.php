@@ -49,12 +49,12 @@
         </td>
         <td width="45%">
         <center>
-        <a href="apps/console/console.html#Top"><img src="img/consoless.png" width="320px"><br/>Console</a>
+        <a href="apps/console/"><img src="img/consoless.png" width="320px"><br/>Console</a>
         </center>
         </td>
         <td width="45%">
         <center>
-        <a href="apps/calculator/calculator.html"><img src="img/calcss.png" width="150px"><br/>Calculator</a>
+        <a href="apps/calculator/"><img src="img/calcss.png" width="150px"><br/>Calculator</a>
         </center>
         </td>
         </tr>

@@ -4,6 +4,7 @@
 
 <title>Sxript Console</title>
 
+<link rel="icon" href="../../src/sxript.ico">
 <script type="text/javascript" src="../../web-js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="../../src/sxript.js"></script>
 <script type="text/javascript" src="../../src/qbf.js"></script>
@@ -120,7 +121,7 @@ form {
   <tr>
     <td align="right" width="40%"><font color="White" size="7" face="Courier New"><b>Sxript</b></font>
     </td>
-    <td align="center" width="20%"><a href="../../index.html" target="_parent"><img src="../../img/sxlogoinv.png" alt=""/></a>
+    <td align="center" width="20%"><a href="../../" target="_parent"><img src="../../img/sxlogoinv.png" alt=""/></a>
     </td>
     <td align="left" width="40%"><font color="White" size="7" face="Courier New"><b>Console</b></font>
     </td>

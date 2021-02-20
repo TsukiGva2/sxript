@@ -11,8 +11,8 @@
 <body>
 
   [<a href=<?php echo ($pathtoroot."/sxript/index.php") ?> >Home</a>] - 
-  [<a href=<?php echo ($pathtoroot."/sxript/apps/console/console.php") ?> >Console</a>] - 
-  [<a href=<?php echo ($pathtoroot."/sxript/apps/terminal/terminal.php") ?> >Terminal</a>] - 
+  [<a href=<?php echo ($pathtoroot."/sxript/apps/console/") ?> >Console</a>] - 
+  [<a href=<?php echo ($pathtoroot."/sxript/apps/terminal/") ?> >Terminal</a>] - 
   [<a href=<?php echo ($pathtoroot."/sxript/index.php#Guide") ?> >Guide</a>] - 
   [<a href=<?php echo ($pathtoroot."/sxript/index.php#Applications") ?> >Applications</a>] - 
   [<a href=<?php echo ($pathtoroot."/sxript/index.php#Index") ?> >Index</a>] - 
