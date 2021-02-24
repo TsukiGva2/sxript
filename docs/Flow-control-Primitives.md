@@ -90,7 +90,7 @@ The "outer" loop, having iteration variable `i`, is executed four times. This lo
 ```
 #### Block Nesting
 
-A more complex use the `for`-primitive would require multiple expressions within the loop body. Modifying the example above somewhat, we may come up with:
+A more complex use of the `for` primitive requires multiple expressions within the loop body. Modifying the example above somewhat, we may come up with:
 
 ```
 for(<i,1,4,1>,{

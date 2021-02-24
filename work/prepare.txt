@@ -1,0 +1,34 @@
+func(prepare,{
+  block(
+
+    sub({
+      let(name,[x]):
+      let(p1,[y]):
+      let(p2,[z]):
+
+      print_{
+        func({name},{[x]*[y]})
+      :
+        func({name}2,{
+          sub({
+            let(a,{p1}):
+            let(b,{p2}):
+            print_[a]+[b]+[x]+[y]
+          })
+        })
+      :
+        print_()
+      }
+
+    })
+  )
+}):
+
+print_prepare(cow,1,2):
+print_prepare(pig,`hello ',`to '):
+
+print_cow(3,4)                      ,\n:
+print_pig(`the ',`world')           ,\n:
+
+print_cow2(5,6)                      ,\n:
+print_pig2(`the ',`galaxy')          ,\n:

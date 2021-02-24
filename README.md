@@ -1,4 +1,5 @@
 # Sxript
+C. 2014-2021
 
 ![screenshot](img/sxgrey.png)
 
@@ -75,3 +76,7 @@
 ## [14: Intermission](docs/Intermission.md)
 
 > ``` apply(block,<{print_\n `hello ' + :print_`world' \n}>)```
+
+## [15: User-Defined Functions](docs/User-Defined-Functions.md)
+
+> `func(name,{[x]...[y]...[z]})`

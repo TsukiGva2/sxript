@@ -1,0 +1,22 @@
+func(hfunc,{
+  block(
+    sub({
+      let(name,[x]):
+      let(action,[y]):
+
+      let(thetime,time()):
+
+      let(prefix,{
+        let(thetime,{thetime}):
+        let(thedate,date()):
+        func(yell,{quote([x])+`!'}):
+      }):
+
+      let(body,stack([prefix],[action])):
+
+      print_{
+        print_func({name},{sub({body})})
+      }
+    })
+  )
+})(moo,{let(a,[x]):print_<[a]+[y],[thetime],yell([x])>})(5,6)
