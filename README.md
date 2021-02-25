@@ -75,8 +75,12 @@ C. 2014-2021
 
 ## [14: Intermission](docs/Intermission.md)
 
-> ``` apply(block,<{print_\n `hello ' + :print_`world' \n}>)```
+> ```apply(block,<{print_\n `hello ' + :print_`world' \n}>)```
 
-## [15: User-Defined Functions](docs/User-Defined-Functions.md)
+## [15: Variables](docs/Variables.md)
+
+> `let(a,[a]+{b})`
+
+## [16: User-Defined Functions](docs/User-Defined-Functions.md)
 
 > `func(name,{[x]...[y]...[z]})`

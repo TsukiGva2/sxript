@@ -1,6 +1,6 @@
 # Guide: Intermission
 
-By this point, we've witnessed enough to write programs that *approach* being useful. At the very least, we may practice building "toys" that help solidify the ground covered to this point.
+By this point, it's becoming evident that certain tasks can be approached from more than one direction, and the number of directions will only grow from here. Meanwhile we've covered enough ground to write programs that *approach* being useful. Here we explore a few "toy" programs that demonstrate various features discussed so far, without introducing any major language features.
 
 ## Vectors and `for` Loops
 
@@ -18,7 +18,7 @@ For a vector `<a,b,c,d,e>`, one way to produce the word `abcde`, is to use the `
 
 ## Block Evaluation with `apply`
 
-Here we demonstrate multiple "programs" existing within the same vector, where evaluation is triggered with the `apply` primitive with `block` as an argument:
+Here we demonstrate multiple "programs" existing as elements of a vector, where evaluation is triggered with the `apply` primitive with `block` as the first argument:
 
 ```
 apply(block,<

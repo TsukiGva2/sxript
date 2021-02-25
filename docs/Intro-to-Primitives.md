@@ -2,7 +2,7 @@
 
 ## Built-in Functions
 
-Apart from operators, a second class of "prime movers" in the Sxript language are called *primitives*. A primitive translates to a "built-in function", where a function is a mechanism that transforms input into output. In the most general sense, a function is usually denoted `f`, and its input is labeled `[i]`. The construction `f([i])` results in an output value `[o]` that is generally different from `[i]`.
+Apart from operators, a second class of "prime movers" in the Sxript language are called *primitives*. A primitive translates to a "built-in function", where a function is a mechanism that transforms input into output. In the most general sense, a function is usually denoted `f`, and its input is labeled `[i]`. The construction `f([i])` results in an output value `[o]` that depends on, but is generally different from `[i]`.
 
 ### Pure Functions vs. Impure Functions
 

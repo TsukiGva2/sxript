@@ -1,1 +1,3 @@
 # Guide: User-Defined Functions
+
+A *user-defined function*, or UDF, is t...
