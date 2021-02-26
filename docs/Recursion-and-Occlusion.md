@@ -1,4 +1,4 @@
-# Parentheses and Recursion
+# Recursion and Occlusion
 
 Sxript expressions readily admit parentheses ( `()` ) for embedding an expression within an expression. In a given input string, the *deepest-and-left-most* set matching parentheses, if the pair exists, contains a "sub-expression". Once isolated, the sub-expression is sent for evaluation, returning as a number, quote, or other structure. This result is inserted into the working string in place of the sub-expression, without the parentheses. This behavior repeats until all sub-expressions are simplified.
 
@@ -16,6 +16,13 @@ By default, the elements in a vector are evaluated in left-to-right order, start
 
 Now we come to an important definition. Any content contained in curvy braces ( `{}` ) is called *occulted* code, or occulted expressions, considered as a single piece of data. Occulted expressions, whether they contain parentheses or not, are invisible to the evaluation mechanism.
 
+### Occulted Code in Blocks
+
 The simplest use of occulted code occurs in a code block, where the form `block({a:b:c})` contains the occulted structure `{a:b:c}`. Each *element* of occulted code is separated by the colon symbol ( `:` ).
 
 The special form `block()` opens (or "un-occults") the contents for evaluation. Control is passed inside the code block, and the entire `block({a:b:c})` expression simplifies to whatever is carried off by `print_` statement(s) contained in `{a:b:c}`.
+
+### Boundary Dissolution
+
+If two "chunks" of occulted code occur in sequence, i.e. `{abc}{def}`, the inner boundary symbols `}{` disappear entirely, resulting in `{abcdef}`. This is called *boundary dissolution*, and is only defined for occulted code. Other bracketed structures, such as quotes and vectors, do not bear this notion.
+

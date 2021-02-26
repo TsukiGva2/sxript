@@ -49,7 +49,7 @@ C. 2014-2021
 
 > `do`, `loop`, `goto_`, `anchor_`, `if_`
 
-## [8: Parentheses and Recursion](docs/Parentheses-and-Recursion.md)
+## [8: Recursion and Occlusion](docs/Recursion-and-Occlusion.md)
 
 > `<1+1,(1/(1-1/2)),{5+5}>`
 

@@ -82,3 +82,6 @@ block(
 ```
 
 The final output of the above is `+5.0`. Note also that two variables `a` and `b` are still defined.
+
+## Applied Boundary Dissolution
+
