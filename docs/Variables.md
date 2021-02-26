@@ -50,7 +50,7 @@ With the first line finished, control passes to the `print_` statement, evaluate
 
 ## Variable Mutation
 
-When it comes to changing the value stored in a variable, there is no "edit" primitive, nor are there any specialized operators `++`, `+=`, `=+`, etc. Instead, we simply use `let` again, with the variable content represented by a symbol in the second argument. For instance, the following code block stores `1` in the variable `a`, and then stores `+2.0` in the same variable:
+When it comes to changing the value stored in a variable, there is no "edit" primitive, nor are there any specialized operators `++`, `+=`, `=+`, etc. Instead, we simply use `let` again, with the variable content represented by a symbol in the second argument. For example, the following code block stores `1` in the variable `a`, and then stores `+2.0` in the same variable:
 
 ```
 block({
@@ -61,7 +61,7 @@ block({
 
 ## Storing Occulted Code
 
-Variable storage avails a curious way to build complexity. Consider the following code block:
+Consider the following code block:
 
 ```
 block({
@@ -70,7 +70,7 @@ block({
 })
 ```
 
-In the above we, store the occulted code `{let(b,3):print_2+[b]}` in a variable `a`, and then the `print_` statement simply outputs the occulted code as-is. Of course, this can itself be evaluated if we wrap the *whole* code block within another `block` primitive, the above becomes:
+In the above, we store the occulted code `{let(b,3):print_2+[b]}` in a variable `a`, and then the `print_` statement simply outputs the occulted code as-is. Of course, this can itself be evaluated if we wrap the *whole* code block within another `block` primitive, the above becomes:
 
 ```
 block(
@@ -82,6 +82,3 @@ block(
 ```
 
 The final output of the above is `+5.0`. Note also that two variables `a` and `b` are still defined.
-
-## Applied Boundary Dissolution
-

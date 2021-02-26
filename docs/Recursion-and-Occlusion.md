@@ -21,8 +21,3 @@ Now we come to an important definition. Any content contained in curvy braces ( 
 The simplest use of occulted code occurs in a code block, where the form `block({a:b:c})` contains the occulted structure `{a:b:c}`. Each *element* of occulted code is separated by the colon symbol ( `:` ).
 
 The special form `block()` opens (or "un-occults") the contents for evaluation. Control is passed inside the code block, and the entire `block({a:b:c})` expression simplifies to whatever is carried off by `print_` statement(s) contained in `{a:b:c}`.
-
-### Boundary Dissolution
-
-If two "chunks" of occulted code occur in sequence, i.e. `{abc}{def}`, the inner boundary symbols `}{` disappear entirely, resulting in `{abcdef}`. This is called *boundary dissolution*, and is only defined for occulted code. Other bracketed structures, such as quotes and vectors, do not bear this notion.
-

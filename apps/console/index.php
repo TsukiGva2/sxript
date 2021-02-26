@@ -18,8 +18,8 @@ $(document).ready(function() {
     theinput = $("#textin").val();
     thecleaninput = theinput.replace(/^\s+|\s+$/g, "");
     theprocessedinput = thecleaninput;
-	
-	if (document.getElementById("subprogram").checked) {
+
+    if (document.getElementById("subprogram").checked) {
       theprocessedinput = "sub({" + theprocessedinput + "})";
     }
     if (document.getElementById("codeblock").checked) {
@@ -29,11 +29,12 @@ $(document).ready(function() {
       document.mainform.areatext.value += "\n: " + theprocessedinput;
     }
 	
-	if (document.getElementById("whiteinput").checked) {
+    if (document.getElementById("whiteinput").checked) {
       document.mainform.areatext.value += "\n" + ": " + manageWhiteSpace(theprocessedinput) + "\n";
-	} else {
-	  document.mainform.areatext.value += "\n" + ": " + sxriptEval(theprocessedinput) + "\n";
-	}
+    } else {
+      document.mainform.areatext.value += "\n" + ": " + sxriptEval(theprocessedinput) + "\n";
+    }
+
     document.mainform.areatext.scrollTop = document.mainform.areatext.scrollHeight;
     document.getElementById("textin").value = thecleaninput;
   });

@@ -55,7 +55,7 @@ C. 2014-2021
 
 ## [9: Introduction to Primitives](docs/Intro-to-Primitives.md)
 
-> `prim(x,y)=z`
+> `prim(x,y)=z, len(x)=number`
 
 ## [10: Index of Types](docs/Type-Index.md)
 
@@ -81,6 +81,10 @@ C. 2014-2021
 
 > `let(a,[a]+{b})`
 
-## [16: User-Defined Functions](docs/User-Defined-Functions.md)
+## [16: Boundary Dissolution](docs/Boundary-Dissolution.md)
+
+> `{abc}{def}, {abcdef}`
+
+## [17: User-Defined Functions](docs/User-Defined-Functions.md)
 
 > `func(name,{[x]...[y]...[z]})`
