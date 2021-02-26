@@ -30,7 +30,7 @@ A *vector* is any structure enclosed by left- ( `<` ) and right-angle-brackets (
 
 ## Occulted Code
 
-*Occulted* code is any content enclosed by left- ( `{` ) and right-curly-brackets ( `}` ). See [Parentheses and Layering](guide/Parentheses-and-Layering.md) for an introduction.
+*Occulted* code is any content enclosed by left- ( `{` ) and right-curvy-brackets ( `}` ). See [Parentheses and Layering](guide/Parentheses-and-Layering.md) for an introduction.
 
 ## Symbols
 

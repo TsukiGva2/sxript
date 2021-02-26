@@ -226,6 +226,8 @@ ScopeLevel = 1;
 // 2021-02-09 Fixed bug in scientific notation evident in JS/C++ implementatins.
 //            Added trivial "identity" functions.
 // 2021-02-10 Added function StructureApplyTailOp$.
+// 2021-02-14 Commented part of ReplaceRaw$.
+// 2021-02-25 Replacing "}{" with nothing.
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 function countElements(TheStringIn, TheSeparatorIn) {
@@ -840,6 +842,9 @@ function manageOperators(TheStringIn) {
         TheReturn = replaceWord(TheReturn, "+-", "-", -1);
         TheReturn = replaceWord(TheReturn, "-+", "-", -1);
         TheReturn = replaceWord(TheReturn, "--", "+", -1);
+        //''
+        TheReturn = replaceWord(TheReturn, "}{", "", -1);
+        //''
         if (TheReturn !== TheString) {
             TheReturn = manageOperators(TheReturn);
         }

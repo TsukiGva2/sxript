@@ -9,7 +9,7 @@ REM $Include: 'sxript.bi'
 _DELAY 1
 
 $EXEICON:'sxript.ico'
-$CHECKING:OFF
+'$CHECKING:OFF
 
 $SCREENHIDE
 $CONSOLE

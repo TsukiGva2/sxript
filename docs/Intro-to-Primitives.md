@@ -34,7 +34,7 @@ Yet another use of the `len` is for determining the overall length of a number, 
 
 ### Length of a Word
 
-Any *word* is any chain of one or more characters without bracketing symbols such as parentheses, quotes ( ``` ` ' ```), angle brackets ( `< >` ), curly braces ( `{ }` ), etc. The `len` primitive also measures the number of characters in a given word. The subtlety here is that no (unprotected) whitespace exists in a word. As a consequence, an expression such as ```len(a b c d e )``` is contensed to `len(abcde)`, simplifying to `5`, whereas ```len(`a b e d e ')``` simplifies to `10`.
+Any *word* is any chain of one or more characters without bracketing symbols such as parentheses, quotes ( ``` ` ' ```), angle brackets ( `< >` ), curvy braces ( `{ }` ), etc. The `len` primitive also measures the number of characters in a given word. The subtlety here is that no (unprotected) whitespace exists in a word. As a consequence, an expression such as ```len(a b c d e )``` is contensed to `len(abcde)`, simplifying to `5`, whereas ```len(`a b e d e ')``` simplifies to `10`.
 
 #### Exercise:
 

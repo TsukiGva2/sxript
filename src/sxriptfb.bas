@@ -31,7 +31,7 @@ FOR k = 1 TO SxriptLogoSize
 NEXT
 PRINT
 PRINT " *** Welcome to Sxript *** "
-PRINT "       (QB64 Build)        "
+PRINT "     (FreeBASIC Build)     "
 PRINT
 
 DO

@@ -1,0 +1,15 @@
+let(a,1):
+
+let(b,{
+  print_1 + }occult([a]){ +
+  block({
+    print_ }}occult(occult([a])){{
+  }) +
+  block({
+    print_iff(1,{ }}}occult(occult(occult([a]))){{{ },{-1}) 
+  })
+}):
+
+print_[b] ,\n:
+
+print_block([b])

@@ -973,6 +973,8 @@ std::string bigNumDiv (std::string NumerIn, std::string DenomIn, int NumDigitsIn
 // 2021-02-09 Fixed bug in scientific notation evident in JS/C++ implementatins.
 //            Added trivial "identity" functions.
 // 2021-02-10 Added function StructureApplyTailOp$.
+// 2021-02-14 Commented part of ReplaceRaw$.
+// 2021-02-25 Replacing "}{" with nothing.
 // '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 int countElements (std::string TheStringIn, std::string TheSeparatorIn) {
@@ -1575,6 +1577,9 @@ std::string manageOperators (std::string TheStringIn) {
         TheReturn = replaceWord(TheReturn, "+-", "-", -1);
         TheReturn = replaceWord(TheReturn, "-+", "-", -1);
         TheReturn = replaceWord(TheReturn, "--", "+", -1);
+        //''
+        TheReturn = replaceWord(TheReturn, "}{", "", -1);
+        //''
         if (TheReturn != TheString) {
             TheReturn = manageOperators(TheReturn);
         }

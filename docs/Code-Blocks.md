@@ -4,7 +4,7 @@ Sxript expressions can be chained together in a linear sequence, and sent for ev
 
 ## Block Anatomy
 
-A code block begins with the word `block`, followed by a set of curly braces enclosed in parentheses, as in `({})`. Inside this structure, we place any number of valid expressions, separated by the colon symbol ( `:` ). At least one expression must be prefixed with the word `print_`, with the underscore. All together, a code block may look like:
+A code block begins with the word `block`, followed by a set of curvy braces enclosed in parentheses, as in `({})`. Inside this structure, we place any number of valid expressions, separated by the colon symbol ( `:` ). At least one expression must be prefixed with the word `print_`, with the underscore. All together, a code block may look like:
 
 ```
 block({

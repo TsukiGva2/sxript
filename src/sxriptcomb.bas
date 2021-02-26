@@ -252,6 +252,8 @@ at = SxriptEval$("let(sxlogo,apply($({[x]\n})," + at + "))")
 ' 2021-02-09 Fixed bug in scientific notation evident in JS/C++ implementatins.
 '            Added trivial "identity" functions.
 ' 2021-02-10 Added function StructureApplyTailOp$.
+' 2021-02-14 Commented part of ReplaceRaw$.
+' 2021-02-25 Replacing "}{" with nothing.
 ' '''''''''' '''''''''' '''''''''' '''''''''' ''''''''''
 
 FUNCTION CountElements (TheStringIn AS STRING, TheSeparatorIn AS STRING)
@@ -854,6 +856,9 @@ FUNCTION ManageOperators$ (TheStringIn AS STRING)
     TheReturn = ReplaceWord$(TheReturn, "+-", "-", -1)
     TheReturn = ReplaceWord$(TheReturn, "-+", "-", -1)
     TheReturn = ReplaceWord$(TheReturn, "--", "+", -1)
+    '''
+    TheReturn = ReplaceWord$(TheReturn, "}{", "", -1)
+    '''
     IF (TheReturn <> TheString) THEN
         TheReturn = ManageOperators$(TheReturn)
     END IF
