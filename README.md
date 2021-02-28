@@ -81,10 +81,14 @@ C. 2014-2021
 
 > `let(a,[a]+{b})`
 
-## [16: Boundary Dissolution](docs/Boundary-Dissolution.md)
+## [16: Boundary Fusion](docs/Boundary-Fusion.md)
 
 > `{abc}{def}, {abcdef}`
 
-## [17: User-Defined Functions](docs/User-Defined-Functions.md)
+## [17: Scope and Subprograms](docs/Scope-and-Subprograms.md)
+
+> ```sub({print_`hello '+`world'})```
+
+## [18: User-Defined Functions](docs/User-Defined-Functions.md)
 
 > `func(name,{[x]...[y]...[z]})`

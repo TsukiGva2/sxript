@@ -56,6 +56,29 @@ hello world
 >
 ```
 
+## Nesting Occulted Code
+
+Consider the following code block:
+
+```
+block({
+  print_{print_1:print_2+2}
+})
+
+```
+
+Due to the `print_` statement outputting an occulted expression, the result of the above is simply `{print_3:print_2+2}`. Note though, that this is exactly compatible with the body of a code block. It must follow that if we wrap the *whole* code block with yet another `block` primitive, the inner content can be evaluated.
+
+```
+block(
+  block({
+    print_{print_3:print_2+2}
+  })
+)
+```
+
+The intermediate output of the above is `{print_3:print_2+2}`, which simplifies to `+7.0`.
+
 ## ASCII Tables
 
 ### Mini Table

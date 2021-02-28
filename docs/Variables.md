@@ -70,7 +70,7 @@ block({
 })
 ```
 
-In the above, we store the occulted code `{let(b,3):print_2+[b]}` in a variable `a`, and then the `print_` statement simply outputs the occulted code as-is. Of course, this can itself be evaluated if we wrap the *whole* code block within another `block` primitive, the above becomes:
+In the above, we store the occulted code `{let(b,3):print_2+[b]}` in a variable `a`, and then the `print_` statement simply outputs the occulted code as-is. Of course, this can itself be evaluated if we send the *whole* code block to another `block` primitive:
 
 ```
 block(

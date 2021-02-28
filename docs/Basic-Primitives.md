@@ -13,7 +13,7 @@ In the following, `x` and `y` are numbers.
 | `int(x)=number`  | Converts `x` to an integer.
 | `ln(x)=number`  | Returns natural logarithm of `x`.
 | `rand(x)=number` | Returns a random number between `0` and `x`. (Impure Function!)
-| `sgn(x)=number`  | Returns `1` if `x` is positive, `-` if negative, `0` if neither.
+| `sgn(x)=number`  | Returns `1` if `x` is positive, `-1` if negative, `0` if neither.
 | `sin(x)=number` | Returns trigonometric sine of `x` (argument in radians).
 | `sqrt(x)=number` | Returns the square root of `x`.
 | `tan(x)=number` | Returns trigonometric tangent of `x` (argument in radians).
