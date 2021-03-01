@@ -12,7 +12,7 @@ func(numgen,{
       let(f,occult(a)):
       let(c,left(symbol([f]),[b])):
       print_({
-        func({f}{b},{left({c},[x])})
+        func(({f})({b}),{left({c},[x])})
       })
     })
   )

@@ -68,8 +68,10 @@ block({
 })
 ```
 
-The output of the above is `<1,[b],+3.0>`. Outside of the subprogram that `a` still stores `1`, and `b` is still undefined. Meanwhile, `c` stores `+3.0`.
+The output of the above is `<1,[b],+3.0>`. Outside of the subprogram, `a` still stores `1`, and `b` is still undefined. Meanwhile, `c` stores `+3.0`.
 
 ## Environment
 
-When the `sub` primitive is used, the "outer program" is formally called the *environment*. All variables from in environment are accessible to the subprogram. This is a one-way relationship in the sense subsequent expressions in the environment cannot access variables within a subprogram.
+When the `sub` primitive is used, the "outer program" is formally called the *environment*. All variables from the environment are accessible to the subprogram, but this is a one-way relationship. Expressions in the environment cannot access variables within a subprogram.
+
+When the sub program is completed, the *only* effect on the state of the program is whatever is carried off by the `print_` statement.
